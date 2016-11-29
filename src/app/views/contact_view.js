@@ -7,7 +7,7 @@ const ContactView = Backbone.View.extend({
     this.template = options.template;
   },
   render: function() {
-    var contactHTML = this.template({contact: this.model.toJSON()});
+    var contactHTML = this.template({name: this.model.toJSON().name});
     this.$el.html(contactHTML);
     return this;
   }

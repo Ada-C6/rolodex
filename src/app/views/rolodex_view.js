@@ -21,10 +21,10 @@ const RolodexView = Backbone.View.extend({
   render: function(){
     this.element.empty();
 
-    this.contactList.forEach(function(contact){
-      contact.render();
+    this.contactList.forEach(function(card){
+      card.render();
       console.log("render contact");
-      this.element.append(contact.$el);
+      this.element.append(card.$el);
     }, this);
 
     return this;
