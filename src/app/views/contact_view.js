@@ -4,7 +4,6 @@ import RolodexView from 'app/views/rolodex_view';
 const ContactView = Backbone.View.extend({
 
   initialize: function(options) {
-    // this.contact = options.contact;
     this.template = options.template;
     // this.listenTo(this.model, 'change', this.render);
   },
