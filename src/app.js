@@ -4,6 +4,8 @@ import _ from 'underscore';
 
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
+import ContactView from 'app/views/contact_view';
+import RolodexView from 'app/views/rolodex_view';
 
 var contactsData = [
   {
@@ -24,23 +26,12 @@ var contactsData = [
 ];
 
 
-var ContactView = Backbone.View.extend({
-  initialize: function(options) {
-    this.contact = options.contact;
-  },
-  render: function() {
-    var html = '<div class="contact">';
-    html += '<h2>' + this.contact.name + '</h2>';
-    html += '</div>';
-    this.$el.html(html);
-    return this;
-  }
-});
-
 $(document).ready(function() {
-  var contactListElement = $('#contact-details')
-  var card = new ContactView({contact: contactsData[0]});
-  contactListElement.append(card.render().$el);
+  var application = new RolodexView({
+    el: $('#application'),
+    contactsData: contactsData
+  });
+  application.render();
 });
 
 // var application = new Application();
