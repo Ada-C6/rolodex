@@ -5,11 +5,11 @@ const Contact = Backbone.Model.extend({
     name: "a person",
     phone: "206-222-2222",
     email: "person@ada.edu"
-  }, 
+  },
   // This model should have the attributes for
   // a single contact: name, phone number, and email.
   initialize: function() {
-    console.log("Created a new contact with name: " + this.name);
+    console.log("Created a new contact with name: " + this.attributes.name);
   }
 });
 

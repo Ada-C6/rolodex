@@ -42,12 +42,13 @@ $(document).ready(function(){
   var cardList = [];
 
   peeps.forEach(function(contactDeets) {
+    var contact = new Contact(contactDeets);
+
     var card = new ContactView({
-      contact: contactDeets,
+      model: contact,
       template: contactCardTemplate
     });
     cardList.push(card);
     contactListElement.append(card.render().$el);
-    card.render();
   });
 });
