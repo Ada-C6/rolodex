@@ -1,3 +1,5 @@
+// This collection represents an ordered list of Contact models
+
 import Backbone from 'backbone';
 
 const Rolodex = Backbone.Collection.extend({
