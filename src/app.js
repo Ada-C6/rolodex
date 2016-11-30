@@ -1,5 +1,11 @@
+import $ from 'jquery';
+import _ from 'underscore';
+import Backbone from 'backbone';
+
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
+import Contact from 'app/models/contact';
+import ContactView from 'app/views/contact_view';
 
 var contactList = [
   {
@@ -21,9 +27,22 @@ var contactList = [
   }
 ];
 
-var application = new Application();
+$(document).ready(function() {
+  var contactTemplate = _.template($('#tmpl-contact-card').html());
+  var listElement = $(".contact-card");
+  //  var cardList = [];
+  var contactInfo = new ContactView({
+    contact: contactList[0],
+    template: contactTemplate
+  });
 
-var appView = new ApplicationView({
-  el: '#application',
-  model: application
+  listElement.append(contactInfo.render().$el);
 });
+
+
+// var application = new Application();
+//
+// var appView = new ApplicationView({
+//   el: '#application',
+//   model: application
+// });
