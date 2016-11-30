@@ -12,19 +12,21 @@ const RolodexView = Backbone.View.extend({
     // Compile a template to be shared between the individual tasks
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
-    // Keep track of the <ul> element
     this.listElement = this.$('#contact-cards');
 
     this.cardList = [];
 
-
-    console.log(this.model);
-
     this.model.forEach(function(contact) {
-      console.log("I'm in the forEach");
       this.addContact(contact);
     }, this);
 
+    this.input = {
+      name: this.$('.columns input[name="name"]'),
+      phoneNumber: this.$('.columns input[name="phone"]'),
+      email: this.$('.columns input[name="email"]')
+    };
+
+    this.listenTo(this.model, "update", this.render);
     this.listenTo(this.model, "add", this.addContact);
 
   }, // END OF INITIALIZE FUNCTION
@@ -34,7 +36,6 @@ const RolodexView = Backbone.View.extend({
 
     // Loop through the data assigned to this view
     this.cardList.forEach(function(card) {
-      // Cause the task to render
       card.render();
 
       // Add that HTML to our contact list
@@ -44,13 +45,30 @@ const RolodexView = Backbone.View.extend({
   },
 
   events: {
-    'click .btn-cancel': 'clearInput'
+    'click .btn-cancel': 'clearInput',
+    'click .btn-save': 'createContact'
   },
 
   clearInput: function(event) {
     this.input.name.val('');
     this.input.phoneNumber.val('');
     this.input.email.val('');
+  },
+
+  createContact: function(event) {
+    event.preventDefault();
+    var contact = new Contact(this.getInput());
+    this.model.add(contact);
+    this.clearInput();
+  },
+
+  getInput: function() {
+    var contact = {
+      name: this.input.name.val(),
+      phoneNumber: this.input.phoneNumber.val(),
+      email: this.input.email.val()
+    };
+    return contact;
   },
 
   addContact: function(contact) {
