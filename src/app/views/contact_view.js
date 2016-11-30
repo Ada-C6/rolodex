@@ -23,7 +23,7 @@ const ContactView = Backbone.View.extend({
     'click .contact-card': 'showDetails'
   },
   showDetails: function(e){
-    var detailsHTML = this.detailsTemplate({name: this.model.toJSON().name, email: this.model.toJSON().email, phone: this.model.toJSON().phone});
+    var detailsHTML = this.detailsTemplate({name: this.model.get("name"), email: this.model.get("email"), phone: this.model.get("phone")});
     this.element.html(detailsHTML);
     $('#contact-details').show();
     $('#application').addClass('popup');
