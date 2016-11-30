@@ -19,7 +19,8 @@ const ContactView = Backbone.View.extend({
 
   render: function() {
     var html = this.template(this.model.toJSON());
-    this.$el.html(html);
+    // this originally said: this.$el.html(html);
+    this.$el.append(html);
     // // reconnects the DOM event handlers
     // this.delegateEvents();
     // // Enable chained calls
