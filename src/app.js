@@ -11,12 +11,21 @@ var contactData = [
   {
     name: "Grace Hopper",
     phoneNumber: "6105175609",
-    email: "gracehopper@gmail.com", // This is unnecessary since undefined is falsey.
+    email: "gracehopper@gmail.com",
   }, {
     name: "Ada Lovelace",
     phoneNumber: "5037542989",
-    email: "adalovelace@gmail.com", // This is unnecessary since undefined is falsey.
+    email: "adalovelace@gmail.com",
+  }, {
+    name: "Anita Borg",
+    phoneNumber: "2087290989",
+    email: "anitaborg@gmail.com",
+  }, {
+    name: "Margaret Hamilton",
+    phoneNumber: "4069941029",
+    email: "margarethamilton@gmail.com",
   }
+
 ];
 
 $(document).ready(function() {
