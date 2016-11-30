@@ -39,8 +39,8 @@ const RolodexView = Backbone.View.extend({
     return this;
   },
   events: {
+    'click .btn-cancel': 'clearForm',
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'clearForm'
   },
   clearForm: function(){
     this.input.name.val("");

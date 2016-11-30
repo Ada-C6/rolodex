@@ -40,5 +40,6 @@ $(document).ready(function() {
     el: $('#application'), //setting the el as 'this' when 'this' is referenced in TaskListView
     model: contactList
   });
+
   application.render();
 });
