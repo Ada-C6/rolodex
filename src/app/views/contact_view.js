@@ -1,8 +1,11 @@
 import Backbone from 'backbone';
+import $ from 'jquery';
+import _ from 'underscore';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
     this.template = options.template;
+    this.detailsTemplate = _.template($("#tmpl-contact-details").html());
     // console.log(this.template);
 
     // this.listenTo(this.model, "change", this.render); I think we only needed this for delete/complete
@@ -20,11 +23,16 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-    "click #contact-details": "contactDetailsHandler"
+    "click .contact-card": "contactDetailsHandler"
   },
 
   contactDetailsHandler: function(event) {
-    console.log("And this is when the details popup should appear!");
+    // console.log("And this is when the details popup should appear!");
+    $("#contact-details").show();
+    var htmlForDetails = this.detailsTemplate({contact: this.model.attributes});
+
+    $("#contact-details").html(htmlForDetails);
+
   }
 
 });

@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Backbone from 'backbone';
 
 const ApplicationView = Backbone.View.extend({
@@ -7,6 +8,15 @@ const ApplicationView = Backbone.View.extend({
 
   render: function() {
     return this;
+  },
+
+  events: {
+    "click #application": "hideDetailsBox"
+  },
+
+  hideDetailsBox: function(event) {
+    console.log(">> box should hide!")
+    $("#contact-details").hide();
   }
 });
 

@@ -49,7 +49,7 @@ const RolodexView = Backbone.View.extend({
 
   events: {
     "click .btn-cancel": "clearInput",
-    // "submit .btn-save": "createTask"
+    // "submit .btn-save": "createNewContact"
   },
 
   clearInput: function(event) {
@@ -58,7 +58,7 @@ const RolodexView = Backbone.View.extend({
     this.input.phone.val("");
   },
 
-  createContact: function(event) {
+  createNewContact: function(event) {
     // No post-form-submission refresh for you!
     event.preventDefault();
 
@@ -95,7 +95,7 @@ const RolodexView = Backbone.View.extend({
 
    // Add the contactCard to our contactCard list
    this.contactCardsList.push(contactCard);
-  }
+ }
 
 });
 
