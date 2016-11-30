@@ -17,6 +17,7 @@ const RolodexView = Backbone.View.extend({
     // Keep track of the <ul> element - passed from the ApplicationView so we know about it
     this.listElement = this.$el;
 
+    console.log(this.listElement);
     this.cardList = [];
 
     this.model.forEach(function(contact) {

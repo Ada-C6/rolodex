@@ -9,6 +9,7 @@ import Rolodex from 'app/collections/rolodex';
 const ApplicationView = Backbone.View.extend({
 
   initialize: function() {
+    console.log(this.el);
     this.rolodex = this.model.contactList;
 
     this.modal = $('#contact-details');
@@ -30,6 +31,7 @@ const ApplicationView = Backbone.View.extend({
 
   render: function() {
     this.rolodexView.render();
+    // this.render();
     // rolodex is already attached to the page so we don't have to append
     // this.el.append(this.rolodexView.el);
 
@@ -38,10 +40,11 @@ const ApplicationView = Backbone.View.extend({
 
   events: {
   'click .btn-cancel': 'clearInput',
-  'click .btn-save': 'createTask',
-  'click #contact-cards': 'hideModal',
-  // 'click #contact-details': 'hideModal',
-  'click header': 'hideModal'
+  'click .btn-save': 'createContact',
+  'click .btn-edit': 'populateForm',
+  'click *': 'hideModal',
+  'click .contact-card': 'showModal',
+  'click #contact-details': 'showModal'
   },
 
   getInput: function() {
@@ -60,7 +63,7 @@ const ApplicationView = Backbone.View.extend({
     this.input.phoneNumber.val('');
   },
 
-  createTask: function(event) {
+  createContact: function(event) {
     event.preventDefault();
 
     var rawContact = this.getInput();
@@ -70,20 +73,24 @@ const ApplicationView = Backbone.View.extend({
 
     // Clear the input form so the user can add more contacts
     this.clearInput();
-    console.log("createTask called");
+  },
+
+  populateForm: function(event) {
+    console.log("populateForm called");
+    // this.input.name.val('');
+    // this.input.email.val('');
+    // this.input.phoneNumber.val('');
   },
 
   hideModal: function() {
-    console.log('Hide modal triggered');
     this.modal.hide();
   },
 
-  // protectContactChildren: function(event) {
-  //   $(".header a").click(function(event) {
-  //      e.stopPropagation();
-  //   });
-  // }
-
+  showModal: function(event) {
+    // when contact card or contact detail are clicked, we want to prevent them from being hidden
+    event.stopPropagation();
+    this.modal.show();
+  }
 });
 
 export default ApplicationView;

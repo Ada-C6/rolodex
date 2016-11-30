@@ -6,9 +6,6 @@ const ContactView = Backbone.View.extend({
     this.cardTemplate = options.cardTemplate;
     this.modalTemplate = options.modalTemplate;
     this.modal = $('#contact-details');
-
-    console.log(this.el);
-
   },
 
   render: function() {
@@ -26,23 +23,18 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-      'click .contact-card': 'showModal',
+      'click .contact-card': 'makeModal',
   },
 
-  showModal: function(event) {
-    event.stopPropagation();
+  makeModal: function(event) {
     var html = this.modalTemplate({
       contact: this.model.attributes
     });
 
+    var editButton = '<h3 class="button btn-edit" id=' + this.model.cid + '>Edit</h3>';
+  // the contact view is reponsible for filling in the details
     this.modal.html(html);
-    console.log('Make modal triggered');
-    this.modal.show();
-  },
-
-  hideModal: function() {
-    console.log('Hide modal triggered');
-    this.modal.hide();
+    this.modal.append(editButton);
   },
 });
 
