@@ -5,11 +5,17 @@ import ApplicationView from 'app/views/application_view';
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
 
-var contactData = {
+var contactData = [
+  {
     name: 'Freddie',
     phoneNumber: 123456,
     email: 'fred@msn.com'
-  };
+  },
+  {
+    name: 'Shadow',
+    phoneNumber: 5555555,
+    email: 'shadow@example.com'
+  }];
 
 $(document).ready(function() {
   var contact = new Contact(contactData);
@@ -26,6 +32,5 @@ $(document).ready(function() {
     model: application
   });
 
-  // appView.render();
   contactView.render();
 });
