@@ -1,5 +1,6 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
+import Contact from 'app/models/contact'
 
 const RolodexView = Backbone.View.extend({
   initialize: function(incomingContacts) {
@@ -8,6 +9,14 @@ const RolodexView = Backbone.View.extend({
 
     this.contacts = incomingContacts.contacts;
     this.template = incomingContacts.template;
+
+    this.input = {
+      name: this.$('.contact-form input[name="name"]'),
+      phone: this.$('.contact-form input[name="phone"]'),
+      email: this.$('.contact-form input[name="email"]')
+    };
+
+
   },
   render: function() {
     console.log("You are rendering the RolodexView");
@@ -27,7 +36,46 @@ const RolodexView = Backbone.View.extend({
     }, this);
 
     return this;
+  },
+
+  createContact: function(event) {
+    event.preventDefault();
+    console.log("trying to create a new contact!!");
+    console.log("******************");
+    console.log(this.input.name.val());
+
+    this.contacts.push(this.getInput());
+
+    this.placement.empty();
+    this.render();
+    this.clearInput();
+  },
+
+  events: {
+    'click .btn-save' : 'createContact',
+    'click .btn-cancel' : 'clearInput'
+  },
+
+
+  getInput: function() {
+    var actualContactData = {
+      name: this.input.name.val(),
+      email: this.input.email.val(),
+      phone: this.input.phone.val()
+    };
+
+    return actualContactData;
+  },
+
+  clearInput: function() {
+    console.log("clearInput called");
+    this.input.name.val("");
+    this.input.email.val("");
+    this.input.phone.val("");
+    console.log('Form area should now be clear');
   }
+
+
 });
 
 export default RolodexView;

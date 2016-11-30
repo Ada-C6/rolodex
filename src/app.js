@@ -38,9 +38,9 @@ var contactList = [
     email: "sabrina@sabrina.com"
   },
   {
-    name: "Damien",
+    name: "Miriam",
     phone: "567890",
-    email: "damien@damien.com"
+    email: "miriam@miruam.com"
   },
 ];
 
