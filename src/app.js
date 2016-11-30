@@ -40,7 +40,7 @@ $(document).ready(function(){
   var rolodexList = new Rolodex(peeps);
 
   var rolodex = new RolodexView( {
-    el: $('application'),
+    el: $('#application'),
     model: rolodexList
   });
 

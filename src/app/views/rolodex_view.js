@@ -7,6 +7,12 @@ import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options){
+    // the input from the "form"
+    this.input = {
+      name: this.$('.contact-form input[name="name"]'),
+      email: this.$('.contact-form input[name="email"]'),
+      phone: this.$('.contact-form input[name="phone"]')
+    };
 
     // keep track of the contact cards
     this.cardList = [];
@@ -21,6 +27,12 @@ const RolodexView = Backbone.View.extend({
     this.model.forEach(function(rawContact) {
       this.addContact(rawContact);
     }, this);
+
+    // when a model is added to the collection, creating a card for that contact.
+    this.listenTo(this.model, 'add', this.addContact);
+
+    // when the model is saved to the collection, want to re-render the list of cards.
+    this.listenTo(this.model, 'update', this.render);
 
   },
 
@@ -45,11 +57,15 @@ const RolodexView = Backbone.View.extend({
   },
 
   events: {
-    'click .btn-cancel': 'clearInput'
+    'click .btn-cancel': 'clearInput',
+    'click .btn-save': 'createContact'
   },
 
-  clearInput: function(event){
-    console.log("clearInput called");
+  clearInput: function(event) {
+    console.log("clearInput called")
+    this.input.name.val('');
+    this.input.email.val('');
+    this.input.phone.val('');
   },
 
   addContact: function(contact){
@@ -62,8 +78,28 @@ const RolodexView = Backbone.View.extend({
   },
 
   createContact: function(){
+    event.preventDefault();
+    console.log("create a contact!");
 
+    // grab the task from the form
+    var rawContact = this.getInput();
+
+    //add the task to our collection
+    this.model.add(rawContact);
+
+    // clear the form for next task
+    this.clearInput();
   },
+
+  // Build a task from the data entered in the .new-task form
+  getInput: function() {
+    var contact = {
+      name: this.input.name.val(),
+      email: this.input.email.val(),
+      phone: this.input.phone.val()
+    };
+    return contact;
+  }
 
 
 });
