@@ -13,18 +13,19 @@ var contactData = {
 
 $(document).ready(function() {
   var contact = new Contact(contactData);
-  console.log(contact.attributes.name);
+  // console.log(contact.attributes.name);
   var contactView = new ContactView({
-    el: '#application',
+    el: '#contact-cards',
     model: contact
   });
 
-  // var application = new Application();
+  var application = new Application();
 
-  // var appView = new ApplicationView({
-  //   el: '#application',
-  //   model: application
-  // });
+  var appView = new ApplicationView({
+    el: '#application',
+    model: application
+  });
 
+  // appView.render();
   contactView.render();
 });

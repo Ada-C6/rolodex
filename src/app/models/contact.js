@@ -9,7 +9,7 @@ const Contact = Backbone.Model.extend({
     email: "placeholder email"
   },
   initialize: function() {
-    console.log("Created a new contact with name " + this.name);
+    // console.log("Created a new contact with name " + this.name);
   }
 });
 
