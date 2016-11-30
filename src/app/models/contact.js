@@ -1,16 +1,10 @@
 import Backbone from 'backbone';
 
-// const Contact = Backbone.Model.extend({
-//   // This model should have the attributes for
-//   // a single contact: name, phone number, and email.
-// });
 
-//Wave 1
-// Have a Backbone Model subclass called Contact. This model should have these attributes:
-// Name
-// E-mail address
-// Phone number
-// Have a single instance of Contact created from static data.
+const Contact = Backbone.Model.extend({
+  // This model should have the attributes for
+  // a single contact: name, phone number, and email.
+});
 
 // var contactOne = new Contact(
 //   {
@@ -19,4 +13,4 @@ import Backbone from 'backbone';
 //     email: "sing@song.net"
 //   }
 // );
-// export default Contact;
+export default Contact;

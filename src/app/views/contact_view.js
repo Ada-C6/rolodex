@@ -1,18 +1,19 @@
 import Backbone from 'backbone';
+import _ from 'underscore';
+import $ from 'jquery';
 
-// const ContactView = Backbone.View.extend({
-//   render: function() {
-//     var html = '<h4>' + this.model.get('name') + '</h4>';
-//     $(this.el).html(html);
-//   }
-// });
-//
-// export default ContactView;
+var ContactView = Backbone.View.extend({
+  initialize: function() {
+    this.template = _.template($('#tmpl-contact-card').html());
+  },
+
+  render: function() {
+    var html = this.template({name: this.model.get('name')});
+    $(this.el).html(html);
+    // ?? this.$el.append(html);
+  }
+});
 //
 // var contactViewOne = new ContactView({ model: contactOne });
 
-//Wave 1:
-// Have a Backbone View subclass called ContactView.
-// Display a single contact card on the contact list. This contact card should:
-// Be implemented by using Contact and ContactView together.
-// Show the name only, no other contact details.
+export default ContactView;

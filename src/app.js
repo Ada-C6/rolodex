@@ -6,8 +6,8 @@ import _ from 'underscore';
 // import ApplicationView from 'app/views/application_view';
 
 // I need to comment out these 2 lines later when I separate Model and View to their correct files.
-// import Contact from 'app/models/contact';
-// import ContactView from 'app/models/contact_view';
+import Contact from 'app/models/contact';
+import ContactView from 'app/views/contact_view';
 
 
 // var application = new Application();
@@ -18,23 +18,23 @@ import _ from 'underscore';
 // });
 
 
-var Contact = Backbone.Model.extend({
-  // This model should have the attributes for
-  // a single contact: name, phone number, and email.
-});
+// var Contact = Backbone.Model.extend({
+//   // This model should have the attributes for
+//   // a single contact: name, phone number, and email.
+// });
 
 
-var ContactView = Backbone.View.extend({
-  initialize: function() {
-    this.template = _.template($('#tmpl-contact-card').html());
-  },
-
-  render: function() {
-    var html = this.template({name: this.model.get('name')});
-    $(this.el).html(html);
-    // this.$el.append(html);
-  }
-});
+// var ContactView = Backbone.View.extend({
+//   initialize: function() {
+//     this.template = _.template($('#tmpl-contact-card').html());
+//   },
+//
+//   render: function() {
+//     var html = this.template({name: this.model.get('name')});
+//     $(this.el).html(html);
+//     // this.$el.append(html);
+//   }
+// });
 
 
 $(document).ready(function() {
