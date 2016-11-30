@@ -12,7 +12,7 @@ const ContactView = Backbone.View.extend({
   // reconnects the DOM event Handlers
   // this.delegateEvents();
   //could use .toJSON() instead of .attributes
-  var html = this.template(this.contact.attributes);
+  var html = this.template(this.model.attributes);
   this.$el.html(html);
   // Enable chained calls
   // This is important enough that we'll leave it in, but

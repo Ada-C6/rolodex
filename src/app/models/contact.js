@@ -6,9 +6,9 @@ const Contact = Backbone.Model.extend({
     email: 'email@standin.com',
     number: 'xxx-xxx-xxxx'
   },
-  // initialize: function(options) {
-  //   console.log("task created with : " + options.title);
-  // }
+  initialize: function(options) {
+    console.log("contact created with : " + this.get('name'));
+  }
 });
 
 export default Contact;
