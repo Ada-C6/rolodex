@@ -41,6 +41,7 @@ const RolodexView = Backbone.View.extend({
   events: {
     'click .btn-cancel': 'clearForm',
     'click .btn-save': 'createContact',
+    'click .btn-edit': 'editDetails',
     'click .popup': 'hideDetails'
   },
   clearForm: function(){
@@ -65,6 +66,13 @@ const RolodexView = Backbone.View.extend({
     var newContactView = new ContactView({model: contact, template: this.template});
     console.log("Add card");
     this.contactList.push(newContactView);
+  },
+  editDetails: function(e){
+    console.log("CLICKED EDIT");
+    // var modal = $('#contact-details');
+    // var editTemplate = _.template($('#tmpl-contact-card').html());
+    //
+    // modal.html(editTemplate);
   },
   hideDetails: function(e){
     console.log("not within if statement - ");
