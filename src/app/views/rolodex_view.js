@@ -37,8 +37,19 @@ const RolodexView = Backbone.View.extend({
       this.contactListElement.append(card.$el);
     }, this);
 
+    // reattach dom even listeners to our brand spanking new HTML
+    this.delegateEvents();
+
     // Enable chained calls
     return this;
+  },
+
+  events: {
+    'click .btn-cancel': 'clearInput'
+  },
+
+  clearInput: function(event){
+    console.log("clearInput called");
   },
 
   addContact: function(contact){
@@ -47,7 +58,7 @@ const RolodexView = Backbone.View.extend({
       template: this.contactCardTemplate
     });
 
-    this. cardList.push(card);
+    this.cardList.push(card);
   },
 
   createContact: function(){

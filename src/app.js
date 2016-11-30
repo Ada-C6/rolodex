@@ -5,7 +5,7 @@ import Backbone from 'backbone';
 // import ContactView from 'app/views/contact_view';
 // import Contact from 'app/models/contact';
 
-import Rolodex from 'app/collections/rolodex'; 
+import Rolodex from 'app/collections/rolodex';
 import RolodexView from 'app/views/rolodex_view';
 
 import Application from 'app/models/application';
@@ -40,7 +40,7 @@ $(document).ready(function(){
   var rolodexList = new Rolodex(peeps);
 
   var rolodex = new RolodexView( {
-    el: $('contact-cards'),
+    el: $('application'),
     model: rolodexList
   });
 
