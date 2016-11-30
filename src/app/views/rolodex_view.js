@@ -30,11 +30,13 @@ const RolodexView = Backbone.View.extend({
     var temp = _.template($('#tmpl-contact-details').html());
     var deetsHtml = temp(e);
     this.$('#contact-details').html(deetsHtml);
+    this.$('#contact-details').show();
     console.log('details ' + e.name);
   },
 
   render: function() {
     this.ulEl.empty();
+    this.$('#contact-details').hide();
 
     this.contactViewList.forEach(function(view) {
       view.render();

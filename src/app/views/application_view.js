@@ -64,7 +64,12 @@ const ApplicationView = Backbone.View.extend({
 
   events: {
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'clearInput'
+    'click .btn-cancel': 'clearInput',
+    'click header': 'hideModal'
+  },
+
+  hideModal: function(e) {
+    this.roloView.$('#contact-details').hide();
   },
 
   createContact: function(event) {
