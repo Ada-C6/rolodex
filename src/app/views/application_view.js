@@ -17,10 +17,10 @@ const ApplicationView = Backbone.View.extend({
 
 
 
-  ////////////// ADDING NEW CONTACT //////////////
+  ////////////// ADDING A NEW CONTACT //////////////
   events: {
     'submit .new-task': 'createTask',   // "We're intercepting a form submit event"
-    'click .clear-button': 'clearInput'
+    'click .btn-cancel': 'clearInput'
   },
 
   createTask: function(event) {
@@ -61,9 +61,10 @@ const ApplicationView = Backbone.View.extend({
 
   clearInput: function(event) {
     console.log("clearInput called");
-    this.input.title.val('');
-    this.input.description.val('');
 
+    $( 'input[name="name"]' ).val('');
+    $( 'input[name="email"]' ).val('');
+    $( 'input[name="phone"]' ).val('');
   },
 
   // Build a task from the data entered in the .new-task form
