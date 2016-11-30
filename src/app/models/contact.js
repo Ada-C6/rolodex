@@ -1,5 +1,7 @@
 import Backbone from 'backbone';
 
+import ContactView from 'app/views/contact_view';
+
 var Contact = Backbone.Model.extend({
   defaults: {
     name: "Lola",

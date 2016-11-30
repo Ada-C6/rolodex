@@ -1,14 +1,18 @@
 import Backbone from 'backbone';
+import _ from 'underscore';
+import $ from 'jQuery';
+
+// Question: What do I actually need to import?
+import Contact from 'app/models/contact';
 
 var ContactView = Backbone.View.extend({
   initialize: function(options) {
-    this.cardTemplate = _.template($('#tmpl-contact-details').html());
-
+    this.cardTemplate = _.template($('#tmpl-contact-card').html());
   },
 
   render: function() {
-    console.log(this.model.attributes);
-    var html = this.cardTemplate({contact: this.model.attributes});
+
+    var html = this.cardTemplate({name: this.model.attributes.name});
     $(this.el).html(html);
     this.delegateEvents();
     return this;

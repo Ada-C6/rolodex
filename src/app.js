@@ -13,22 +13,23 @@ var contactData = [
     name: 'Molly',
     email: 'kj@gmail.com',
     phone: 6178884444
-  }, {
-    name: 'Caroline',
-    email: 'chj@gmail.com',
-    phone: 6178944444
-  }, {
-    name: 'Dolores',
-    email: 'gefd@gmail.com',
-    phone: 6178355529
   }
 ];
 
-// $(document).ready(function() {
-  var application = new Application();
+$(document).ready(function() {
 
-  var appView = new ApplicationView({
-    el: '#application',
-    model: application
+  var contact = new Contact(contactData[0]);
+
+  var contactView = new ContactView({
+    el: '#contact-cards',
+    // Question: Is this the name of the model contact or the variable defined above?
+    model: contact
   });
-// });
+
+  contactView.render();
+
+  // var appView = new ApplicationView({
+  //   el: '#application',
+  //   model: application
+  // });
+});
