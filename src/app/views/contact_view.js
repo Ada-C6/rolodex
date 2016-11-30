@@ -20,21 +20,21 @@ const ContactView = Backbone.View.extend({
     return this;
   },
   events: {
-    'click .contact-card': 'showDetails',
-    'click .btn-testing': 'hideDetails'
+    'click .contact-card': 'showDetails'
   },
-  showDetails: function(){
+  showDetails: function(e){
     var detailsHTML = this.detailsTemplate({name: this.model.toJSON().name, email: this.model.toJSON().email, phone: this.model.toJSON().phone});
     this.element.html(detailsHTML);
     $('#contact-details').show();
     $('#application').addClass('popup');
-    console.log("showing details");
-  },
-  hideDetails: function(){
-    console.log("CLICKING");
-    // $('#contact-details').hide();
-    // $('#application').removeClass('popup');
+    console.log("showing details - ");
+    console.log(e.target);
   }
+  // hideDetails: function(){
+  //   console.log("CLICKING");
+  //   // $('#contact-details').hide();
+  //   // $('#application').removeClass('popup');
+  // }
 });
 
 export default ContactView;
