@@ -1,3 +1,9 @@
+import $ from 'jquery';
+import Backbone from 'backbone';
+
+import ContactView from 'app/views/contact_view';
+import Contact from 'app/models/contact';
+
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
 
@@ -37,5 +43,11 @@ var appView = new ApplicationView({
 });
 
 $(document).ready(function() {
+  var contact = new Contact(contactData[0]);
+  var contactView = new ContactView({
+    el: $('#contact-cards'), // this will probably need to change, looks like it's the section for the *whole* contact list, not just a single...?
+    model: contact
+  });
 
+  contactView.render();
 });
