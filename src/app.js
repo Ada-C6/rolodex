@@ -4,7 +4,7 @@ import _ from 'underscore';
 
 import Rolodex from 'app/collections/rolodex';
 import Application from 'app/models/application';
-import ApplicationView from 'app/views/application_view';
+import RolodexView from 'app/views/rolodex_view';
 import COntact from 'app/models/contact';
 
 
@@ -26,7 +26,7 @@ $(document).ready(function() {
   // var application = new Application(contactData);
 
 
-  var appView = new ApplicationView({
+  var appView = new RolodexView({
     el: $('#application'),
     model: rolodex
   });

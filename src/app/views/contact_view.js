@@ -11,7 +11,7 @@ const ContactView = Backbone.View.extend({
       this.delegateEvents(); //this is a special thing we have to do when we redraw the html elements below to reconnect the DOM event handlers. Or else the buttons don't work after we add a new task
 
       ////////////// ADDING MODEL //////////////
-      console.log(this.template);
+      // console.log(this.template);
       var html = this.template({name: this.contact.attributes.name}); // Changed to this.model from this.task when we added the model because we changed task to model (as set in addTask of task_list_view)("model" is a Backbone model and this is how we access this)
       // could also use .toJSON() instead of .attributes: b/c .attributes gives you direct access to the attributes, which can be bad because you bypass validations and can accidentally change them without triggering events.
       this.$el.html(html);
