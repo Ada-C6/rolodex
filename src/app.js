@@ -35,7 +35,7 @@ var contactData = [
 $(document).ready(function() {
   var rolodex = new Rolodex(contactData);
   var application = new RolodexView({
-    el: $('#application'),
+    el: $('body'),
     model: rolodex
   });
     application.render();

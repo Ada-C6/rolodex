@@ -5,21 +5,20 @@ import Rolodex from 'app/collections/rolodex';
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
 
+
 const RolodexView = Backbone.View.extend({
 
   initialize: function(options) {
-    // Store a the full list of tasks
-    // this.taskData = options.taskData;
-
+    // Store a the full list of contacts
     this.modelList = [];
 
-    // Compile a template to be shared between the individual tasks
+    // Compile a template to be shared between the individual contacts
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
     // Keep track of the <ul> element
     this.listElement = this.$('#contact-cards');
 
-    // Create a TaskView for each task
+    // Create a ContactView for each task
     this.rolodex = [];
     this.model.forEach(function(contact) {
       this.addContact(contact);
@@ -35,6 +34,8 @@ const RolodexView = Backbone.View.extend({
     this.listenTo(this.model, 'update', this.render);
     this.listenTo(this.model, 'add', this.addContact);
     this.listenTo(this.model, "remove", this.removeContact);
+    // this.listenTo(this.model, "show", this.showModal);
+    // this.listenTo(this.model, "hide", this.hideModal);
   },
 
   render: function() {
@@ -53,6 +54,23 @@ const RolodexView = Backbone.View.extend({
 
     return this; // enable chained calls
   },
+
+   events: {
+     'click #contact-details': 'hideModal',
+     'click .btn-cancel': 'clearInput',
+     'click .btn-save': 'createContact'
+   },
+
+ hideModal: function(event) {
+   console.log("getting here!");
+   // $(document).click(function(event) {
+   //     if(!$(event.target).closest('#contact-details').length) {
+   if($('#contact-details').is(":visible")) {
+       $('#contact-details').hide();
+    }
+   //     }
+  //  $('#contact-details').hide();
+ },
 
   getInput: function() {
     var contact = {
@@ -82,11 +100,6 @@ const RolodexView = Backbone.View.extend({
       }
     }
     this.rolodex = filteredList;
-  },
-
-  events: {
-   'click .btn-cancel': 'clearInput',
-   'click .btn-save': 'createContact'
   },
 
   clearInput: function(event) {
