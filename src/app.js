@@ -3,12 +3,19 @@ import ApplicationView from 'app/views/application_view';
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
 import $ from 'jquery';
+import Rolodex from 'app/collections/rolodex';
+import RolodexView from 'app/views/rolodex_view';
 
 var contactData = [
   {
     name: 'Kapi-san',
     email: 'kapi@bara.com',
     phone: 2
+  },
+  {
+    name: "Charles",
+    email: 'charlesincharge@ada.com',
+    phone: 3
   }
 
 ];
@@ -22,10 +29,10 @@ var appView = new ApplicationView({
 });
 
 $(document).ready(function(){
-  var cont = new Contact(contactData[0]);
-  var contView = new ContactView({
-    el: $('#contact-cards'),
-    model: cont
+  var contactList = new Rolodex(contactData);
+  var contView = new RolodexView({
+    el: $('#application'),
+    model: contactList
   });
   contView.render();
 });
