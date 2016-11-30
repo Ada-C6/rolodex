@@ -8,16 +8,15 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate = _.template($("#tmpl-contact-card").html());
 
-    this.listElement = this.$el;
+    this.listElement = $("#contact-cards");
 
-    // We'll keep track of a list of contact models and their views
     this.contactCardsList = [];
 
     this.model.forEach(function(contact) {
       this.addContact(contact); //creates Contact objects and throws them in contactCardsList
     }, this);
 
-    // Keep track of our form input fields (NOT THE VALUES INSIDE) - this is just telling us where the name value LIVES
+    // This is just telling us where the name value LIVES
     this.fieldFromNewContactForm = {
       name: this.$('.contact-form input[name="name"]'),
       email: this.$('.contact-form input[name="email"]'),
@@ -27,7 +26,7 @@ const RolodexView = Backbone.View.extend({
     // When a model is added to the collection, create a contactCard for that model and add it to contactCardsList
     this.listenTo(this.model, "add", this.addContact);
 
-    // When the model updates, re-render the list of cards
+    // When the model/collection updates, re-render the list of cards
     this.listenTo(this.model, "update", this.render);
   },
 

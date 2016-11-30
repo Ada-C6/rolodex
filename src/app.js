@@ -19,7 +19,7 @@ import Rolodex from 'app/collections/rolodex';
 $(document).ready(function() {
   var application = new Application();
   var appView = new ApplicationView({
-    el: '#application',
+    el: 'html',
     model: application
   });
 

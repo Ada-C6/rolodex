@@ -5,6 +5,10 @@ import RolodexView from 'app/views/rolodex_view'
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
     this.htmlElement = this.$el;
+    // $("body").on("click", function() {
+    //   console.log(">> box should hide!")
+    //   $("#contact-details").hide();
+    // })
   },
 
   render: function() {
@@ -14,19 +18,26 @@ const ApplicationView = Backbone.View.extend({
     });
 
     roloView.render();
-    // this.model.rolodex.render();
-    // console.log(" uhh wat????" + roloView)
+
     return this;
   },
 
   events: {
-    "click body": "hideDetailsBox"
+    "click ": "hideDetailsBox"
   },
 
-  hideDetailsBox: function() {
+  hideDetailsBox: function(event) {
     console.log(">> box should hide!")
-    $("#contact-details").hide();
+    debugger
+    if (true/* ! event triggered on #contact-details*/) {
+      $("#contact-details").hide();
+    }
   }
+
+  // remove: function() {
+  //   $("body").off("click")
+  // }
+
 });
 
 export default ApplicationView;
