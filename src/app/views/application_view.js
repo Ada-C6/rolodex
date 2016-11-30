@@ -64,8 +64,8 @@ const ApplicationView = Backbone.View.extend({
   },
 
   hidePopup: function(e) {
-    // console.log("hidePopup called");
-    // console.log($(e.target).closest(".contact-card").length === 0);
+    console.log("hidePopup called");
+    console.log($(e.target).closest(".contact-card"));
 
 
     // OMG... this took FOREVER to figure out. there was a weird problem with identifying if
