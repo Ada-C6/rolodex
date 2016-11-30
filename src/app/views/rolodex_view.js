@@ -17,6 +17,9 @@ const RolodexView = Backbone.View.extend({
       // console.log('going through rolodex ' + rawContact.attributes.name);
       this.addContact(rawContact);
     }, this);
+
+    this.listenTo(this.model, 'add', this.addContact);
+    this.listenTo(this.model, 'update', this.render);
     // this.cView = new ContactView({
     //   template: this.template
     // });
