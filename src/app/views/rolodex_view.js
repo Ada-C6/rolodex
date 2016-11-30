@@ -48,8 +48,16 @@ const RolodexView = Backbone.View.extend({
   },
 
   events: {
-    'click .btn-save': 'createContact'
+    'click .btn-save': 'createContact',
+    'click .btn-cancel': 'clearForm',
+    'keyup': 'processKey'
   },
+
+  processKey: function(e) {
+    if(e.which === 13) { // enter key
+      this.createContact(e);
+    }
+},
 
   getInput: function(){
     var contact = {
@@ -65,7 +73,14 @@ const RolodexView = Backbone.View.extend({
     console.log('submit button clicked');
     var newContact = this.getInput();
     this.model.add(newContact);
+    this.clearForm();
+  },
 
+  clearForm: function(event) {
+    console.log("'form' cleared");
+    this.input.name.val('');
+    this.input.email.val('');
+    this.input.phone.val('');
   }
 
 
