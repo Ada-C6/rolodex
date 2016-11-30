@@ -26,7 +26,8 @@ const ApplicationView = Backbone.View.extend({
 
   render: function() {
     this.rolodexView.render();
-    this.el.append(this.rolodexView.el);
+    // rolodex is already attached to the page so we don't have to append
+    // this.el.append(this.rolodexView.el);
 
     return this;
   },

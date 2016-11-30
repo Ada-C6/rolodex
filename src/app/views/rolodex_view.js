@@ -10,8 +10,9 @@ import Contact from 'app/models/contact';
 const RolodexView = Backbone.View.extend({
   initialize: function() {
 
-    // Compile a template to be shared between the contacts
+    // Compile templates to be shared between the contacts
     this.cardTemplate = _.template($('#tmpl-contact-card').html());
+    this.modalTemplate = _.template($('#tmpl-contact-details').html());
 
     // Keep track of the <ul> element - passed from the ApplicationView so we know about it
     this.listElement = this.$el;
@@ -25,10 +26,8 @@ const RolodexView = Backbone.View.extend({
     // When a model is added to the collection, add a card for it
     this.listenTo(this.model, 'add', this.addContact);
 
-    // // When a model is removed from the collection, remove the card for it from the list of cards
-    // this.listenTo(this.model, 'remove', this.removeTask);
-    //
     // Re-render the whole rolodex when the collection changes
+
     this.listenTo(this.model, 'update', this.render);
 
   },
@@ -38,7 +37,8 @@ const RolodexView = Backbone.View.extend({
     // Create a card for the new contact
     var card = new ContactView({
       model: contact,
-      template: this.cardTemplate
+      cardTemplate: this.cardTemplate,
+      modalTemplate: this.modalTemplate
     });
 
     // Add the card to our card list
