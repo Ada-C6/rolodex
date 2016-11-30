@@ -4,6 +4,8 @@ import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
+import Rolodex from 'app/collections/rolodex';
+import RolodexView from 'app/views/rolodex_view';
 
 var contactData = [
   {
@@ -15,14 +17,19 @@ var contactData = [
     name: 'Shadow',
     phoneNumber: 5555555,
     email: 'shadow@example.com'
+  },
+  {
+    name: 'Mochi',
+    phoneNumber: 7922222,
+    email: 'mochi@example.com'
   }];
 
 $(document).ready(function() {
-  var contact = new Contact(contactData);
+  var contactList = new Rolodex(contactData);
   // console.log(contact.attributes.name);
-  var contactView = new ContactView({
+  var rolodexView = new RolodexView({
     el: '#contact-cards',
-    model: contact
+    model: contactList
   });
 
   var application = new Application();
@@ -32,5 +39,6 @@ $(document).ready(function() {
     model: application
   });
 
-  contactView.render();
+  // appView.render();
+  rolodexView.render();
 });

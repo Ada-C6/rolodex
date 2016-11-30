@@ -1,11 +1,9 @@
 import $ from 'jquery';
-import _ from 'underscore';
 import Backbone from 'backbone';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
-    this.template = _.template($('#tmpl-contact-card').html());
-    this.name = options.model.attributes.name;
+    // this.name = options.model.attributes.name;
   },
 
   render: function() {
