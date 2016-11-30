@@ -27,12 +27,13 @@ const ContactView = Backbone.View.extend({
   },
 
   contactDetailsHandler: function(event) {
-    // console.log("And this is when the details popup should appear!");
     $("#contact-details").show();
     var htmlForDetails = this.detailsTemplate({contact: this.model.attributes});
 
     $("#contact-details").html(htmlForDetails);
-
+    // $("#application").click(function() {
+    //   $("#contact-details").hide();
+    // })
   }
 
 });

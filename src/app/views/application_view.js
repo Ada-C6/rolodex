@@ -1,20 +1,29 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
+import RolodexView from 'app/views/rolodex_view'
 
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
-    this.render();
+    this.htmlElement = this.$el;
   },
 
   render: function() {
+    var roloView = new RolodexView( {
+      el: '#contact-cards',
+      model: this.model.rolodex
+    });
+
+    roloView.render();
+    // this.model.rolodex.render();
+    // console.log(" uhh wat????" + roloView)
     return this;
   },
 
   events: {
-    "click #application": "hideDetailsBox"
+    "click body": "hideDetailsBox"
   },
 
-  hideDetailsBox: function(event) {
+  hideDetailsBox: function() {
     console.log(">> box should hide!")
     $("#contact-details").hide();
   }

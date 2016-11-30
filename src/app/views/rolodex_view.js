@@ -1,20 +1,18 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import ContactView from 'app/views/contact_view';
+import Backbone from 'backbone';
 
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
-    // Compile a template to be shared between the individual contact cards
     this.contactTemplate = _.template($("#tmpl-contact-card").html());
 
-    // Keep track of the <ul> element to append stuff to
     this.listElement = this.$el;
 
     // We'll keep track of a list of contact models and their views
     this.contactCardsList = [];
 
-    // Process each contact from the collection model
     this.model.forEach(function(contact) {
       this.addContact(contact); //creates Contact objects and throws them in contactCardsList
     }, this);
@@ -41,7 +39,7 @@ const RolodexView = Backbone.View.extend({
       contactCard.render();
 
       // Add that HTML to our task list
-      this.listElement.append(contactCard.el); //take the elements inside a contactCard and append them to listElement (which is "#contact-cards")
+      this.listElement.append(contactCard.$el); //take the elements inside a contactCard and append them to listElement (which is "#contact-cards")
     }, this);
 
     return this; // enable chained calls
