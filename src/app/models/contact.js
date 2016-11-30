@@ -9,7 +9,7 @@ const Contact = Backbone.Model.extend({
 		phone: "7575551234"
 	},
 	initialize: function (options){
-		console.log("Task created with: "+ this.get("name"))
+		console.log("Contact card for: "+ this.get("name"))
 	}
 });
 
