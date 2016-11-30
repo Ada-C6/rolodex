@@ -26,6 +26,13 @@ var contactList = [
 ];
 
 $(document).ready(function() {
+  var application = new Application();
+
+  var appView = new ApplicationView({
+    el: '#application',
+    model: application
+  });
+
   var myRolodex = new Rolodex(contactList);
   var rolodexDisplay = new RolodexView(
     {
@@ -34,11 +41,3 @@ $(document).ready(function() {
     });
   rolodexDisplay.render();
 });
-
-
-// var application = new Application();
-//
-// var appView = new ApplicationView({
-//   el: '#application',
-//   model: application
-// });

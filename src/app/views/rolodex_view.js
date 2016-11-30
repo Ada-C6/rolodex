@@ -12,6 +12,7 @@ const RolodexView = Backbone.View.extend({
       this.addContact(rawContact);
     }, this);
   },
+
   render: function() {
     this.listElement.empty();
     this.cardList.forEach(function(card) {
