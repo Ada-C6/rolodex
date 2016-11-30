@@ -4,26 +4,32 @@ import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
 import $ from 'jquery';
 
-var hardCodedContact = {
+var hardCodedContacts = [{
   name: "christian",
   email: "christian@christian.com",
   phone: "6126550000"
-};
+},
+{
+  name: "lauren",
+  email: "lauren@cat.com",
+  phone: "6126550000"
+},
+{
+  name: "ediff",
+  email: "dummy@cat.com",
+  phone: "dfikdsjfs;df"
+}
+];
 
 $(document).ready(function(){
 
-  var contact = new Contact(hardCodedContact);
-
+// for each hard-coded contact, make them a new contact. use the #contact-cards element, and the model that belongs to the hard-coded contact element.
+for (var i = 0; i < hardCodedContacts.length; i++) {
+  var contact = new Contact(hardCodedContacts[i]);
   var contactView = new ContactView({
     el: '#contact-cards',
-    model: contact 
+    model: contact
   });
+}
+
 })
-
-
-// var application = new Application();
-//
-// var appView = new ApplicationView({
-//   el: '#application',
-//   model: application
-// });
