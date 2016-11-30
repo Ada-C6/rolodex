@@ -2,10 +2,9 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
 
-import Application from 'app/models/application';
-import ApplicationView from 'app/views/application_view';
-import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
+import Contact from 'app/models/contact';
+import Rolodex from 'app/collections/rolodex';
 
 
 const RolodexView = Backbone.View.extend({
@@ -16,39 +15,54 @@ const RolodexView = Backbone.View.extend({
     // Keep track of the <ul> element
     this.listElement = this.$('#contact-cards');
 
-    // We'll keep track of a list of task models and a list
-    // of task views.
-    this.modelList = [];
     this.cardList = [];
 
+
+    console.log(this.model);
+
     this.model.forEach(function(contact) {
+      console.log("I'm in the forEach");
       this.addContact(contact);
     }, this);
 
-    // Process each task
-    // options.contactData.forEach(function(contact) {
-    //   this.addContact(contact);
-    // }, this); // bind `this` so it's available inside forEach
+    this.listenTo(this.model, "add", this.addContact);
 
-    // Keep track of our form input fields
-    // this.input = {
-    //   title: this.$('.new-task input[name="title"]'),
-    //   description: this.$('.new-task input[name="description"]')
-    // };
   }, // END OF INITIALIZE FUNCTION
 
-  addTask: function(contact) {
+  render: function() {
+    this.listElement.empty();
 
-  // Create a card for the new task
-  var card = new ContactView({
-    model: contact,
-    template: this.contactTemplate
-  });
+    // Loop through the data assigned to this view
+    this.cardList.forEach(function(card) {
+      // Cause the task to render
+      card.render();
 
-  // Add the card to our card list
-  this.cardList.push(card);
-},
+      // Add that HTML to our contact list
+      this.listElement.append(card.$el);
+    }, this);
+    return this;
+  },
 
+  events: {
+    'click .btn-cancel': 'clearInput'
+  },
+
+  clearInput: function(event) {
+    this.input.name.val('');
+    this.input.phoneNumber.val('');
+    this.input.email.val('');
+  },
+
+  addContact: function(contact) {
+
+    var card = new ContactView({
+      model: contact,
+      template: this.contactTemplate
+    });
+
+    // Add the card to our card list
+    this.cardList.push(card);
+  }
 });
 
 export default RolodexView;

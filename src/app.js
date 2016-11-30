@@ -2,26 +2,36 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
 
-import Application from 'app/models/application';
-import ApplicationView from 'app/views/application_view';
-import Contact from 'app/models/contact';
-import ContactView from 'app/views/contact_view';
 import RolodexView from 'app/views/rolodex_view';
+import Rolodex from 'app/collections/rolodex';
+
 
 var contactData = [
   {
     name: 'Ellen Ochoa',
     phoneNumber: '555-555-5555',
-    email: 'awesomeastrosauce@nasa.gov'
-  },
+    email: 'awesomeastronaut@nasa.gov'
+  }, {
+    name: 'Duy-Loan Le',
+    phoneNumber: '444-444-4444',
+    email: 'calculatorprime@ti.com'
+  }, {
+    name: 'Margaret Hamilton',
+    phoneNumber: '333-333-3333',
+    email: 'apolloteamleader@nasa.gov'
+  }, {
+    name: 'Katherine Johnson',
+    phoneNumber: '222-222-2222',
+    email: 'humancomputer@nasa.gov'
+  }
 ];
 
 $(document).ready(function() {
-  var application = new Application(contactData);
+  var rolodex = new Rolodex(contactData);
 
-  var appView = new ApplicationView({
+  var appView = new RolodexView({
     el: $('#application'),
-    model: application
+    model: rolodex
   });
   appView.render();
 });
