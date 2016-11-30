@@ -33,7 +33,6 @@ const RolodexView = Backbone.View.extend({
 
     this.listenTo(this.model, 'update', this.render);
     this.listenTo(this.model, 'add', this.addContact);
-    this.listenTo(this.model, "remove", this.removeContact);
     // this.listenTo(this.model, "show", this.showModal);
     // this.listenTo(this.model, "hide", this.hideModal);
   },
@@ -56,21 +55,18 @@ const RolodexView = Backbone.View.extend({
   },
 
    events: {
-     'click #contact-details': 'hideModal',
      'click .btn-cancel': 'clearInput',
-     'click .btn-save': 'createContact'
+     'click .btn-save': 'createContact',
+     'click ': 'hideModal'
    },
 
  hideModal: function(event) {
    console.log("getting here!");
-   // $(document).click(function(event) {
-   //     if(!$(event.target).closest('#contact-details').length) {
-   if($('#contact-details').is(":visible")) {
+     if($(event.target).closest('.contact-card').length === 0) {
        $('#contact-details').hide();
-    }
-   //     }
-  //  $('#contact-details').hide();
+     }
  },
+
 
   getInput: function() {
     var contact = {
@@ -88,18 +84,6 @@ const RolodexView = Backbone.View.extend({
     });
 
     this.rolodex.push(card);
-  },
-  removeContact: function(model) {
-    var filteredList = [];
-    for(var i=0; i<this.rolodex.length; i++) {
-      if(this.rolodex[i].model == model) {
-        console.log("found it!");
-      }
-      else {
-        filteredList.push(this.rolodex[i]);
-      }
-    }
-    this.rolodex = filteredList;
   },
 
   clearInput: function(event) {
@@ -122,5 +106,25 @@ const RolodexView = Backbone.View.extend({
    this.clearInput();
   }
 });
+
+
+// $(document).not('.contact-details').click(function () {
+//    $('.contact-details').hide();
+// });
+//
+// $(document).on('click', function(event) {
+//   if ($(event.target).has('.contact-details').length) {
+// 	$(".contact-details").hide();
+//   }
+// });
+
+// element.listenTo(button1, 'no-suggestions'), header.hide());
+//
+// hide: function(){
+//   this.$el.hide();
+// }
+
+
+
 
 export default RolodexView;

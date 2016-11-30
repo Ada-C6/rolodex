@@ -23,13 +23,4 @@ defaults: {
 
 });
 
-// $(document).ready(function() {
-//   var contact = new Contact();
-//   var contactView = new ContactView({
-//     el: $('#contact-details'),
-//     model: contact
-//   });
-//     contactView.render();
-// });
-
 export default Contact;

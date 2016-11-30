@@ -23,7 +23,6 @@ const ContactView = Backbone.View.extend({
     this.$el.html(html);
     this.delegateEvents();
 
-    // Enable chained calls
     return this;
   },
 
@@ -32,18 +31,18 @@ const ContactView = Backbone.View.extend({
   },
 
   showModal: function(event) {
-    event.preventDefault();
-
     var html = this.cardTemplate({
       name: this.contact.attributes.name,
       email: this.contact.attributes.email,
       phone: this.contact.attributes.phone
     });
 
+    // event.stopPropagation();
     $('#contact-details').show();
     $('#contact-details').html(html);
 
-}
+
+  }
 
 });
 
