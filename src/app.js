@@ -2,9 +2,11 @@ import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
 
-import ContactView from 'app/views/contact_view';
-import Contact from 'app/models/contact';
+// import ContactView from 'app/views/contact_view';
+// import Contact from 'app/models/contact';
 
+import Rolodex from 'app/collections/rolodex'; 
+import RolodexView from 'app/views/rolodex_view';
 
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
@@ -16,13 +18,13 @@ var peeps = [
     phone: "206-222-2121"
   },
   {
-    name: "sky",
-    email: "sky@ada.edu",
+    name: "dan",
+    email: "dan@ada.edu",
     phone: "206-222-2121"
   },
   {
-    name: "esther",
-    email: "esther@ada.edu",
+    name: "kari",
+    email: "kari@ada.edu",
     phone: "206-222-2121"
   }
 ];
@@ -35,20 +37,15 @@ var appView = new ApplicationView({
 });
 
 $(document).ready(function(){
-  var contactCardTemplate = _.template($('#tmpl-contact-card').html());
+  var rolodexList = new Rolodex(peeps);
 
-  var contactListElement = $('#contact-cards');
-
-  var cardList = [];
-
-  peeps.forEach(function(contactDeets) {
-    var contact = new Contact(contactDeets);
-
-    var card = new ContactView({
-      model: contact,
-      template: contactCardTemplate
-    });
-    cardList.push(card);
-    contactListElement.append(card.render().$el);
+  var rolodex = new RolodexView( {
+    el: $('contact-cards'),
+    model: rolodexList
   });
+
+  rolodex.render();
+
+  // stuff to move to rolodex_view.
+
 });
