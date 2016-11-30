@@ -23,15 +23,12 @@ const ApplicationView = Backbone.View.extend({
   },
 
   events: {
-    "click ": "hideDetailsBox"
+    "click ": "hideDetailsBox",
+    "click #contact-details": (e) => { e.stopPropagation() } // Thanks, Jay
   },
 
   hideDetailsBox: function(event) {
-    console.log(">> box should hide!")
-    debugger
-    if (true/* ! event triggered on #contact-details*/) {
-      $("#contact-details").hide();
-    }
+    $("#contact-details").hide();
   }
 
   // remove: function() {

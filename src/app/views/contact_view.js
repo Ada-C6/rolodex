@@ -22,8 +22,7 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-    "click .contact-card": "contactDetailsHandler"
-  },
+    "click .contact-card": "contactDetailsHandler"  },
 
   contactDetailsHandler: function(event) {
     event.stopPropagation();
