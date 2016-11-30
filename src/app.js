@@ -29,10 +29,12 @@ var contactList = [
 
 $(document).ready(function() {
   var contactTemplate = _.template($('#tmpl-contact-card').html());
-  var listElement = $(".contact-card");
+  var listElement = $("#contact-cards");
+  var exampleContact = new Contact(contactList[0]);
+
   //  var cardList = [];
   var contactInfo = new ContactView({
-    contact: contactList[0],
+    contact: exampleContact,
     template: contactTemplate
   });
 
