@@ -1,7 +1,11 @@
 import Backbone from 'backbone';
 
+import ContactView from 'app/views/contact_view';
+import RolodexView from 'app/views/rolodex_view';
+
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
+    console.log("Bueller?");
     this.render();
   },
 
