@@ -1,7 +1,9 @@
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
 import Contact from 'app/models/contact';
+import Rolodex from 'app/collections/rolodex';
 import ContactView from 'app/views/contact_view';
+import RolodexView from 'app/views/rolodex_view';
 import $ from 'jquery';
 
 var hardCodedContacts = [{
@@ -18,18 +20,25 @@ var hardCodedContacts = [{
   name: "ediff",
   email: "dummy@cat.com",
   phone: "dfikdsjfs;df"
-}
-];
+}];
 
 $(document).ready(function(){
+  var rolodex = new Rolodex(hardCodedContacts);
+
+  var application = new RolodexView({
+    el: $('#contact-cards'),
+    model: rolodex
+  });
+  application.render();
+
 
 // for each hard-coded contact, make them a new contact. use the #contact-cards element, and the model that belongs to the hard-coded contact element.
-for (var i = 0; i < hardCodedContacts.length; i++) {
-  var contact = new Contact(hardCodedContacts[i]);
-  var contactView = new ContactView({
-    el: '#contact-cards',
-    model: contact
-  });
-}
+// for (var i = 0; i < hardCodedContacts.length; i++) {
+//   var contact = new Contact(hardCodedContacts[i]);
+//   var contactView = new ContactView({
+//     el: '#contact-cards',
+//     model: contact
+//   });
+// }
 
 })
