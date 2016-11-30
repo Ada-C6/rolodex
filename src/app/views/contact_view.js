@@ -8,8 +8,11 @@ const ContactView = Backbone.View.extend({
   },
 
   render: function() {
-    var html = this.template({contact:  this.model.attributes});
+    var html = this.template({contact:  this.model.attributes}); //don't forget! this gives us the name when we say contact.name
     this.$el.html(html);
+    // this.delegateEvents();
+        console.log("contact is " + this.model.attributes.name);
+        console.log("contact is " + this.model.attributes);
 
     // Enable chained calls
     return this;
