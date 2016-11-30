@@ -10,12 +10,27 @@ var contactData = [
   {
     name: 'Kapi-san',
     email: 'kapi@bara.com',
-    phone: 2
+    phone: '222-222-2222'
   },
   {
     name: "Charles",
     email: 'charlesincharge@ada.com',
-    phone: 3
+    phone: '333-333-3333'
+  },
+  {
+    name: "Margaret",
+    email: "IGotYouToTheMoon",
+    phone: '444-444-4444'
+  },
+  {
+    name: "Brendan",
+    email: "bman@bman.com",
+    phone: '555-555-5555'
+  },
+  {
+    name: "Picard",
+    email: "makeitso@enterprise.com",
+    phone: '666-666-6666'
   }
 
 ];
@@ -29,6 +44,7 @@ var appView = new ApplicationView({
 });
 
 $(document).ready(function(){
+  $('#contact-details').hide();
   var contactList = new Rolodex(contactData);
   var contView = new RolodexView({
     el: $('#application'),

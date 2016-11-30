@@ -8,12 +8,13 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
+
     this.unorderedList = this.$('#contact-cards');
 
     this.contactList = [];
 
     console.log("THIS IS A MODEL" + this.model);
-    this.$('#contact-details').hide();
+    // this.$('#contact-details').hide();
 
     this.model.forEach(function(contact) {
       this.addContactCard(contact);
@@ -27,6 +28,7 @@ const RolodexView = Backbone.View.extend({
 
     this.listenTo(this.model, 'add', this.addContactCard);
     this.listenTo(this.model, 'update', this.render );
+    
 
 
   },
@@ -50,8 +52,10 @@ const RolodexView = Backbone.View.extend({
   events: {
     'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearForm',
-    'keyup': 'processKey'
+    'keyup': 'processKey',
+
   },
+
 
   processKey: function(e) {
     if(e.which === 13) { // enter key
