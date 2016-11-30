@@ -25,6 +25,12 @@ const RolodexView = Backbone.View.extend({
       this.addContact(contact);
     }, this);
 
+    this.input = {
+      name: this.$('.columns input[name="name"]'),
+      phoneNumber: this.$('.columns input[name="phone"]'),
+      email: this.$('.columns input[name="email"]')
+    };
+
     this.listenTo(this.model, "add", this.addContact);
 
   }, // END OF INITIALIZE FUNCTION
