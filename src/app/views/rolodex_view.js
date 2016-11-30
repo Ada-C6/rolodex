@@ -2,22 +2,29 @@ import Backbone from 'backbone';
 import _ from 'underscore';
 import $ from 'jquery';
 
-import ContactView from 'app/views/contact_view'
+import ContactView from 'app/views/contact_view';
+import Contact from 'app/models/contact';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
-    this.contactsData = options.contactsData; //stores the full list of contacts
+    // this.contactsData = options.contactsData; //stores the full list of contacts
     this.contactTemplate = _.template($('#tmpl-contact-card').html()); //compiles a template to be shared between the contacts
     this.listElement = this.$('#contact-cards'); //keep track of the <li> elements
 
+    this.modelList = [];
     this.cardList = [];
-    this.contactsData.forEach(function(contact) {
-      var card = new ContactView({
-        contact: contact,
-        template: this.contactTemplate
-      });
-      this.cardList.push(card);
+
+    options.contactsData.forEach(function(contact) {
+      this.addContact(contact);
     }, this);
+
+    // this.contactsData.forEach(function(contact) {
+    //   var card = new ContactView({
+    //     contact: contact,
+    //     template: this.contactTemplate
+    //   });
+    //   this.cardList.push(card);
+    // }, this);
 
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
@@ -52,14 +59,15 @@ const RolodexView = Backbone.View.extend({
     event.preventDefault();
     console.log('creating a contact button pressed!');
     var contact = this.getInput();
-    this.contactsData.push(contact);
-    var card = new ContactView({
-      contact: contact,
-      template: this.contactTemplate
-    });
-    this.cardList.push(card);
+    this.addContact(contact);
+    // this.contactsData.push(contact);
+    // var card = new ContactView({
+    //   contact: contact,
+    //   template: this.contactTemplate
+    // });
+    // this.cardList.push(card);
     this.render();
-    this.clearInput(); //this is causing an error in my console log but it's still working...:shrugs:
+    this.clearInput(event); 
   }, //close createContact
 
   getInput: function() {
@@ -69,7 +77,17 @@ const RolodexView = Backbone.View.extend({
       phone: this.input.phone.val()
     };
     return contact;
-  }//close getInput
+  }, //close getInput
+
+  addContact: function(rawContact) {
+    var contact = new Contact(rawContact);
+    this.modelList.push(contact);
+    var card = new ContactView({
+      model: contact,
+      template: this.contactTemplate
+    });
+    this.cardList.push(card);
+  } //close addContact
 });
 
 export default RolodexView;
