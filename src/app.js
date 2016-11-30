@@ -1,11 +1,9 @@
 import $ from 'jquery';
-import _ from 'underscore';
-import Backbone from 'backbone';
 
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
-import Contact from 'app/models/contact';
-import ContactView from 'app/views/contact_view';
+import Rolodex from 'app/collections/rolodex';
+import RolodexView from 'app/views/rolodex_view';
 
 var contactList = [
   {
@@ -28,17 +26,13 @@ var contactList = [
 ];
 
 $(document).ready(function() {
-  var contactTemplate = _.template($('#tmpl-contact-card').html());
-  var listElement = $("#contact-cards");
-  var exampleContact = new Contact(contactList[0]);
-
-  //  var cardList = [];
-  var contactInfo = new ContactView({
-    contact: exampleContact,
-    template: contactTemplate
-  });
-
-  listElement.append(contactInfo.render().$el);
+  var myRolodex = new Rolodex(contactList);
+  var rolodexDisplay = new RolodexView(
+    {
+      el: $("#contact-cards"),
+      model: myRolodex
+    });
+  rolodexDisplay.render();
 });
 
 

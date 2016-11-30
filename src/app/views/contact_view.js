@@ -1,6 +1,3 @@
-import Backbone from 'backbone';
-import Contact from 'app/models/contact';
-
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
     this.contact = options.contact;
@@ -8,7 +5,7 @@ const ContactView = Backbone.View.extend({
   },
 
   render: function() {
-    var html = this.template({contact: this.contact.attributes});
+    var html = this.template({contact: this.model.attributes});
     this.$el.html(html);
 
     return this;

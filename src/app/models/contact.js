@@ -1,5 +1,3 @@
-import Backbone from 'backbone';
-
 const Contact = Backbone.Model.extend({
   defaults: {
     name: "Random Person",
