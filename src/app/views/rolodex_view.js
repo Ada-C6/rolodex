@@ -11,6 +11,12 @@ const RolodexView = Backbone.View.extend({
     this.model.forEach(function(rawContact) {
       this.addContact(rawContact);
     }, this);
+
+    this.listenTo(this.model, 'add', this.addContact);
+    this.listenTo(this.model, 'update', this.render);
+
+
+    this.render();
   },
 
   render: function() {

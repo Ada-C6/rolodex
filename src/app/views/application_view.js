@@ -1,3 +1,6 @@
+import RolodexView from 'app/views/rolodex_view';
+import $ from 'jquery';
+import _ from 'underscore';
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
     this.input = {
@@ -6,15 +9,22 @@ const ApplicationView = Backbone.View.extend({
       phone: this.$('.contact-form input[name="phone"]')
     };
 
-    this.render();
+
+    this.rolodexDisplay = new RolodexView(
+      {
+        el: $("#contact-cards"),
+        model: this.model.rolodex
+      });
   },
 
   render: function() {
+    this.rolodexDisplay.render();
     return this;
   },
 
   events: {
     'click .btn-cancel': 'clearForm',
+    'click .btn-save': 'createContact'
   },
 
   clearForm: function(event) {
@@ -33,6 +43,15 @@ const ApplicationView = Backbone.View.extend({
     return contactInfo;
   },
 
+  createContact: function(event) {
+    event.preventDefault();
+    var collectContact = this.getInput();
+
+    this.model.rolodex.add(collectContact);
+//    this.model.rolodex.addContact(collectContact);
+    this.clearForm();
+    console.log('createContact clicked');
+  },
 });
 
 export default ApplicationView;
