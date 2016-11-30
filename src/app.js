@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 import ContactView from 'app/views/contact_view';
+import Contact from 'app/models/contact';
 
 import RolodexView from 'app/views/rolodex_view';
 import Rolodex from 'app/collections/rolodex';
@@ -30,6 +31,7 @@ $(document).ready(function() {
   };
   var application = new RolodexView(options);
   application.render();
+  
 });
 
 

@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+
 import Contact from 'app/models/contact';
 
 var Rolodex = Backbone.Collection.extend({
