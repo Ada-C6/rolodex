@@ -22,20 +22,14 @@ const RolodexView = Backbone.View.extend({
       this.addContact(contact);
       }, this); // bind `this` so it's available inside forEach
 
-    // // Keep track of our form input fields
-    // this.input = {
-    //   title: this.$('.new-task input[name="title"]'),
-    //   description: this.$('.new-task input[name="description"]')
-    // };
+    // When a model is added to the collection, add a card for it
+    this.listenTo(this.model, 'add', this.addContact);
 
-    // // When a model is added to the collection, add a card for it
-    // this.listenTo(this.model, 'add', this.addTask);
-    //
     // // When a model is removed from the collection, remove the card for it from the list of cards
     // this.listenTo(this.model, 'remove', this.removeTask);
     //
-    // // Re-render the whole list when the collection changes
-    // this.listenTo(this.model, 'update', this.render);
+    // Re-render the whole rolodex when the collection changes
+    this.listenTo(this.model, 'update', this.render);
 
   },
 
