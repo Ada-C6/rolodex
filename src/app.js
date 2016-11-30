@@ -23,23 +23,19 @@ var contactData=
 
 $(document).ready(function() {
   //set a variable that is an instance of the model
+  
   //using the data from contactData
   var contact = new Contact(contactData);
+  
   //set an instance of contact view
   var contactCard = new ContactView({
+  	
   	//contact view takes a 'template' and a model
     template: _.template($("#tmpl-contact-card").html()),
-    model: contact,
-    el: "#contact-cards"
-    // con: contactData
+    model: contact
   });
-  //render contact card
-  console.log("el:",contactCard.el)
-  console.log("model:",contactCard.model)
   
-
-  console.log( "contact-card rendering:", contactCard);
-  $("#contact-cards").append(contactCard.render().$el);
+  //append contact card template onto "contact cards" ul
+    $("#contact-cards").append(contactCard.render().$el);
   
-  // $("#contact-cards").append("<h1>Hello</h1>");
 });

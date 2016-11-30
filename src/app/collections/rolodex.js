@@ -5,6 +5,7 @@ const Rolodex = Backbone.Collection.extend({
   // and should include any methods or attributes
   // that are involved in working with more than one
   // Contact.
+  	model: Contact
 });
 
 export default Rolodex;

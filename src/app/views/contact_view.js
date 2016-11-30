@@ -8,46 +8,11 @@ const ContactView = Backbone.View.extend({
 	initialize: function(options) {
 	  // Compile a template to be shared between the individual tasks
 	  this.contactTemplate = options.template;
-	  console.log(this)
-	  // console.log("conData",options.con)
-	  // this.render();
-
-	  // // Keep track of the <ul> element
-	  this.listElement = this.$('.contact-card');
-
-	  // // We'll keep track of a list of task models and a list
-	  // // of task views.
-	  // this.modelList = [];
-	  options.model
+	  this.model=options.model;
 	  this.cardList = [];
-
-	  // // Process each contact card
-	  // options.con.forEach(function(contact) {
-	  //   this.addContact(contact);
-	  // }, this); // bind `this` so it's available inside forEach
-
-	  // Keep track of our form input fields
-	  // this.input = {
-	  //   name: this.$('.contact-card input[name="name"]'),
-	  //   description: this.$('.contact-card input[name="email"]')
-	  // };
   },
 	addContact: function(rawContact) {
-	//   // Create a contact card from this raw data
-	//   var contact = new Contact(rawContact);
-
-	//   // Add the contact  model to our list
-	//   this.cardList.push(contact);
-
-	//   // Create a card for the new task
-	//   var card = new ContactView({
-	//     model: contact,
-	//     template: this.contactTemplate,
-	//     // con: cardList
-	//   });
-
-	//   // Add the card to our card list
-	//   this.cardList.push(card);
+	
 	 },
 	render: function() {
 	    
