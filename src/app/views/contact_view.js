@@ -7,8 +7,7 @@ const ContactView = Backbone.View.extend({
     this.modalTemplate = options.modalTemplate;
     this.modal = $('#contact-details');
 
-    // modal must be hidden until we hover a contact
-    this.modal.hide();
+    console.log(this.el);
 
   },
 
@@ -27,23 +26,24 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-      'mouseover .contact-card': 'showModal',
-      'mouseleave .contact-card': 'hideModal'
+      'click .contact-card': 'showModal',
   },
 
-  showModal: function() {
+  showModal: function(event) {
+    event.stopPropagation();
     var html = this.modalTemplate({
       contact: this.model.attributes
     });
 
     this.modal.html(html);
+    console.log('Make modal triggered');
     this.modal.show();
   },
 
   hideModal: function() {
+    console.log('Hide modal triggered');
     this.modal.hide();
-  }
-
+  },
 });
 
 export default ContactView;

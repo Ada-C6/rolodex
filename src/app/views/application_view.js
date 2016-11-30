@@ -11,6 +11,10 @@ const ApplicationView = Backbone.View.extend({
   initialize: function() {
     this.rolodex = this.model.contactList;
 
+    this.modal = $('#contact-details');
+    // modal must be hidden until we hover a contact
+    this.modal.hide();
+
     this.rolodexView = new RolodexView({
       el: '#contact-cards',
       model: this.rolodex
@@ -34,7 +38,10 @@ const ApplicationView = Backbone.View.extend({
 
   events: {
   'click .btn-cancel': 'clearInput',
-  'click .btn-save': 'createTask'
+  'click .btn-save': 'createTask',
+  'click #contact-cards': 'hideModal',
+  // 'click #contact-details': 'hideModal',
+  'click header': 'hideModal'
   },
 
   getInput: function() {
@@ -65,6 +72,17 @@ const ApplicationView = Backbone.View.extend({
     this.clearInput();
     console.log("createTask called");
   },
+
+  hideModal: function() {
+    console.log('Hide modal triggered');
+    this.modal.hide();
+  },
+
+  // protectContactChildren: function(event) {
+  //   $(".header a").click(function(event) {
+  //      e.stopPropagation();
+  //   });
+  // }
 
 });
 
