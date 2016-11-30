@@ -3,12 +3,10 @@ import Backbone from 'backbone';
 import _ from 'underscore';
 
 import Rolodex from 'app/collections/rolodex';
-import Application from 'app/models/application';
 import RolodexView from 'app/views/rolodex_view';
 import ApplicationView from 'app/views/application_view';
-import COntact from 'app/models/contact';
 
-
+// Starter Data to initialize the Rolodex Collection
 var contactData = [
   {
     name: "Grace Hopper",
@@ -23,17 +21,22 @@ var contactData = [
 
 $(document).ready(function() {
 
+  // initialize the collection of contacts with the contactData specified above
   var rolodex = new Rolodex(contactData);
-  // var application = new Application(contactData);
 
+  // Define the parent element controlled by the ApplicationView
   var appView = new ApplicationView({
-    el: $('#application'),
+    el: $('body'), //switched to body from #application so that clicking anywere on the screen would hide the popup
     model: rolodex
   });
 
+  // Define the parent element controlled by the RolodexView
   var roloView = new RolodexView({
-    el: $('#application'),
+    el: $('main'),
     model: rolodex
   });
+
+  // Display the originally stored contacts
+  roloView.render();
 
 }); // closing $(document).ready

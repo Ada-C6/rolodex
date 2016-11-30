@@ -19,47 +19,33 @@ const ApplicationView = Backbone.View.extend({
 
   ////////////// ADDING A NEW CONTACT //////////////
   events: {
-    'submit .new-task': 'createTask',   // "We're intercepting a form submit event"
-    'click .btn-cancel': 'clearInput'
+    'click .btn-save': 'createContact',   // "We're intercepting a form submit event"
+    'click .btn-cancel': 'clearInput',
+    'mouseup ': 'hidePopup',
   },
 
-  createTask: function(event) {
-    console.log('createTask called');
-    // Suppress that behavior.
+  createContact: function(event) {
+    console.log('createContact called');
+    // Suppress the default behavior (might be unnecessary since this is not a form).
     event.preventDefault();
 
     // Get the input data from the form and turn it into a task
-    var task = this.getInput();
+    var contact = this.getInput();
+    console.log(contact);
 
-
-    // Add the new task to our list of tasks
-    ////////////// ADDING MODEL //////////////
-    ////// Commented this out and... ////////
-    // this.taskData.push(task);
-    //
-    // // Create a card for the new task, and add it to our card list
-    // var card = new TaskView({
-    //   task: task,
-    //   template: this.taskTemplate
-    // });
-    // this.cardList.push(card);
-    ////////////// ADDING MODEL //////////////
-    //////////// added this ... //////////////
-
-    ////////////// ADDING MODEL //////////////
-
-    // this.addTask(task); // THis is unnecessary b/c we listenTo this.model "add"s
-    this.model.add(task);
-    ////////////// //////////////
-
-    // Re-render the whole list, now including the new card
-    // this.render(); // THis is unnecessary b/c we listenTo this.model "update"s
+    // This is calling a built in function ".add" on the Rolodex collection (passed in here with the name 'model')
+      // the contact data from getInput is passed to rolodex.js Collection,
+      // which calls contact.js model,
+      // the Listening event in rolodex "senses" that this.model (i.e. the rolodex) has been added to,
+      // and subsequently calls the addContact method.
+    this.model.add(contact);
 
     // Clear the input form so the user can add another task
     this.clearInput();
   },
 
-  clearInput: function(event) {
+  // Clear the inputs in the boxes
+  clearInput: function() {
     console.log("clearInput called");
 
     $( 'input[name="name"]' ).val('');
@@ -67,28 +53,28 @@ const ApplicationView = Backbone.View.extend({
     $( 'input[name="phone"]' ).val('');
   },
 
-  // Build a task from the data entered in the .new-task form
+  // Build a contact from the data entered in the .new-task form
   getInput: function() {
-    var task = {
-      title: this.input.title.val(),
-      description: this.input.description.val()
+    var contact = {
+      name: $( 'input[name="name"]' ).val(),
+      email: $( 'input[name="email"]' ).val(),
+      phoneNumber: $( 'input[name="phone"]' ).val()
     };
-    return task;
+    return contact;
   },
 
+  hidePopup: function(e) {
+    // console.log("hidePopup called");
+    // console.log($(e.target).closest(".contact-card").length === 0);
 
-  ////////////// ADDING MODEL //////////////
-  addTask: function(task) { // changed to task from rawTask when adding COLLECTIONS
-    // var task = new Task(rawTask);
-    // this.modelList.push(task);
-    var card = new TaskView({
-      model: task,
-      template: this.taskTemplate
-    });
-    this.cardList.push(card);
-  },
-  //////////////////////////////////////////
 
+    // OMG... this took FOREVER to figure out. there was a weird problem with identifying if
+    // I clicked on the h4 part of a contact-card it didnt identify as clicking $('.contact-card') -- i.e. juse $('.contact-card').is(e.target) did not work
+    // but if I don't limit to clicking anywhere EXCEPT on a contact-card, it would get confused showing and hiding them at the same time.
+    if ($(e.target).closest(".contact-card").length === 0) {
+      $('#contact-details').fadeOut(200); // Close the popup element
+    }
+  }
 
 });
 

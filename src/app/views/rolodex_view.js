@@ -16,23 +16,19 @@ const RolodexView = Backbone.View.extend({
       this.cardList = [];
 
       this.model.forEach(function(contact) {
-          ////// Commented this out when we added the model
-          // console.log(contact);
-
-          var card = new ContactView({
-            contact: contact,
-            template: this.contactTemplate
-          });
-          this.cardList.push(card);
-
-         ////////////// ADDING MODEL //////////////
-        //  this.addTask(task);
+        // call contactView on each contact in the collection
+        this.addContact(contact);
       }, this); // bind `this` so it's available inside forEach  * i.e. "this" is another argument being passed into the forEach so it knows which "this" to use
 
 
+      // Re-render the whole rolodex whenever it is updated
+      this.listenTo(this.model, "update", this.render);
+      // Add the contacts whenever the model has been added to
+      this.listenTo(this.model, "add", this.addContact); // --> THis is required for the newly added contact to render, so the model must not get "updated" until that happens?
 
-      this.render();
-      
+
+      // this.render();
+
     }, // end initialize function
 
   render: function() {
@@ -50,7 +46,19 @@ const RolodexView = Backbone.View.extend({
     }, this);
 
     return this; // enable chained calls
-  }
+  },
+
+  ////////////// ADDING MODEL //////////////
+  addContact: function(contact) {
+    // var task = new Task(rawTask);
+    // this.modelList.push(task);
+    var card = new ContactView({
+      model: contact,
+      template: this.contactTemplate
+    });
+    this.cardList.push(card);
+
+  },
 });
 
 export default RolodexView;
