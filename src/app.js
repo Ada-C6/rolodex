@@ -1,6 +1,26 @@
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
 
+var contactList = [
+  {
+    name: "Jenny",
+    email: "jenny@tutone.com",
+    phone: "867-5309"
+  }, {
+    name: "Jessica Rabbit",
+    email: "jrabbit@toontown.com",
+    phone: "555-0123"
+  }, {
+    name: "Elmer Fudd",
+    email: "killdawabbit@hunter.com",
+    phone: "KLondike 6-5000"
+  }, {
+    name: "Lisa Simpson",
+    email: "saxophone.nerd@sprinfield.com",
+    phone: "555-0420"
+  }
+];
+
 var application = new Application();
 
 var appView = new ApplicationView({
