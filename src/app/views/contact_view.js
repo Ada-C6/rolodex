@@ -10,9 +10,9 @@ const ContactView = Backbone.View.extend({
   },
 
   render: function(){
-    var contact = new Contact();
-    console.log(contact.attributes.name);
-    var html = this.template({name: contact.attributes.name});
+    // var contact = new Contact();
+    // console.log(contact.attributes.name);
+    var html = this.template({name: this.model.attributes.name});
     this.$el.html(html);
     return this;
   }
