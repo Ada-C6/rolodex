@@ -7,10 +7,10 @@ import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
-    this.contactTemplate = _.template($('#tmpl-contact-card').html());
+    // this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
     // Keep track of the <ul> element
-    this.listElement = this.$('.contact-cards'); 
+    this.listElement = this.$('.contact-cards');
     // Create a ContactView for each contact
     this.contactList = [];
 

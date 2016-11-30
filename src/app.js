@@ -2,6 +2,8 @@ import $ from 'jquery';
 
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
+import ContactView from 'app/views/contact_view';
+import Contact from 'app/models/contact';
 
 var contactInfo = [
   {
@@ -26,4 +28,12 @@ $(document).ready(function() {
     model: application
   });
   appView.render();
+
+  var contact = new ContactView({
+    model: new Contact(contactInfo[0])
+  });
+  contact.render();
+  $('#contact-cards').append(contact.$el);
+  console.log(contact);
+
 });
