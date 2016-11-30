@@ -6,6 +6,7 @@ import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
 import ContactView from 'app/views/contact_view';
 import RolodexView from 'app/views/rolodex_view';
+import Rolodex from 'app/collections/rolodex';
 
 var contactsData = [
   {
@@ -27,9 +28,10 @@ var contactsData = [
 
 
 $(document).ready(function() {
+  var rolodex = new Rolodex(contactsData);
   var application = new RolodexView({
     el: $('#application'),
-    contactsData: contactsData
+    model: rolodex//contactsData: contactsData
   });
   application.render();
 });

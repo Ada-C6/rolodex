@@ -11,12 +11,16 @@ const RolodexView = Backbone.View.extend({
     this.contactTemplate = _.template($('#tmpl-contact-card').html()); //compiles a template to be shared between the contacts
     this.listElement = this.$('#contact-cards'); //keep track of the <li> elements
 
-    this.modelList = [];
+    // this.modelList = [];
     this.cardList = [];
 
-    options.contactsData.forEach(function(contact) {
+    this.model.forEach(function(contact) {
       this.addContact(contact);
     }, this);
+
+    // options.contactsData.forEach(function(contact) {
+    //   this.addContact(contact);
+    // }, this);
 
     // this.contactsData.forEach(function(contact) {
     //   var card = new ContactView({
@@ -31,6 +35,9 @@ const RolodexView = Backbone.View.extend({
       email: this.$('.contact-form input[name="email"]'),
       phone: this.$('.contact-form input[name="phone"]')
     };
+
+    this.listenTo(this.model, 'add', this.addContact);
+    this.listenTo(this.model, 'update', this.render);
   }, //close initialize
 
   render: function() {
@@ -58,16 +65,17 @@ const RolodexView = Backbone.View.extend({
   createContact: function(event) {
     event.preventDefault();
     console.log('creating a contact button pressed!');
-    var contact = this.getInput();
-    this.addContact(contact);
+    var contact = new Contact( this.getInput() );
+    // this.addContact(contact);
+    this.model.add(contact);
     // this.contactsData.push(contact);
     // var card = new ContactView({
     //   contact: contact,
     //   template: this.contactTemplate
     // });
     // this.cardList.push(card);
-    this.render();
-    this.clearInput(event); 
+    // this.render();
+    this.clearInput(event);
   }, //close createContact
 
   getInput: function() {
@@ -79,15 +87,16 @@ const RolodexView = Backbone.View.extend({
     return contact;
   }, //close getInput
 
-  addContact: function(rawContact) {
-    var contact = new Contact(rawContact);
-    this.modelList.push(contact);
+  addContact: function(contact) {
+    // var contact = new Contact(rawContact);
+    // this.modelList.push(contact);
     var card = new ContactView({
       model: contact,
       template: this.contactTemplate
     });
     this.cardList.push(card);
   } //close addContact
+
 });
 
 export default RolodexView;
