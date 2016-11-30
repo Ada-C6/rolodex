@@ -1,3 +1,4 @@
+// rolodex holds the contact cards plus its own stuff
 import Backbone from 'backbone';
 
 const Rolodex = Backbone.Collection.extend({
