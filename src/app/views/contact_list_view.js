@@ -13,14 +13,15 @@ import ContactView from 'app/views/contact_view';
 var ContactListView = Backbone.View.extend({
   initialize: function(options) {
   this.template = _.template($('#tmpl-contact-card').html());
-
+  console.log('What is this at the moment? ' + this);
+  console.log('What is options.contacts at the moment? ' + options.contacts);
+  console.log('What is this.model at the moment? ' + this.model);
   this.modelList = [];
   this.cardList = [];
 
   options.contacts.forEach(function(rawData) {
     this.addContact(rawData);
   }, this);
-  // this.listenTo(this.model, 'change', this.render);
 
 //
     // this.listenTo(this.model, 'change', this.render);
@@ -33,6 +34,9 @@ var ContactListView = Backbone.View.extend({
     this.cardList.forEach(function(card) {
       // Cause the task to render
       card.render();
+
+      // WANT TO SEE IF THIS WILL LISTEN TO CONTACT VIEW CHANGES
+      this.listenTo(this.contacts, 'saving', this.createContact);
 
       // Add that HTML to our task list
       this.$el.append(card.$el);
@@ -60,6 +64,8 @@ var ContactListView = Backbone.View.extend({
 
   createContact: function(event) {
       event.preventDefault();
+      // console.log();
+      console.log('Time to create a new contact');
 // THIS IS A COPY FROM TASKS
       // // Get the input data from the form and turn it into a task
       // var rawData = this.getInput();

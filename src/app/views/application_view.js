@@ -31,7 +31,7 @@ const ApplicationView = Backbone.View.extend({
     console.log('Ready to save?');
     console.log('How to sent it to the ContactListView next?');
     var rawData = this.getInput();
-
+    rawData.trigger('saving');
   },
   cancelOnClick: function() {
     console.log('Cancel form input!');
@@ -39,7 +39,13 @@ const ApplicationView = Backbone.View.extend({
     this.$('input')[1].value = '';
     this.$('input')[2].value = '';
   },
-  getInput: {
+  getInput: function() {
+    var contact = {
+      name: this.$('input')[0].value,
+      email: this.$('input')[1].value,
+      phone: this.$('input')[2].value
+    };
+    return contact;
     // var contact = {
     //  name: this.input.name.val(),
     //  email: this.input.email.val()
