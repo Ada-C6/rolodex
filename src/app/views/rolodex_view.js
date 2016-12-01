@@ -20,11 +20,11 @@ var RolodexView = Backbone.View.extend({
       this.addContact(rawContact);
     }, this);
 
-    // this.input = {
-    //   name: this.$('.contact-form input[name="name"]'),
-    //   email: this.$('.contact-form input[name="email"]'),
-    //   phoneNumber: this.$('.contact-form input[name="phoneNumber"]')
-    // };
+    this.input = {
+      name: this.$('.contact-form input[name="name"]'),
+      email: this.$('.contact-form input[name="email"]'),
+      phone: this.$('.contact-form input[name="phone"]')
+    };
   },
 
   render: function() {
@@ -35,6 +35,17 @@ var RolodexView = Backbone.View.extend({
       this.contactNameElement.append(contact.$el);
     }, this);
     return this;
+  },
+
+  events: {
+    'click .btn-cancel': 'cancelInput',
+    'submit .btn-save': 'saveContact'
+  },
+
+  cancelInput: function(event) {
+    this.input.name.val('');
+    this.input.email.val('');
+    this.input.phone.val('');
   },
 
   addContact: function(contact_info) {
