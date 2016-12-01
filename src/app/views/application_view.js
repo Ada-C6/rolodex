@@ -7,14 +7,24 @@ import RolodexView from 'app/views/rolodex_view';
 
 const ApplicationView = Backbone.View.extend({
   initialize: function(options) {
-    this.contactData = options.contactData;
     this.contactTemplate = _.template($('#tmpl-contact-details').html());
     this.rolodexTemplate = _.template($('#tmpl-contact-card').html());
     this.cardList = [];
+    this.modelList = [];
+
+    this.input = {
+      name: this.$('.contact-form input[name="name"]'),
+      email: this.$('.contact-form input[name="email"]'),
+      phone: this.$('.contact-form input[name="phone"]')
+    };
 
     this.model.forEach(function(contact) {
       this.addContact(contact);
     }, this);
+
+    this.listenTo(this.model, "update", this.render);
+
+    this.listenTo(this.model, "add", this.addContact);
 
   },
 
@@ -27,6 +37,8 @@ const ApplicationView = Backbone.View.extend({
     //
     // contactView.render();
 
+    $('#contact-cards').empty();
+
     this.cardList.forEach(function(card) {
       card.render();
 
@@ -35,7 +47,32 @@ const ApplicationView = Backbone.View.extend({
     return this;
   },
 
-  addContact: function(contact){
+  events: {
+    'click .btn-save': 'saveInput',
+    'click .btn-cancel': 'clearInput'
+  },
+
+  clearInput: function(event) {
+    $('input').val('');
+  },
+
+  saveInput: function(event) {
+
+    event.preventDefault();
+
+    var contact = new Contact({
+      name: this.input.name.val(),
+      phone: this.input.phone.val(),
+      email: this.input.email.val()
+    });
+
+    this.model.add(contact);
+
+    this.clearInput();
+
+  },
+
+  addContact: function(contact) {
     var card = new RolodexView({
       el: $('#contact-cards'),
       model: contact,
