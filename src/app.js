@@ -25,19 +25,18 @@ var contactData = [
 //
 
 $(document).ready(function() {
+  // rolodex is creating a new Rolodex model with our static contactData from above
   var rolodex = new Rolodex(contactData);
-    // var contactList = new Contact(contactData);
 
+// we're defining options here that are application will be in charge of.
   var options = {
     el: $('#application'),
     model: rolodex
-    // console.log(contactData);
   };
-    // var application = new TaskListView(options);
-    //setting a variable called options and passing it into TaskListView is the same options as in task_list_view.js
 
   var application = new RolodexView(options);
   application.render();
+
   //original code below
   // var application = new Application(contactData);
   //

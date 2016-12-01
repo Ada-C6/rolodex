@@ -53,16 +53,9 @@ const RolodexView = Backbone.View.extend({
    return this; // enable chained calls
  },
 
- // Turn a raw contact into a Contact model, add it to our list of contacts,
-  //  create a card for it, and add that card to our list of cards.
+ // Turn a raw contact into a Contact model, add it to our list of contacts
   addContact: function(rawContact) {
-    // Create a Task from this raw data
-    // var contact = new Contact(rawContact);
 
-    // Add the new contact model to our list
-    // this.modelList.push(contact);
-
-    // Create a card for the new task
     var card = new ContactView({
       model: rawContact,
       template: this.contactTemplate
