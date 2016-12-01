@@ -20,14 +20,6 @@ const RolodexView = Backbone.View.extend({
       // Add contact to list of contacts
       this.addContact(contact);
       }, this);
-
-      // // Keep track of form input fields
-      // this.input = {
-      //   name: this.$('contact-form input[name="name"]'),
-      //   email: this.$('contact-form input[name="email"]'),
-      //   phoneNumber: this.$('contact-form input[name="phone"]')
-      // };
-    // });
   },
 
   render: function() {

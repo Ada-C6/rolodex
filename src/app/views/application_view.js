@@ -2,13 +2,13 @@ import Backbone from 'backbone';
 
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
-    this.render();
+    // this.render();
 
     // Keep track of form input fields
     this.input = {
-      name: this.$('contact-form input[name="name"]'),
-      email: this.$('contact-form input[name="email"]'),
-      phoneNumber: this.$('contact-form input[name="phone"]')
+      name: this.$('.contact-form input[name="name"]'),
+      email: this.$('.contact-form input[name="email"]'),
+      phoneNumber: this.$('.contact-form input[name="phone"]')
     };
   },
 
@@ -30,6 +30,7 @@ const ApplicationView = Backbone.View.extend({
   },
 
   createContact: function(event) {
+    event.preventDefault();
     var contact = this.getInput();
     console.log(contact);
   },
