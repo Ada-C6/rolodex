@@ -35,6 +35,7 @@ var contactData = [
 
 ];
 
+$('#contact-details').hide();
 
 var application = new Application(contactData);
 
@@ -43,8 +44,10 @@ var appView = new ApplicationView({
   model: application
 });
 
+
+
 $(document).ready(function(){
-  $('#contact-details').hide();
+
   var contactList = new Rolodex(contactData);
   var contView = new RolodexView({
     el: $('#application'),

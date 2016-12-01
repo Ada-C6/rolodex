@@ -1,7 +1,6 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
 import _ from 'underscore';
-import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
@@ -28,12 +27,11 @@ const RolodexView = Backbone.View.extend({
 
     this.listenTo(this.model, 'add', this.addContactCard);
     this.listenTo(this.model, 'update', this.render );
-    
-
 
   },
 
   render: function() {
+    this.unorderedList.empty();
     this.contactList.forEach(function(contactCard){
       contactCard.render();
       this.unorderedList.append(contactCard.$el);
@@ -47,6 +45,22 @@ const RolodexView = Backbone.View.extend({
       template: this.contactTemplate
     });
     this.contactList.push(card);
+    this.listenTo(card, 'showDetails', this.showContactDetails);
+    this.listenTo(card, 'hideDetails', this.hideContactDetails);
+  },
+
+  showContactDetails: function(card) {
+    console.log("hovered over a thing");
+    var name = card.model.get('name');
+    var email = card.model.get("email");
+    var phone = card.model.get('phone');
+    this.$('#contact-details').html(card.detailsTemplate({email: email, name: name, phone: phone}));
+    this.$('#contact-details').toggle();
+  },
+
+  hideContactDetails: function() {
+    console.log("stopped hovering over the thing");
+    this.$('#contact-details').toggle();
   },
 
   events: {
