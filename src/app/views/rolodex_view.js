@@ -52,10 +52,11 @@ const RolodexView = Backbone.View.extend({
  },
 
  // Turn a raw contact into a Contact model, add it to our list of contacts
-  addContact: function(rawContact) {
+  addContact: function(contact) {
 
     var card = new ContactView({
-      model: rawContact,
+      // model: rawContact,
+      model: contact,
       template: this.contactTemplate
     });
 

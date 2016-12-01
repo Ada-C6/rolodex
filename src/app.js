@@ -2,7 +2,7 @@
 import $ from 'jquery';
 // import Contact from 'app/models/contact';
 import Contact from 'app/views/contact_view';
-import Rolodex from 'app/collections/rolodex';
+import Rolodex from 'app/collections/rolodex'; //important from collection
 import RolodexView from 'app/views/rolodex_view';
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
@@ -26,6 +26,7 @@ var contactData = [
 
 $(document).ready(function() {
   // rolodex is creating a new Rolodex model with our static contactData from above
+  //rolodex creates new Collection of models from contactData
   var rolodex = new Rolodex(contactData);
 
 // we're defining options here that are application will be in charge of.
