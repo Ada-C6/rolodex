@@ -1,14 +1,9 @@
-// import Backbone from 'backbone';
-
-import $ from 'jquery';
 import Backbone from 'backbone';
-import _ from 'underscore';
 
 const ContactView = Backbone.View.extend({
     initialize: function(options) {
-        this.template = _.template($('#tmpl-contact-card').html());
+        this.template = options.template;
     },
-// I'D LIKE TO UNDERSTAND WHY THIS FILE AND ROLODEX_VIEW FILE BOTH USE UNDERSCORE AND HAVE THEIR OWN TEMPLATE POINTING TO THE EXACT SAME SPOT IN THE HTML. IS THERE A WAY I COULD "CLEAN" THIS UP?
 
     render: function() {
         console.log(this.model.attributes);
