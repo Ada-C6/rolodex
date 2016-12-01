@@ -8,6 +8,8 @@ import _ from 'underscore';
 // I need to comment out these 2 lines later when I separate Model and View to their correct files.
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
+import Rolodex from 'app/collections/rolodex';
+import RolodexView from 'app/views/rolodex_view';
 
 
 // var application = new Application();
@@ -36,20 +38,43 @@ import ContactView from 'app/views/contact_view';
 //   }
 // });
 
+var contactData = [
+  {
+    name: "Kelly Tran",
+    phone: "432 432 5433",
+    email: "sing@song.net"
+  }, {
+    name: "Baby Bear",
+    phone: "123 456 7890",
+    email: "bear@bearland.net"
+  }, {
+    name: "Happy Baloon",
+    phone: "987 654 3210",
+    email: "baloon@baloon.com"
+  }
+];
 
 $(document).ready(function() {
-  var contactOne = new Contact(
-    {
-      name: "Kelly Tran",
-      phone: "432 432 5433",
-      email: "sing@song.net"
-    }
-  );
+  // var contactOne = new Contact(
+  //   {
+  //     name: "Kelly Tran",
+  //     phone: "432 432 5433",
+  //     email: "sing@song.net"
+  //   }
+  // );
+  //
+  // var contactViewOne = new ContactView({ model: contactOne });
+  // contactViewOne.render();
+  // $('#contact-cards').html(contactViewOne.el);
 
-  var contactViewOne = new ContactView({ model: contactOne });
-  contactViewOne.render();
-  $('#contact-cards').html(contactViewOne.el);
+  var contactList = new Rolodex(contactData);
+  var options = {
+    el: $('#application'),
+    model: contactList
+  };
 
+  var application = new RolodexView(options);
+  application.render();
 });
 
 

@@ -3,8 +3,8 @@ import _ from 'underscore';
 import $ from 'jquery';
 
 var ContactView = Backbone.View.extend({
-  initialize: function() {
-    this.template = _.template($('#tmpl-contact-card').html());
+  initialize: function(options) {
+    this.template = options.template;
   },
 
   render: function() {
