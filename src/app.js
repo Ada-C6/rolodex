@@ -13,12 +13,6 @@ import ContactView from 'app/views/contact_view';
 import Rolodex from 'app/collections/rolodex';
 import RolodexView from 'app/views/rolodex_view';
 
-// Create a few first contact from the Contact model
-var firstContact = new Contact ({
-  name: "Olivia",
-  phone: "1234567890",
-  email: "justin@bieber.com"
-});
 
 // Create a list of new contacts to pass around
 var contactList = [
@@ -44,24 +38,29 @@ var contactList = [
   },
 ];
 
+// Start by hiding the contact details!
+console.log("00. I am hiding the modal");
+$('#contact-details').hide();
 
-// This should fire after the document is ready:
+
+// Once the document is ready
 $(document).ready(function(){
-  console.log("The document is ready");
+  console.log("05. The document is ready");
+
+  // Create a new Rolodex from the static contactList defined above
   var someContacts = new Rolodex(contactList);
-  var contactCardTemplate = _.template($('#tmpl-contact-card').html());
-
-
-  console.log("The Rolodex has been created");
+  console.log("10. The new Rolodex is ready. Here are the contents:");
   console.log(someContacts);
+
+  var contactCardTemplate = _.template($('#tmpl-contact-card').html());
 
   var roloView = new RolodexView({
     el: $('#application'),
     contacts: someContacts,
-    template: contactCardTemplate
+    cardTemplate: contactCardTemplate
   });
 
-  console.log("The application is about to be rendered");
+  console.log("20. The RolodexView is about to be rendered by the document ready function");
   roloView.render();
 });
 

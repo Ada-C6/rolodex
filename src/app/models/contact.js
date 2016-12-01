@@ -5,12 +5,12 @@ const Contact = Backbone.Model.extend({
   // a single contact: name, phone number, and email.
 
   defaults: {
-    name: "Alyssa",
-    phone: "952-270-6773",
-    email: "akhursh@gmail.com"
+    name: "Placeholder Name",
+    phone: "Placehold Phone",
+    email: "Placeholder Email"
   },
   initialize: function(options) {
-    console.log("You've created a new model with the name " + this.attributes.name);
+    console.log("06 - 09. You've created a new model with the name " + this.attributes.name);
   }
 
 });
