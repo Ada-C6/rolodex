@@ -11,6 +11,7 @@ import ContactView from 'app/views/contact_view';
 import Contact from 'app/models/contact';
 
 import RolodexView from 'app/views/rolodex_view';
+import Rolodex from 'app/collections/rolodex';
 
 
 
@@ -44,15 +45,15 @@ var contactData = [
 
 $(document).ready(function() {
 
-  var application = new Application(contactData);
+  var rolodex = new Rolodex(contactData);
 
-  var rolodex = new RolodexView({
+  var listOfContacts = new RolodexView({
     el: '#application',
     // Question: Is this the name of the model contact or the variable defined above?
-    model: application
+    model: rolodex
   });
 
-  rolodex.render();
+  listOfContacts.render();
 
   // var appView = new ApplicationView({
   //   el: '#application',

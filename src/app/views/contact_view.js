@@ -12,7 +12,7 @@ var ContactView = Backbone.View.extend({
 
   render: function() {
 
-    var html = this.cardTemplate({name: this.model.attributes.name});
+    var html = this.cardTemplate({name: this.model.get(name)});
     $(this.el).html(html);
     this.delegateEvents();
     return this;
