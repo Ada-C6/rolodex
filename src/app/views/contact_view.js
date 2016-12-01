@@ -9,10 +9,8 @@ const ContactView = Backbone.View.extend({
   },
 
   render: function() {
-    console.log(this.template);
-    var html = this.template({contact: this.model.attributes});
+    var html = this.template(this.model.attributes);
     this.$el.html(html);
-    console.log(this.model);
 
     // Enable chained calls
     return this;
