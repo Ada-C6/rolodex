@@ -6,25 +6,23 @@ import ContactView from 'app/views/contact_view';
 import _ from 'underscore';
 import Backbone from 'backbone';
 
+//building RolodexView with the options passed in app (includes el and Data)
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
-    // Compile a template to be shared between the individual tasks
-    console.log(options);
+    console.log("Inside RolodexView::::::" + JSON.stringify(options));
     console.log("Inside rolodex");
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
-    // Keep track of the <ul> element
+    // Keep track of the <ul> element in the main section of index.html. Sames as saying this.el
+    // this.listElement = this.$el;
     this.listElement = this.$('#contact-cards');
 
-    // We'll keep track of a list of task models and a list
-    // of task views.
-    // this.modelList = [];
     this.cardList = [];
-    console.log("THESE ARE THE OPTIONS" +options);
-      console.log("This is this" + this);
-    // Process each task
+    // console.log("THESE ARE THE OPTIONS" + options);
+    //   console.log("This is this" + this);
+    //   console.log(">>> This is this.model:  " + this.model);
     this.model.forEach(function(rawContact) {
-      console.log(rawContact.name);
+      console.log("happening in this.model.forEach, adding card for: " +rawContact.attributes.name);
       this.addContact(rawContact);
     }, this); // bind `this` so it's available inside forEach
 
@@ -37,8 +35,7 @@ const RolodexView = Backbone.View.extend({
   }, //end initialize
 
   render: function() {
-   // Make sure the list in the DOM is empty
-   // before we start appending items
+   // Make sure the list in the DOM is empty before we start appending items
    this.listElement.empty();
 
    // Loop through the data assigned to this view
@@ -48,6 +45,7 @@ const RolodexView = Backbone.View.extend({
 
      // Add that HTML to our task list
      this.listElement.append(card.$el);
+
    }, this);
 
    return this; // enable chained calls
