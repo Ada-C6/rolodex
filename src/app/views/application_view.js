@@ -1,5 +1,7 @@
 import Backbone from 'backbone';
 
+import RolodexView from 'app/views/rolodex_view';
+
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
     // this.render();
@@ -22,8 +24,6 @@ const ApplicationView = Backbone.View.extend({
   },
 
   clearContact: function(event) {
-    console.log('clearContact called');
-    console.log(this.input);
     this.input.name.val('');
     this.input.email.val('');
     this.input.phoneNumber.val('');
@@ -33,6 +33,11 @@ const ApplicationView = Backbone.View.extend({
     event.preventDefault();
     var contact = this.getInput();
     console.log(contact);
+
+    // this.model.add(contact);
+    console.log(this);
+
+    this.clearContact();
   },
 
   getInput: function() {
