@@ -7,7 +7,12 @@ var contactData = [
     {
         name: 'hello world',
         email: 'testing@world.com',
-        phone: '2345678901'
+        phone: 2345678901
+    },
+    {
+        name: 'second...',
+        email: 'testing2@world.com',
+        phone: 3456789012
     }
 ];
 
@@ -16,13 +21,9 @@ const ApplicationView = Backbone.View.extend({
         this.render();
     },
 
-// I WILL WANT TO UNDERSTAND THE DETAILS OF THIS RENDER FUNCTION (rolodexTag) AS IT SEEMS DIFFERENT THAN OUR LIVE CODING...
     render: function() { // render a new instance of RolodexView
-
-        var rolodexTag = $('#application'); // set a HTML tag for this to end up in the rolodex section
-
-        var rolodex = new RolodexView({ // give the application the rolodex view to render
-            el: rolodexTag,
+        var rolodex = new RolodexView({ // give the application the rolodex view to render within the #application div
+            el: $('#application'),
             data: contactData
         });
 
