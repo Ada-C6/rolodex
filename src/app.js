@@ -18,7 +18,7 @@ var contactData = [
     email: 'safarishari@ada.com',
     phone: '444-444-4444'
   }, {
-    name: 'Diane',
+    name: 'Dianne',
     email: 'diane@ada.com',
     phone: '333-333-3333'
   }, {
