@@ -25,6 +25,10 @@ var RolodexView = Backbone.View.extend({
       email: this.$('.contact-form input[name="email"]'),
       phone: this.$('.contact-form input[name="phone"]')
     };
+
+    this.listenTo(this.model, 'add', this.addContact);
+
+    this.listenTo(this.model, 'update', this.render);
   },
 
   render: function() {
@@ -39,13 +43,7 @@ var RolodexView = Backbone.View.extend({
 
   events: {
     'click .btn-cancel': 'cancelInput',
-    'submit .btn-save': 'saveContact'
-  },
-
-  cancelInput: function(event) {
-    this.input.name.val('');
-    this.input.email.val('');
-    this.input.phone.val('');
+    'click .btn-save': 'saveContact'
   },
 
   addContact: function(contact_info) {
@@ -56,7 +54,34 @@ var RolodexView = Backbone.View.extend({
     });
 
     this.contactList.push(contact);
+
+    return this;
   },
+
+  cancelInput: function(event) {
+    this.input.name.val('');
+    this.input.email.val('');
+    this.input.phone.val('');
+  },
+
+  getInput: function() {
+    var contact = {
+      name: this.input.name.val(),
+      email: this.input.email.val(),
+      phone: this.input.phone.val(),
+    };
+    return contact;
+  },
+
+  saveContact: function(event) {
+    event.preventDefault();
+
+    var rawContact = this.getInput();
+
+    this.model.add(rawContact);
+
+    this.cancelInput();
+  }
 
 });
 
