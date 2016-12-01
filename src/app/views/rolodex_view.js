@@ -10,20 +10,16 @@ const RolodexView = Backbone.View.extend({
     // Template to be shared between individual contacts
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
+    // Keep track of the <ul> element
+    this.listElement = this.$('#contact-cards');
+
     // Create a ContactView for each contact
     this.contactList = [];
-    console.log(this.contactList);
     this.model.forEach(function(contact) {
-      console.log(contact.attributes);
-      // console.log(this.template);
-      var contactCard = new ContactView({
-        name: contact.attributes.name,
-        // template: this.contactTemplate
-      });
 
       // Add contact to list of contacts
-      // this.contactList.push(contactCard);
-      // console.log(this.contactList);
+      this.addContact(contact);
+      }, this);
 
       // // Keep track of form input fields
       // this.input = {
@@ -31,15 +27,28 @@ const RolodexView = Backbone.View.extend({
       //   email: this.$('contact-form input[name="email"]'),
       //   phoneNumber: this.$('contact-form input[name="phone"]')
       // };
-    });
+    // });
   },
 
   render: function() {
+    // Loop through data
     this.contactList.forEach(function(contact) {
-      card.render();
-      console.log(this);
-    });
+      contact.render();
+
+      // Add HTML to contact list
+      this.listElement.append(contact.$el);
+    }, this);
+    return this;
   },
+
+  addContact: function(contact) {
+    var card = new ContactView({
+      model: contact,
+      template: this.contactTemplate
+    });
+
+    this.contactList.push(card);
+  }
 
 });
 

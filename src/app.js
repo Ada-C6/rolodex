@@ -26,9 +26,9 @@ var contactData = [
 
 $(document).ready(function() {
   var contactList = new Rolodex(contactData);
-  // console.log(contact.attributes.name);
+
   var rolodexView = new RolodexView({
-    el: '#contact-cards',
+    el: 'main',
     model: contactList
   });
 
