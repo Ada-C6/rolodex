@@ -39,6 +39,24 @@ const RolodexView = Backbone.View.extend({
 
     return this;
   },
+
+  events: {
+    // 'click .btn-save' : 'createContact',
+    'click .btn-cancel' : 'clearInput'
+  },
+  //
+  clearInput: function(event) {
+    console.log("clearInput called");
+    this.$('input')[0].value = '';
+    this.$('input')[1].value = '';
+    this.$('input')[2].value = '';
+    // var contactForm = this.$('input');
+    // var contactInput = contactForm.$('<input>');
+    // console.log(contactForm);
+    // contactForm[0].input.value = '';
+  //   this.$('.contact-form').label.input.phone.val('');
+  //   this.$('.contact-form').label.input.email.val('');
+  },
 });
 
 export default RolodexView;
