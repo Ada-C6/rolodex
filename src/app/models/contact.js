@@ -4,12 +4,12 @@ const Contact = Backbone.Model.extend({
 
   defaults: {
     name: "Placeholder name",
-    phoneNumber: "Placeholder phoneNumber",
+    phone: "Placeholder phone",
     email: "Placeholder email"
   },
 
   initialize: function() {
-    console.log("Created new contact with name " + this.get('name'));
+    // console.log("Created new contact with name " + this.get('name'));
   }
 
 });
