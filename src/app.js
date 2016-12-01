@@ -19,25 +19,6 @@ import RolodexView from 'app/views/rolodex_view';
 //   model: application
 // });
 
-
-// var Contact = Backbone.Model.extend({
-//   // This model should have the attributes for
-//   // a single contact: name, phone number, and email.
-// });
-
-
-// var ContactView = Backbone.View.extend({
-//   initialize: function() {
-//     this.template = _.template($('#tmpl-contact-card').html());
-//   },
-//
-//   render: function() {
-//     var html = this.template({name: this.model.get('name')});
-//     $(this.el).html(html);
-//     // this.$el.append(html);
-//   }
-// });
-
 var contactData = [
   {
     name: "Kelly Tran",
@@ -55,17 +36,6 @@ var contactData = [
 ];
 
 $(document).ready(function() {
-  // var contactOne = new Contact(
-  //   {
-  //     name: "Kelly Tran",
-  //     phone: "432 432 5433",
-  //     email: "sing@song.net"
-  //   }
-  // );
-  //
-  // var contactViewOne = new ContactView({ model: contactOne });
-  // contactViewOne.render();
-  // $('#contact-cards').html(contactViewOne.el);
 
   var contactList = new Rolodex(contactData);
   var options = {
