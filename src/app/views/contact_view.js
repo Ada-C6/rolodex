@@ -3,11 +3,12 @@ import _ from 'underscore';
 import Backbone from 'backbone';
 
 import Contact from 'app/models/contact';
+import RolodexView from 'app/views/rolodex_view';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
     // If model is passed in, don't need to keep track of it in initializer
-    this.template = _.template($('#tmpl-contact-card').html());
+    this.template = options.template;
     // this.template = options.template;
 
     // Listen to our model, and re-render whenever it changes.
@@ -15,7 +16,7 @@ const ContactView = Backbone.View.extend({
   },
 
   render: function() {
-    var html = this.template(this.model.attributes);
+    var html = this.template({contact: this.model.attributes});
     this.$el.html(html);
 
     this.delegateEvents();
