@@ -7,6 +7,7 @@ import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options){
+
     // the input from the "form"
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
@@ -37,6 +38,7 @@ const RolodexView = Backbone.View.extend({
   },
 
   render: function(){
+
     // make sure my list is empty to start with
     this.contactListElement.empty();
 
@@ -62,7 +64,7 @@ const RolodexView = Backbone.View.extend({
   },
 
   clearInput: function(event) {
-    console.log("clearInput called")
+    console.log("clearInput called");
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
@@ -74,6 +76,7 @@ const RolodexView = Backbone.View.extend({
       template: this.contactCardTemplate
     });
 
+    this.listenTo(card, 'edit', this.showModal);
     this.cardList.push(card);
   },
 
@@ -99,8 +102,21 @@ const RolodexView = Backbone.View.extend({
       phone: this.input.phone.val()
     };
     return contact;
-  }
+  },
 
+  showModal: function(peep) {
+    console.log("showing modal for " + peep.get("name"));
+    // hide the modal by default
+    $("#contact-details").show();
+  },
+
+  // otherClick: function(event){
+  //   console.log("clicking somewhere else");
+  // },
+  //
+  // hideModal: function() {
+  //
+  // }
 
 });
 
