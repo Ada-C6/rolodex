@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
-    this.template = _.template($('#tmpl-contact-card').html());
+    this.template = options.template;
   },
 
   render: function() {
