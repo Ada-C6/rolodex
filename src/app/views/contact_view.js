@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
 import _ from 'underscore';
+import ApplicationView from 'app/views/application_view';
 
 // import Contact from 'app/models/contact';
 
@@ -10,13 +11,17 @@ import _ from 'underscore';
 
 var ContactView = Backbone.View.extend({
   initialize: function(options) {
-  this.template = _.template($('#tmpl-contact-card').html());
+    // this.options = this.model
+    this.template = _.template($('#tmpl-contact-card').html());
 
-  // this.listenTo(this.model, 'change', this.render);
+    // this.listenTo(options.model, 'saving', this.render);
+    // this.listenTo(options.model, 'saving', console.log('THIS?'));
   },
   render: function() {
-
-    var html = this.template({name: this.model.attributes.name}); //instance of Contact
+    // console.log('Rendering ContactView');
+    // console.log(this.model);
+    var cardName = {name: this.model.attributes.name};
+    var html = this.template(cardName); //instance of Contact
     this.$el.html(html);
 
     // Re-attach DOM event listeners to our brand-spankin-new HTML

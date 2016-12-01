@@ -16,29 +16,29 @@ var contactList = [
 // var application = new Application(); // from cloned doc
 //
 $(document).ready(function() {
- var listElement = $('#contact-cards');
+//  var listElement = $('#contact-cards');
+// //
+// // console.log('CHECKPOINT');
+//   var contactBox = new ContactView( {
+//     el: listElement,
+//     model: contactList
+//   });
 //
-// console.log('CHECKPOINT');
-  var contactBox = new ContactView( {
-    el: listElement,
-    model: contactList
-//     el: '#application',
-//     model: application
-  });
+//   var contactGrid = new ContactListView( {
+//     el: listElement,
+//     contacts: contactList
+//   });
 
-  var contactGrid = new ContactListView( {
-    el: listElement,
+  var formView = new ApplicationView( {
+    el: '#application',
+    // model: application
+
+    // el: $('.contact-form'),
     contacts: contactList
   });
 
-  var formView = new ApplicationView( {
-    el: $('.contact-form')
-  });
-
-  // DO THE INPUT HERE?
-
   formView.render();
-  contactGrid.render();
+  // contactGrid.render();
 
 //
 });
