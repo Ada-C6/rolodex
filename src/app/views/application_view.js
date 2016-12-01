@@ -6,6 +6,16 @@ import Rolodex from 'app/collections/rolodex';
 import RolodexView from 'app/views/rolodex_view';
 // import ContactView from 'app/views/contact_view';
 
+// var ContactDetailsView = Backbone.View.extend({
+//   events: {
+//     'click': false
+//   },
+//
+//   render: function(){
+//     return this;
+//   }
+// });
+
 var contactData = [
   {
     name: 'Jo',
@@ -58,6 +68,7 @@ const ApplicationView = Backbone.View.extend({
     // this.cView.render();
     //
     // this.ulEl.append(this.cView.$el);
+    // this.deets = new ContactDetailsView();
 
     return this;
   },
@@ -65,11 +76,21 @@ const ApplicationView = Backbone.View.extend({
   events: {
     'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearInput',
-    'click header': 'hideModal'
+    // 'click #contact-details': false,
+    // 'click .contact-card': false,
+    'click': 'hideModal'
   },
 
   hideModal: function(e) {
-    this.roloView.$('#contact-details').hide();
+    if (e.target.id == 'contact-details' || e.target.class == 'contact-card') {
+      console.log(e.target.id);
+      return;
+    } else if ($(e.target).closest('#contact-details').length || $(e.target).closest('.contact-card').length) {
+      return;
+    } else {
+    console.log('hiding stuff');
+    $('#contact-details').hide();
+    }
   },
 
   createContact: function(event) {

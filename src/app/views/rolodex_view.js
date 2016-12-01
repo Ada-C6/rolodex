@@ -18,6 +18,8 @@ const RolodexView = Backbone.View.extend({
       this.addContact(rawContact);
     }, this);
 
+    this.deets = this.$('#contact-details');
+
     this.listenTo(this.model, 'add', this.addContact);
     this.listenTo(this.model, 'update', this.render);
     // this.cView = new ContactView({
@@ -29,14 +31,14 @@ const RolodexView = Backbone.View.extend({
   showDeets: function(e) {
     var temp = _.template($('#tmpl-contact-details').html());
     var deetsHtml = temp(e);
-    this.$('#contact-details').html(deetsHtml);
-    this.$('#contact-details').show();
+    this.deets.html(deetsHtml);
+    this.deets.show();
     console.log('details ' + e.name);
   },
 
   render: function() {
     this.ulEl.empty();
-    this.$('#contact-details').hide();
+    this.deets.hide();
 
     this.contactViewList.forEach(function(view) {
       view.render();
@@ -60,14 +62,19 @@ const RolodexView = Backbone.View.extend({
     this.contactViewList.push(card);
   },
 
-  // events: {
-  //   'click .tmpl-contact-card': 'triggerDetails'
-  // },
-  //
-  // triggerDetails: function(e){
-  //   console.log('this is the trigger sending');
-  //   this.trigger('details', this.model.attributes);
-  // }
+  events: {
+    // 'click': 'hideModal',
+    // 'click #contact-details': 'suppress'
+  },
+
+  suppress: function(e){
+    return false;
+  },
+
+  hideModal: function(e){
+    console.log('this is hiding something');
+    this.deets.hide();
+  }
 });
 
 export default RolodexView;

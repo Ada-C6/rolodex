@@ -19,6 +19,7 @@ const ContactView = Backbone.View.extend({
     // console.log(contact.attributes.name);
     var html = this.template({name: this.model.attributes.name});
     this.$el.html(html);
+    this.delegateEvents();
     return this;
   },
 
@@ -30,6 +31,7 @@ const ContactView = Backbone.View.extend({
     console.log('this is the trigger sending');
     console.log(this.model.attributes);
     this.trigger('details', this.model.attributes);
+    // return false; // use stop propogation here
   }
 });
 
