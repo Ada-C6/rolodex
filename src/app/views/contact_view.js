@@ -12,7 +12,6 @@ var ContactView = Backbone.View.extend({
     this.$el.html(html);
 
     // Enable chained calls
-    console.log(this);
     return this;
   },
 });

@@ -8,7 +8,7 @@ var Contact = Backbone.Model.extend({
   },
 
   initialize: function() {
-    console.log("Created new entry for contact: " + this.name);
+    console.log("Created new entry for contact: ",  this.attributes);
   }
 
 });

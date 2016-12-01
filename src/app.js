@@ -1,46 +1,41 @@
 import $ from 'jquery';
 
-
 import Application from 'app/models/application';
 import Contact from 'app/models/contact';
+import Rolodex from 'app/collections/rolodex';
 import ApplicationView from 'app/views/application_view';
 import ContactView from 'app/views/contact_view';
+import RolodexView from 'app/views/rolodex_view';
 
+
+var defaultContacts = [
+  {
+  name: "Josh",
+  email: "jlp@test.com",
+  phoneNumber: "123-456-7890"
+}, {
+  name: "Jen",
+  email: "jmo@test.com",
+  phoneNumber: "123-123-1234"
+}
+];
 
 $(document).ready(function() {
-  var singleContact = new Contact({
-    name: "Josh",
-    email: "jlp@test.com",
-    phoneNumber: "123-456-1234"
-  });
+  var newRolodex = new Rolodex(defaultContacts);
 
-  var singleContactView = new ContactView({
-    model: singleContact,
-    el: $('#contact-cards')
+  var newRolodexView = new RolodexView ({
+    model: newRolodex,
+    el: $('#application')
   });
-
-  singleContactView.render();
+  newRolodexView.render();
 });
 
-// var defaultContacts = [
-//   {
-//   name: "Josh",
-//   email: "jlp@test.com",
-//   phoneNumber: "123-456-7890"
-// }
-// ];
 
-// var singleContact = new Contact({
-//   name: defaultContacts[0].name,
-//   email: defaultContacts[0].email,
-//   phoneNumber: defaultContacts[0].phoneNumber
-// });
-//
 // var application = new Application(
 //
 // );
-
+//
 // var appView = new ApplicationView({
 //   el: '#application',
-//   model: contact;
+//   model: contact
 // });
