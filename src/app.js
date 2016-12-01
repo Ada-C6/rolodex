@@ -8,29 +8,22 @@ import RolodexView from 'app/views/rolodex_view';
 import Rolodex from 'app/collections/rolodex';
 
 
-var contactInfo = [
-  {
-    name: 'Ian',
-    email: 'ian@ian.com',
-    phone: '4125556765'
-  }, {
-    name: 'Erik',
-    email: 'erik@erik.com',
-    phone: '7035553245'
-  }, {
-    name: 'Mariah',
-    email: 'mariah@mariah.com',
-    phone: '6125553257'
-  }
-];
+var application = new Application();
 
-$(document).ready(function() {
-  var contactList = new Rolodex(contactInfo);
-  var appView = new RolodexView({
-    el: $('#application'),
-    model: contactList
-  });
-  appView.render();
+var appView = new ApplicationView({
+  el: '#application',
+  model: application
+});
+
+
+
+// $(document).ready(function() {
+//   var contactList = new Rolodex(contactInfo);
+//   var appView = new RolodexView({
+//     el: $('#application'),
+//     model: contactList
+//   });
+//   appView.render();
   //
   // var contact = new ContactView({
   //   model: new Contact(contactInfo[0])
@@ -38,5 +31,3 @@ $(document).ready(function() {
   // contact.render();
   // $('#contact-cards').append(contact.$el);
   // console.log(contact);
-
-});

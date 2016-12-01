@@ -7,10 +7,7 @@ import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
-    this.template = _.template($('#tmpl-contact-card').html());
-
-    // Keep track of the <ul> element
-    this.listElement = this.$('.contact-cards');
+    this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
     // Create a ContactView for each contact
     this.contactList = [];
@@ -22,23 +19,23 @@ const RolodexView = Backbone.View.extend({
 
   render: function() {
     // Make sure the list in the DOM is empty before we start appending items
-    this.listElement.empty();
+    this.$el.empty();
 
     // Loop through the data assigned to this view
     this.contactList.forEach(function(contact) {
       // Cause the contact to render
       contact.render();
       // Add that HTML to our rolodex
-      this.listElement.append(contact.$el); // $el is getting the div that represents a card and inserting it into the page
+      this.$el.append(contact.$el); // $el is getting the div that represents a card and inserting it into the page
     }, this);
 
     return this; // enable chained calls
   },
 
   addContact: function(contact) {
-    var info = new Contact({
+    var info = new ContactView({
       model: contact,
-      template: this.taskTemplate
+      template: this.contactTemplate
     });
 
     this.contactList.push(info);
