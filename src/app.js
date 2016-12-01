@@ -8,11 +8,11 @@ import ApplicationView from 'app/views/application_view';
 $(document).ready(function() {
   var application = new Application();
   var appView = new ApplicationView({
-    el: '#application',
+    el: 'html',
     model: application
   });
   appView.render();
-  // $(body).on('click', hideModal);
+  // $(window).on('click', hideModal);
   //
   // // console.log(appView.$el);
   // var hideModal = function(e) {
