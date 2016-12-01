@@ -27,11 +27,20 @@ const ApplicationView = Backbone.View.extend({
     this.input.name.val('');
     this.input.email.val('');
     this.input.phoneNumber.val('');
-    console.log(this.input);
   },
 
   createContact: function(event) {
-    alert('create called');
+    var contact = this.getInput();
+    console.log(contact);
+  },
+
+  getInput: function() {
+    var contact = {
+      name: this.input.name.val(),
+      email: this.input.email.val(),
+      phoneNumber: this.input.phoneNumber.val()
+    };
+    return contact;
   }
 
 });
