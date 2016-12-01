@@ -12,19 +12,25 @@ const RolodexView = Backbone.View.extend({
 
     // Create a ContactView for each contact
     this.contactList = [];
+    console.log(this.contactList);
     this.model.forEach(function(contact) {
       // console.log(contact.attributes);
       // console.log(this.template);
       var contactCard = new ContactView({
         name: contact.attributes.name,
-        template: this.contactTemplate
+        // template: this.contactTemplate
       });
+
+      // Add contact to list of contacts
+      this.contactList.push(contactCard);
+      console.log(this.contactList);
     });
   },
 
   render: function() {
     this.contactList.forEach(function(contact) {
       card.render();
+      console.log(this);
     });
   }
 });
