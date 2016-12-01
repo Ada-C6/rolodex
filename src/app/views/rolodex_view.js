@@ -14,10 +14,15 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
     this.listElement = this.$('#contact-cards');
-    this.modelList = [];
+    // These are used when you add a card to the list.
+    // this.modelList = [];
+    // this list carries the list of cards that is displayed
     this.cardList = [];
 
     this.model.forEach(function(modelName) {
+
+      // eventually : this.addTask(rawTask);
+
       var contactOptions = new ContactView({
         model: modelName,
         template: this.contactTemplate
@@ -26,18 +31,23 @@ const RolodexView = Backbone.View.extend({
     }, this);
 
     // WHat is this and where does it go?
-    this.input = {
-      name: this.$('.new-task input[name="title"]'),
-      description: this.$('.new-task input[name="description"]')
-    };
+    // this.input = {
+    //   name: this.$('.new-task input[name="title"]'),
+    //   description: this.$('.new-task input[name="description"]')
+    // };
   },
   render: function(){
     this.cardList.forEach(function(card){
       card.render();
+      console.log(">>>>> Debugging with Dan: DPR: about to log card stuff");
+      console.log(card);
+      console.log(card.el);
+      console.log(card.$el);
       this.listElement.append(card.$el);
     }, this);
     return this;
   }
+
 });
 
 export default RolodexView;

@@ -11,8 +11,9 @@ var ContactView = Backbone.View.extend({
   },
 
   render: function() {
-
-    var html = this.cardTemplate({name: this.model.get(name)});
+    // console.log(this.model);
+    var html = this.cardTemplate({name: this.model.get('name')});
+    // console.log(html);
     $(this.el).html(html);
     this.delegateEvents();
     return this;
