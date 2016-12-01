@@ -5,6 +5,8 @@ import $ from 'jquery';
 
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
+import RolodexView from 'app/views/rolodex_view';
+import Rolodex from 'app/collections/rolodex';
 
 var application = new Application();
 
@@ -26,15 +28,22 @@ var contactData = [
   }
 ];
 
-var charlesmodel = new Contact(contactData[0]);
-
-var contactTemplate = _.template($('#tmpl-contact-card').html());
-// console.log("contact Template: ", contactTemplate);
-
-var charlesview = new ContactView({
-  model: charlesmodel,
-  template: contactTemplate
+var rolView = new RolodexView({
+  el: '#application',
+  contactData: contactData
 });
+
+rolView.render();
+
+// var charlesmodel = new Contact(contactData[0]);
+//
+// var contactTemplate = _.template($('#tmpl-contact-card').html());
+// // console.log("contact Template: ", contactTemplate);
+//
+// var charlesview = new ContactView({
+//   model: charlesmodel,
+//   template: contactTemplate
+// });
 // console.log("charlesview: ", charlesview);
 
-$('#contact-cards').append(charlesview.render().$el);
+// $('#contact-cards').append(charlesview.render().$el);
