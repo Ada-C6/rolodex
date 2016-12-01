@@ -1,5 +1,11 @@
-import Application from 'app/models/application';
-import ApplicationView from 'app/views/application_view';
+// import Application from 'app/models/application';
+// import ApplicationView from 'app/views/application_view';
+
+import $ from 'jquery';
+
+import ContactListView from 'app/views/contact_list_view';
+
+import Rolodex from 'app/collections/rolodex';
 
 var contactData = [
     {
