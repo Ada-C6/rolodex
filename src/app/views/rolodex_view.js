@@ -14,7 +14,7 @@ const RolodexView = Backbone.View.extend({
     this.contactList = [];
     console.log(this.contactList);
     this.model.forEach(function(contact) {
-      // console.log(contact.attributes);
+      console.log(contact.attributes);
       // console.log(this.template);
       var contactCard = new ContactView({
         name: contact.attributes.name,
@@ -22,8 +22,15 @@ const RolodexView = Backbone.View.extend({
       });
 
       // Add contact to list of contacts
-      this.contactList.push(contactCard);
-      console.log(this.contactList);
+      // this.contactList.push(contactCard);
+      // console.log(this.contactList);
+
+      // // Keep track of form input fields
+      // this.input = {
+      //   name: this.$('contact-form input[name="name"]'),
+      //   email: this.$('contact-form input[name="email"]'),
+      //   phoneNumber: this.$('contact-form input[name="phone"]')
+      // };
     });
   },
 
@@ -32,7 +39,8 @@ const RolodexView = Backbone.View.extend({
       card.render();
       console.log(this);
     });
-  }
+  },
+
 });
 
 export default RolodexView;
