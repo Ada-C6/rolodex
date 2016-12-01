@@ -48,7 +48,7 @@ var contactData = [
 ];
 
 $(document).ready(function() {
-  $('#contact-details').hide();
+  $('#contact-details').hide(); // hide the contact-details when we haven't clicked on a contact-cards
   var contactList = new Rolodex(contactData);
   var options = {
     el: $('#application'), // pointing to the entire app and will call the #contact-cards inside the application
