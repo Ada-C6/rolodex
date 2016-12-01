@@ -9,20 +9,33 @@ var RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate = _.template($('#contact-card').html());
 
-    this.listElement = this.$('.contact-card');
+    this.listElement = this.$el;
 
     this.cardList = [];
 
-    this.model.forEach(function(rawContact) {
-      this.addContact(rawContact);
+    this.model.forEach(function(contact) {
+      this.addContact(contact);
     }, this);
 
-    //code to keep track of form inputs goes here?
+    this.input = {
+     name: this.$('.contact-form input[name="name"]'),
+     phone: this.$('.contact-form input[name="phone"]'),
+     email: this.$('.contact-form input[name="email"]')
+    };
 
     this.listenTo(this.model, 'add', this.addContact);
+    this.listenTo(this.model, 'update', this.addContact);
   },
 
   render: function() {
+    // var contacts = $('#contact-cards');
+    // this.$el.append(contacts);
+    //
+    // var contact = new ContactView({
+    //   el: contacts
+    // });
+    // contact.render();
+
     this.listElement.empty();
 
     this.cardList.forEach(function(contactCard){

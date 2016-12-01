@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Backbone from 'backbone';
 
 import ContactView from 'app/views/contact_view';
 import Contact from 'app/models/contact';
@@ -26,12 +27,12 @@ var contactData = [
 $(document).ready(function() {
   var rolodex = new Rolodex(contactData);
   var options = {
-    el: $('#application'),
+    el: $('#contact-cards'),
     model: rolodex
   };
-  var application = new RolodexView(options);
-  application.render();
-  
+  var rolodexView = new RolodexView(options);
+  rolodexView.render();
+
 });
 
 
