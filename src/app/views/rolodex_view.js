@@ -14,7 +14,7 @@ const RolodexView = Backbone.View.extend({
 
     this.cardList = [];
 
-    // model here is a collection of Contact models, which was instatiated in app.js: var contactList = new Rolodex(contactData);
+    // model here is a collection of Contact models, which was instantiated in app.js: var contactList = new Rolodex(contactData);
     this.model.forEach(function(rawContact) {
       this.addContact(rawContact);
     }, this);
