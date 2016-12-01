@@ -1,7 +1,7 @@
 import $ from 'jquery';
 //
 // import Application from 'app/models/application';
-// import ApplicationView from 'app/views/application_view';
+import ApplicationView from 'app/views/application_view';
 import ContactView from 'app/views/contact_view';
 import ContactListView from 'app/views/contact_list_view';
 // import Contact from 'app/models/contact';
@@ -30,16 +30,14 @@ $(document).ready(function() {
     el: listElement,
     contacts: contactList
   });
-//
-//   var appView = new ApplicationView(contactVariableOfSomeSort);
-//
-//   var contactView = new ContactView({
-//     el: '#contact-cards',
-//     model: contact
-//   });
-//
-//   appView.render();
-//   contactView.render();
+
+  var formView = new ApplicationView( {
+    el: $('.contact-form')
+  });
+
+  // DO THE INPUT HERE?
+
+  formView.render();
   contactGrid.render();
 
 //

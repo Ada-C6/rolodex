@@ -20,6 +20,8 @@ var ContactListView = Backbone.View.extend({
   options.contacts.forEach(function(rawData) {
     this.addContact(rawData);
   }, this);
+  // this.listenTo(this.model, 'change', this.render);
+
 //
     // this.listenTo(this.model, 'change', this.render);
   },
@@ -55,20 +57,22 @@ var ContactListView = Backbone.View.extend({
     // Add the card to our card list
     this.cardList.push(card);
   },
-//
-//   events: {
-//     'click .delete-button': 'deleteHandler'
-//   },
-//
-//   deleteHandler: function() {
-//     // Show a popup box asking the user for confirmation
-//     if (window.confirm("Are you sure you want to delete this Contact?")) {
-//       this.model.destroy(); // implicitly calls 'remove'
-//       // Remove calls: 'remove' on the collection and 'update' on the collection
-//       console.log('This contact is destroyed');
-//     }
-//   }
-//
+
+  createContact: function(event) {
+      event.preventDefault();
+// THIS IS A COPY FROM TASKS
+      // // Get the input data from the form and turn it into a task
+      // var rawData = this.getInput();
+      //
+      // this.addTask(rawTask);
+      //
+      // // Re-render the whole list, now including the new card
+      // this.render();
+      //
+      // // Clear the input form so the user can add another task
+      // this.clearInput();
+    }
+
 });
 //
 export default ContactListView;
