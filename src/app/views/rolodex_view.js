@@ -11,7 +11,7 @@ const RolodexView = Backbone.View.extend({
 
   render: function() {
     var html = this.template(this.model.attributes);
-    this.$el.html(html);
+    this.$el.append(html);
 
     // Enable chained calls
     return this;
