@@ -14,7 +14,7 @@ var contactData = [
     email: 'nicole@ada.com',
     phone: '555-555-5555'
   }, {
-    name: 'ShariSafari',
+    name: 'Shari Safari',
     email: 'safarishari@ada.com',
     phone: '444-444-4444'
   }, {
@@ -22,7 +22,7 @@ var contactData = [
     email: 'diane@ada.com',
     phone: '333-333-3333'
   }, {
-    name: 'MargarineMary',
+    name: 'Margarine Mary',
     email: 'margarinemary@ada.com',
     phone: '222-222-2222'
   }
@@ -34,6 +34,15 @@ var contactData = [
 //   phone: '222-222-2222'
 // };
 
+
+var application = new Application();
+
+var appView = new ApplicationView({
+  el: '#application',
+  model: application
+});
+
+
 $(document).ready(function() {
   var rolodex = new Rolodex(contactData);
   var contactOptions = {
@@ -44,14 +53,14 @@ $(document).ready(function() {
   var rolodexView = new RolodexView(contactOptions);
   rolodexView.render();
 
-  var application = new Application();
-  var options = {
-    el: '#application',
-    model: application
-  };
-
-  var appView = new ApplicationView(options);
-  appView.render();
+  // var application = new Application();
+  // var options = {
+  //   el: '#application',
+  //   model: application
+  // };
+  //
+  // var appView = new ApplicationView(options);
+  // appView.render();
 
   console.log("i just completed document.ready in app.js");
 });
