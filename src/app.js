@@ -69,7 +69,7 @@ $(document).ready(function() {
 
   var contactList = new Rolodex(contactData);
   var options = {
-    el: $('#application'),
+    el: $('#application'), // pointing to the entire app and will call the #contact-cards inside the application
     model: contactList
   };
 
