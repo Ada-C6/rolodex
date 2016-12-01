@@ -18,6 +18,10 @@ const RolodexView = Backbone.View.extend({
     this.model.forEach(function(rawContact) {
       this.addContact(rawContact);
     }, this);
+
+    // ?? any use?
+    this.listenTo(this.model, 'add', this.addContact);
+    this.listenTo(this.model, 'update', this.render);
   },
 
   addContact: function(contact) {
@@ -41,15 +45,34 @@ const RolodexView = Backbone.View.extend({
   },
 
   events: {
-    // 'click .btn-save' : 'createContact',
+    'click .btn-save' : 'createContact',
     'click .btn-cancel' : 'clearInput'
   },
-  //
+
+  getInput: function() {
+    var contact = {
+      name: this.$('input')[0].value,
+      email: this.$('input')[1].value,
+      phone: this.$('input')[2].value,
+    };
+    return contact;
+  },
+
+  createContact: function(event) {
+    console.log("createContact called");
+    // event.preventDefault(); // when i have this line, all CSS format gone! when i keep it, CSS stays
+    var rawContact = this.getInput();
+    this.model.add(rawContact);
+    this.clearInput();
+  },
+
   clearInput: function(event) {
     console.log("clearInput called");
+    // console.log(this.$('input')[0].val());
     this.$('input')[0].value = '';
     this.$('input')[1].value = '';
     this.$('input')[2].value = '';
+    // why the below doesnt work??
     // var contactForm = this.$('input');
     // var contactInput = contactForm.$('<input>');
     // console.log(contactForm);
