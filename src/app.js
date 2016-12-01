@@ -3,7 +3,7 @@
 
 import $ from 'jquery';
 
-import ContactListView from 'app/views/contact_list_view';
+import RolodexView from 'app/views/rolodex_view';
 
 import Rolodex from 'app/collections/rolodex';
 
@@ -16,12 +16,12 @@ var contactData = [
 ];
 
 $(document).ready(function() {
-    var contactList = new ContactList(contactData);
+    var contactList = new Rolodex(contactData);
     var options = {
         el: '#application',
-        model: application
+        model: rolodex
     };
-    var application = new ContactListView(options);
+    var application = new RolodexView(options);
     application.render();
 });
 
