@@ -1,10 +1,9 @@
 import Backbone from 'backbone';
 
-const Rolodex = Backbone.Collection.extend({
-  // This Rolodex represents a collection of Contacts
-  // and should include any methods or attributes
-  // that are involved in working with more than one
-  // Contact.
+import Contact from 'app/models/contact';
+
+const Rolodex = Backbone.Collection.extend({ // This Rolodex represents a collection of Contacts and includes any methods or attributes that are involved in working with more than one Contact.
+    model: Contact // this is syncing to the model contact.js file
 });
 
 export default Rolodex;
