@@ -11,9 +11,7 @@ const ContactView = Backbone.View.extend({
 	  this.model=options.model;
 	  this.cardList = [];
   },
-	addContact: function(rawContact) {
-	
-	 },
+
 	render: function() {
 	    
 	    //could use .attributes but that's bad for some reason
@@ -24,10 +22,12 @@ const ContactView = Backbone.View.extend({
 	  	//insert it into the html 
 	  	//in the spot where <%-name %> is in the underscore template
 	  	this.$el.html(html);
-
-
     return this;
-  } 
+  }
+  // events: {
+  //   "click .btn-cancel": "deleteHandler",
+  //   "submit .btn-save": "createContact"
+  // }
 });
 
 export default ContactView;
