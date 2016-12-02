@@ -1,6 +1,9 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 
+import ModalView from 'app/views/modal_view';
+
+
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
     this.cardTemplate = options.cardTemplate;
@@ -23,19 +26,28 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-      'click .contact-card': 'makeModal',
+      'click .contact-card': 'createModal',
   },
 
-  makeModal: function(event) {
-    var html = this.modalTemplate({
-      contact: this.model.attributes
+  createModal: function(event) {
+    var modal = new ModalView({
+      model: this.model,
+      template: this.modalTemplate,
+      el: this.modal
     });
 
-    var editButton = '<h3 class="button btn-edit" id=' + this.model.cid + '>Edit</h3>';
-  // the contact view is reponsible for filling in the details
-    this.modal.html(html);
-    this.modal.append(editButton);
+    // this.listenTo(modal, 'edit', this.editHandler);
+
+    modal.render();
+
+    return this;
   },
+
+  // editHandler: function(contact) {
+  //   console.log('in editHandler');
+  //   this.trigger('populateForm', contact);
+  // }
+
 });
 
 export default ContactView;

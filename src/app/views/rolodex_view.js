@@ -17,7 +17,6 @@ const RolodexView = Backbone.View.extend({
     // Keep track of the <ul> element - passed from the ApplicationView so we know about it
     this.listElement = this.$el;
 
-    console.log(this.listElement);
     this.cardList = [];
 
     this.model.forEach(function(contact) {
@@ -45,6 +44,10 @@ const RolodexView = Backbone.View.extend({
     // Add the card to our card list
     this.cardList.push(card);
 
+    // listen to the cards for when we are trying to edit it through the form
+    // this.listenTo(card, 'populateForm', this.populateFormHandler);
+
+
     return this;
   },
 
@@ -63,7 +66,13 @@ const RolodexView = Backbone.View.extend({
     }, this);
 
     return this; // enable chained calls
-  }
+  },
+
+  // populateFormHandler: function(contact) {
+  //   console.log('in PopulateFormHanler');
+  //   this.trigger('setInput', contact);
+  // }
+
 });
 
 export default RolodexView;
