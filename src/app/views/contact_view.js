@@ -31,6 +31,7 @@ var ContactView = Backbone.View.extend({
     console.log("triggerDisplayHandler called");
 
     this.trigger("displayHandler", this);
+    event.stopPropagation();
 
 
     // $(this.el).html(html);

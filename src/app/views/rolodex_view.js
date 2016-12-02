@@ -81,6 +81,8 @@ const RolodexView = Backbone.View.extend({
 
   // No event, because it is triggered by another event.
   displayContactDetails: function(contactCard){
+    $("#contact-details").show();
+    $("#contact-details").empty();
     console.log("displayHandler called");
     var element = this.$("#contact-details");
     var name = contactCard.model.get('name');
