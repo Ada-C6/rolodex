@@ -9,11 +9,8 @@ const RolodexView = Backbone.View.extend({
         // Compile a template to be shared between the individual contacts
         this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
-// THIS SEEMS TO BE THE MAIN PIECE I WAS MISSING EARLIER... WHY IS IT NEEDED HERE AND IT WASN'T NEEDED ONCE WE HAD OUR COLLECTION SET-UP IN OUR LIVE CODE?
-        // this.data = options.data;
-
         // Keep track of the <ul> element where the contact cards will live within
-        this.listElement = this.$('#contact-cards'); // this.$() is telling Backbone to search within the element this TaskListView is responsible for (#application--ID, on the HTML) and look for '.task-list' within it.
+        this.listElement = this.$('#contact-cards'); // this.$() is telling Backbone to search within the element this RolodexView is responsible for (#application--ID, on the HTML) and look for '#contact-cards' within it.
 
         // We'll keep track of a list of contact models and a list of contact views.
         this.cardList = [];
@@ -31,6 +28,7 @@ const RolodexView = Backbone.View.extend({
 
         // when a model is added to the collection, create a card for that model and add it to our list of cards
         this.listenTo(this.model, 'add', this.addContact);
+        this.listenTo(this.model, 'add', this.render);
     },
 
     render: function() {
@@ -43,7 +41,7 @@ const RolodexView = Backbone.View.extend({
 
             // Add that HTML to our contact list
             this.listElement.append(card.$el);
-            // this.listElement.append(card.$el.html()); this is jquery only appending what was INSIDE of the div that was created--it creates a copy of the originial stuff. And then the click event handler doesn't work because it's only listening to the REAL stuff, not the copies. So we reverted to our original text from yesterday.
+            // this.listElement.append(card.$el.html()); this is jquery only appending what was INSIDE of the div that was created--it creates a copy of the originial stuff. And then the click event handler doesn't work because it's only listening to the REAL stuff, not the copies. So we reverted to what's above.
         }, this);
 
         return this; // enable chained calls
@@ -60,6 +58,38 @@ const RolodexView = Backbone.View.extend({
         this.input.name.val('');
         this.input.email.val('');
         this.input.phone.val('');
+    },
+
+    getInput: function() {
+        var contact = {};
+        var name = this.input.name.val();
+        // console.log('is it this line... ' + this.input.name);
+        // console.log('or this second line? ' + this.input.name.val());
+        if (name) { // this will return true if name is not an empty string, undefined, etc.
+            contact.name = name;
+        }
+        var email = this.input.email.val();
+        if (email) {
+            contact.email = email;
+        }
+        var phone = this.input.phone.val();
+        if (phone) {
+            contact.phone = phone;
+        }
+        return contact;
+    },
+
+    createContact: function(event) {
+        event.preventDefault();
+
+        // Get the input data from the form and turn it into a contact
+        var rawContact = this.getInput();
+
+        // add the contact to our collection
+        this.model.add(rawContact);
+
+        // Clear the input form so the user can add another contact
+        this.clearInput();
     },
 
     // Turn a raw contact into a Contact model, add it to our list of contacts, create a card for it, and add that card to our list of cards.
