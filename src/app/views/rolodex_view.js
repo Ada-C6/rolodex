@@ -1,3 +1,5 @@
+// wave 2 is almost complete, except the new instance in the Rolodex collection isn't showing on the app correctly. The input name is being replaced with the default name--perplexing me.
+
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
