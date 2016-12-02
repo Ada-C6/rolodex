@@ -10,6 +10,8 @@ const RolodexView = Backbone.View.extend({
     // Template to be shared between individual contacts
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
+    this.modalTemplate = _.template($('#tmpl-contact-details').html());
+
     // Keep track of the <ul> element
     this.listElement = this.$('#contact-cards');
 
@@ -42,7 +44,8 @@ const RolodexView = Backbone.View.extend({
   addContact: function(contact) {
     var card = new ContactView({
       model: contact,
-      template: this.contactTemplate
+      template: this.contactTemplate,
+      modal: this.modalTemplate
     });
 
     this.contactList.push(card);
