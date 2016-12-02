@@ -23,8 +23,13 @@ const ApplicationView = Backbone.View.extend({
 
   events: {
     'click .btn-cancel': 'clearInput',
-    'click .btn-save': 'saveButton'
+    'click .btn-save': 'saveButton'//,
+    //'click ': 'hideModal'
   }, //end of events
+
+  hideModal: function() {
+    $('#contact-details').hide()
+  },
 
   clearInput: function(event) {
     console.log("clearing");

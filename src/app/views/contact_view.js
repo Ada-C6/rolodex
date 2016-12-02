@@ -28,12 +28,18 @@ const ContactView = Backbone.View.extend({
   }, //,
 
   events: {
-    'click .contact-card': 'toggleModal'
+    'click .contact-card': 'showModal'
   },
   //
-  toggleModal : function() {
-    console.log("toggling")
-    $('#contact-details').toggle();
+  showModal : function(element) {
+    var bubble = $('#contact-details')
+    console.log(element);
+    console.log(this.model.get("name"))
+    bubble.empty();
+    bubble.append("<h3>Name: " + this.model.get("name") + "</h3")
+    bubble.append("<h4>Email: " + this.model.get("email") + "</h4")
+    bubble.append("<h5>Phone: " + this.model.get("phone") + "</h5")
+    bubble.show()
   }
 });
 // accessible elsewhere
