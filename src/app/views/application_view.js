@@ -48,7 +48,7 @@ const ApplicationView = Backbone.View.extend({
   events: {
     'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearContact',
-    'click *': 'hideModal',
+    'click': 'hideModal',
     'click #contact-details': 'showModal'
   },
 
