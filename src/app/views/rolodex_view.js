@@ -59,7 +59,7 @@ const RolodexView = Backbone.View.extend({
 
  events: {
   'click .btn-save': 'createContact',
-  // 'click .clear-button': 'clearInput'
+  'click .btn-cancel': 'clearInput'
 },
 
  // Turn a raw contact into a Contact model, add it to our list of contacts
