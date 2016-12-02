@@ -42,12 +42,6 @@ const ApplicationView = Backbone.View.extend({
       email: this.$('.contact-form input[name="email"]'),
       phone: this.$('.contact-form input[name="phone"]')
     };
-
-    // When a model is added to the collection, add a card for it
-    this.listenTo(this.model, 'add', this.addContact);
-
-    // Re-render the whole list when the collection changes
-    this.listenTo(this.model, 'update', this.render);
   },
 
   render: function() {
@@ -56,7 +50,7 @@ const ApplicationView = Backbone.View.extend({
 
   events: {
     'click .btn-cancel': 'clearInput', // Listen for click on an element with clear-button class
-    'submit .contact-form': 'createContact'
+    'click .btn-save': 'createContact'
   },
 
   clearInput: function(event) {
@@ -67,12 +61,13 @@ const ApplicationView = Backbone.View.extend({
   },
 
   createContact: function(event) {
+    console.log("SAVE DAMNIT");
     event.preventDefault();
     // Get the input data from the form and turn it into a task
     var contact = this.getInput();
 
     // Add the task to our Collection
-    this.model.add(contact);
+    this.rolodex.add(contact);
 
     // Clear the input form so the user can add another task
     this.clearInput();

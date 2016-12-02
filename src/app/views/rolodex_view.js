@@ -15,6 +15,12 @@ const RolodexView = Backbone.View.extend({
     this.model.forEach(function(contact) {  // Loop through contact data above
       this.addContact(contact);
     }, this);
+
+    // When a model is added to the collection, add a card for it
+    this.listenTo(this.model, 'add', this.addContact);
+
+    // Re-render the whole list when the collection changes
+    this.listenTo(this.model, 'update', this.render);
   },
 
   render: function() {
