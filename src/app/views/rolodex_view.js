@@ -10,10 +10,8 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     // this template is shared between all contacts.
     this.template = _.template($('#tmpl-contact-card').html());
-
     // Keep track of the <ul> element
     this.listElement = $('#contact-cards');
-
     // Create a ContactView for each contact & store them here
     this.cardList = [];
 
@@ -36,31 +34,12 @@ const RolodexView = Backbone.View.extend({
 
     // Loop through the data assigned to this view
     this.cardList.forEach(function(card) {
-      // Cause the task to render
       card.render();
-      // Add that HTML to our task list
-      // console.log('card.$el is', card.$el)
-
-      // console.log("listeleemnt", this.listElement);
       this.listElement.append(card.$el);
     }, this);
 
     return this; // enable chained calls
   }, // end of render
-
-  events: {
-    'click .btn-cancel': 'clearInput',
-    'click .btn-save': 'saveButton'
-  }, //end of events
-
-  clearInput: function(event) {
-    console.log("you clicked it!");
-    // event.preventDefault();
-  }, // end of clear
-
-  saveButton: function(event) {
-    alert("you clicked it!")
-  }, // end of save
 
   addContact: function(contact) {
     // console.log("we are in the addContact function and this is the template:",this.template);
@@ -71,8 +50,6 @@ const RolodexView = Backbone.View.extend({
     });
     this.cardList.push(card);
   }, // end of addContact
-
-
 
   removeContact: function(model) {
     // there is no convenient method to take out one element from an array.

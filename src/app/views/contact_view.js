@@ -17,25 +17,21 @@ const ContactView = Backbone.View.extend({
 
   render: function() {
     // console.log("inside contact render, here is this.model", this.model)
-
     var html = this.template({contact: this.model.toJSON()});
     this.$el.html(html);
-    // console.log("this is the html variable",html)
-    // // reconnects the DOM event handlers
+    // not sure if this is actually necessary in this case.
     this.delegateEvents();
-    // // Enable chained calls
     return this;
   }, //,
 
   events: {
+    // i have this in the contactview so i don't need to worry about passing a particular model object to the RolodexView.
     'click .contact-card': 'showModal'
   },
   //
   showModal : function(event) {
-    event.stopPropagation();
+    event.stopPropagation(); // stop modal from hiding, which is the default behavior
     var bubble = $('#contact-details')
-    // console.log(element);
-    // console.log(this.model.get("name"))
     var templateA = _.template($('#tmpl-contact-details').html());
     bubble.empty();
     var html = templateA({contact: this.model.toJSON()});

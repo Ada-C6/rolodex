@@ -3,17 +3,12 @@ import $ from 'jquery';
 import Contact from 'app/models/contact';
 
 const ApplicationView = Backbone.View.extend({
-
-
   initialize: function() {
-    // this.render();
     this.input = {
       name: this.$('input[name="name"]'),
       email: this.$('input[name="email"]'),
       phone: this.$('input[name="phone"]')
     };
-    // this.listenTo(this.model, "update", this.render)
-    // this.listenTo(this.model, "add", this.addContact)
   },
 
   render: function() {
@@ -24,17 +19,17 @@ const ApplicationView = Backbone.View.extend({
   events: {
     'click .btn-cancel': 'clearInput',
     'click .btn-save': 'saveButton',
-    'click ': 'hideModal',
-    'click #contact-details': 'dontHideModal'
+    'click ': 'hideModal', // this hides the modal if you click anywhere
+    'click #contact-details': 'dontHideModal' // EXCEPT if the modal is already there and you click on it again.
   }, //end of events
 
   hideModal: function() {
-    $('#contact-details').hide()
+    $('#contact-details').hide() // hide!
   },
 
   dontHideModal: function(event) {
     // alert("you clicked it!");
-    event.stopPropagation();
+    event.stopPropagation(); // stopPropagation stops the modal from hiding in this case.
   },
 
   clearInput: function(event) {
@@ -46,8 +41,10 @@ const ApplicationView = Backbone.View.extend({
   }, // end of clear
 
   saveButton: function(event) {
-    event.preventDefault();
+    event.preventDefault(); // changed this to a form so i could hit enter to submit. thus we need to prevent the default
     var contact = this.getInput();
+
+    // error handling for blank input fields
     if (contact.name == "" || contact.email == "" || contact.phone == "") {
       alert("please enter all contact details to save.")
     } else {
@@ -58,6 +55,7 @@ const ApplicationView = Backbone.View.extend({
   }, // end of save
 
   getInput: function(event) {
+    // get input.
     var contact = {
         name: this.input.name.val(),
         email: this.input.email.val(),

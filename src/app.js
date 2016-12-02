@@ -31,9 +31,9 @@ $(document).ready(function(){
   var rolodex = new Rolodex(hardCodedContacts);
   // console.log("this is the rolodex",rolodex)
 
-  var application2 = new ApplicationView({
+  var application = new ApplicationView({
     el: $('body'),
-    model: rolodex
+    model: rolodex // have to pass this in! i screwed this up early on and it made the new contactviews difficult to render
   });
 
   var rolodexView = new RolodexView({
@@ -41,17 +41,6 @@ $(document).ready(function(){
     model: rolodex
   });
 
-  // application2.render();
   rolodexView.render();
-
-
-// for each hard-coded contact, make them a new contact. use the #contact-cards element, and the model that belongs to the hard-coded contact element.
-// for (var i = 0; i < hardCodedContacts.length; i++) {
-//   var contact = new Contact(hardCodedContacts[i]);
-//   var contactView = new ContactView({
-//     el: '#contact-cards',
-//     model: contact
-//   });
-// }
 
 })
