@@ -41,7 +41,7 @@ const RolodexView = Backbone.View.extend({
     this.listElement.empty();
 
     // Loop through the data assigned to this view
-    this.cardList.forEach(function(contact) {
+    this.contactList.forEach(function(contact) {
       // Cause the contact to render
       contact.render();
 
