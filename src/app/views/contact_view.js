@@ -10,6 +10,8 @@ const ContactView = Backbone.View.extend({
 	  this.contactTemplate = options.template;
 	  this.model=options.model;
 	  this.cardList = [];
+
+
   },
 
 	render: function() {
@@ -24,11 +26,12 @@ const ContactView = Backbone.View.extend({
     return this;
   },
 
-  	sayHello: function(){
-  		console.log("sayHello")
+  	showModal: function(){
+  		console.log("hello modal");
+  		$('#contact-details').css("display","block");
   },
   events: {
-    "click .contact-card": "sayHello"
+    "click .contact-card": "showModal"
     
   }
 });

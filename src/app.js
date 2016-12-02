@@ -52,13 +52,14 @@ $(document).ready(function() {
 
 
   // var contact = new Contact(contactData[0])
-  //set an instance of contact view
+  // set an instance of contact view
   // var contactCard = new ContactView({
  
   // 	//contact view takes a 'template' and a model
   //   template: _.template($("#tmpl-contact-card").html()),
   //   model: contact
   // });
+ 
   
   //append contact card template onto "contact cards" ul
     // $("#contact-cards").append(contactCard.render().$el);
@@ -68,6 +69,7 @@ $(document).ready(function() {
   	el: '#application'
   });
 
+ 
 
   rolodexView.render();
   

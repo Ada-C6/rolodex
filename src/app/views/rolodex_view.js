@@ -2,12 +2,18 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import ContactView from 'app/views/contact_view';
 
+//currently trying to get modal thing working.
+//there is a bug when I try to show/hide the modal.
+//things only respond to clicks after I add a new card, not when its just defaults
+//this is because the el doesn't get set correctly until I add the new card and put
+//them all into a collection
 
+//another problem is that I can't get my modal box to show/hide correctly on clicks
 
 const RolodexView = Backbone.View.extend({
 	initialize: function(options) {
 	    // Compile a template to be shared between the individual tasks
-	    console.log(options.template)
+	    // console.log(options.template)
 	    this.contactTemplate = options.template;
 
 	    this.model=options.model;
@@ -32,6 +38,10 @@ const RolodexView = Backbone.View.extend({
   			var html = this.contactTemplate({contact: contact.toJSON()})
   			// console.log("the html:", contact)
   			$("#contact-cards").append(html);
+  			console.log(this.listElement);
+  			console.log(this.$el)
+  			this.listElement.append(contact.$el);
+
   		},this);
   	},
   	getInput: function() {
