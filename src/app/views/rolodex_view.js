@@ -21,15 +21,21 @@ const RolodexView = Backbone.View.extend({
     // console.log("THESE ARE THE OPTIONS" + options);
     //   console.log("This is this" + this);
     //   console.log(">>> This is this.model:  " + this.model);
-    this.model.forEach(function(rawContact) {
-      console.log("happening in this.model.forEach, adding card for: " +rawContact.attributes.name);
-      this.addContact(rawContact);
+    this.model.forEach(function(contact) {
+      console.log("happening in this.model.forEach, adding card for: " +contact.attributes.name);
+      this.addContact(contact);
     }, this); // bind `this` so it's available inside forEach
 
     //when model is added to collection, it will create a card and add it to the list of cards
-    // this.listenTo(this.model, 'add', this.addContact);
+    this.listenTo(this.model, 'add', this.addContact);
     //when model updates, re-render list of cards
-    // this.listenTo(this.model, 'update', this.render);
+    this.listenTo(this.model, 'update', this.render);
+
+    this.input = {
+      name: this.$('.contact-form input[name="name"]'),
+      phone: this.$('.contact-form input[name="phone"]'),
+      email: this.$('.contact-form input[name="email"]'),
+    };
 
     // this.listenTo(this.model, 'remove', this.removeTask);
   }, //end initialize
@@ -51,6 +57,11 @@ const RolodexView = Backbone.View.extend({
    return this; // enable chained calls
  },
 
+ events: {
+  'click .btn-save': 'createContact',
+  // 'click .clear-button': 'clearInput'
+},
+
  // Turn a raw contact into a Contact model, add it to our list of contacts
   addContact: function(contact) {
 
@@ -59,10 +70,56 @@ const RolodexView = Backbone.View.extend({
       model: contact,
       template: this.contactTemplate
     });
-
+    console.log("THIS IS THE CARD BEING MADE: " + JSON.stringify(card));
+    // this.listenTo(card, 'edit', this.editContact);
     // Add the card to our card list
     this.cardList.push(card);
   },
+
+  editContact: function(card) {
+    console.log('we are now in editContact for ' + card.model.get('name'));
+    this.setInput(card.model);
+    card.model.destroy();
+  },
+
+  createContact: function(event) {
+    event.preventDefault();
+    // Get the input data from the form and turn it into a task
+    // var contact = new Contact(this.getInput());
+
+    // Create a card for the task
+    // this.addContact(contact);
+
+    var contact = this.getInput();
+    // Add the task to our Collection
+    this.model.add(contact);
+
+    this.clearInput();
+  },
+  //from form, passes information to create contact
+  getInput: function() {
+    var contact = {
+      name: this.input.name.val(),
+      email: this.input.email.val(),
+      phone: this.input.phone.val()
+    };
+    console.log(contact);
+
+    return contact;
+  },
+
+  setInput: function(contact) {
+  this.input.title.val(contact.get('name'));
+  this.input.description.val(contact.get('phone'));
+  this.input.description.val(contact.get('email'));
+},
+
+  clearInput: function(event) {
+    this.input.name.val('');
+    this.input.email.val('');
+    this.input.phone.val('');
+  },
+
 });
 
 export default RolodexView;
