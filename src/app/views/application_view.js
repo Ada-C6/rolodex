@@ -1,9 +1,26 @@
 import Backbone from 'backbone';
 
 import RolodexView from 'app/views/rolodex_view';
+import Rolodex from 'app/collections/rolodex';
 
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
+    var contactData = [
+      {
+        name: 'Freddie',
+        phoneNumber: 123456,
+        email: 'fred@msn.com'
+      },
+      {
+        name: 'Shadow',
+        phoneNumber: 5555555,
+        email: 'shadow@example.com'
+      },
+      {
+        name: 'Mochi',
+        phoneNumber: 7922222,
+        email: 'mochi@example.com'
+      }];
     // this.render();
 
     // Keep track of form input fields
@@ -12,6 +29,15 @@ const ApplicationView = Backbone.View.extend({
       email: this.$('.contact-form input[name="email"]'),
       phoneNumber: this.$('.contact-form input[name="phone"]')
     };
+
+    var contactList = new Rolodex(contactData);
+
+    var rolodexView = new RolodexView({
+      el: 'main',
+      model: contactList
+    });
+
+    rolodexView.render();
   },
 
   render: function() {
