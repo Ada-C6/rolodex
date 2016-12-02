@@ -1,5 +1,3 @@
-// wave 2 is almost complete, except the new instance in the Rolodex collection isn't showing on the app correctly. The input name is showing up in the console.log. And then it's being replaced with the default name in a duplication of the console.log--as well as showing the default on the app view--perplexing me.
-
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
@@ -8,6 +6,13 @@ import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
     initialize: function(options) {
+
+        this.contactDetailSection = this.$('#contact-details');
+
+        this.contactDetailSection.hide();
+
+        this.detailsTemplate = _.template($('#tmpl-contact-details').html());
+
         // Compile a template to be shared between the individual contacts
         this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
@@ -21,14 +26,6 @@ const RolodexView = Backbone.View.extend({
             this.addContact(rawContact);
         }, this); // bind `this` to the initialize 'this' so it's available inside forEach
 
-        // Keep track of our form input fields
-        this.input = {
-            name: this.$('.contact-form input[name="name"]'),
-            email: this.$('.contact-form input[name="email"]'),
-            phone: this.$('.contact-form input[name="phone"]')
-        };
-
-        // when a model is added to the collection, create a card for that model and add it to our list of cards
         this.listenTo(this.model, 'add', this.addContact);
         this.listenTo(this.model, 'update', this.render);
     },
@@ -49,60 +46,26 @@ const RolodexView = Backbone.View.extend({
         return this; // enable chained calls
     },
 
-// TYPICALLY, DO THESE BACKBONE KEYWORDS HAVE AN ORDER? Initialize, Render, Events, then custom created methods at the end?
-    events: {
-        'click .btn-save': 'createContact',
-        'click .btn-cancel': 'clearInput'
-    },
-
-    clearInput: function(event) {
-        console.log("clearInput called!");
-        this.input.name.val('');
-        this.input.email.val('');
-        this.input.phone.val('');
-    },
-
-    getInput: function() {
-        var contact = {};
-        var name = this.input.name.val();
-        // console.log('is it this line... ' + this.input.name);
-        // console.log('or this second line? ' + this.input.name.val());
-        if (name) { // this will return true if name is not an empty string, undefined, etc.
-            contact.name = name;
-        }
-        var email = this.input.email.val();
-        if (email) {
-            contact.email = email;
-        }
-        var phone = this.input.phone.val();
-        if (phone) {
-            contact.phone = phone;
-        }
-        return contact;
-    },
-
-    createContact: function(event) {
-        event.preventDefault();
-
-        // Get the input data from the form and turn it into a contact
-        var rawContact = this.getInput();
-
-        // add the contact to our collection
-        this.model.add(rawContact);
-
-        // Clear the input form so the user can add another contact
-        this.clearInput();
-    },
-
     // Turn a raw contact into a Contact model, add it to our list of contacts, create a card for it, and add that card to our list of cards.
     addContact: function(contact) { // this could have three arguments, we only have one: model, collection, options
         var card = new ContactView({ // create a card for the new contact
-            // contact: contact, // WHAT IS THIS LINE? I'D LIKE TO UNDERSTAND IT'S PURPOSE. :)
             model: contact,
             template: this.contactTemplate
         });
 
         this.cardList.push(card); // add the card to our card list
+
+        this.listenTo(card, 'show', this.showDetails); // this event handler listens to each contact card as soon as it's created, so that if a click happens on the card, the showDetails function will trigger.
+    },
+
+    showDetails: function(contact) {
+        console.log('inside showDetails function for contact ' + contact.get('name'));
+
+        var html = this.detailsTemplate({contact: contact.attributes});
+
+        this.contactDetailSection.html(html);
+
+        this.contactDetailSection.show();
     }
 
 });
