@@ -6,19 +6,14 @@ import ContactView from 'app/views/contact_view';
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
-
-
+    this.detailsTemplate = _.template($('#tmpl-contact-details').html());
     this.unorderedList = this.$('#contact-cards');
-
     this.contactList = [];
-
-    console.log("THIS IS A MODEL" + this.model);
-    // this.$('#contact-details').hide();
 
     this.model.forEach(function(contact) {
       this.addContactCard(contact);
     }, this);
-    //console.log(this.$('.contact-form input[name="name"]').val('42  '));
+
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
       email: this.$('.contact-form input[name="email"]'),
@@ -50,16 +45,14 @@ const RolodexView = Backbone.View.extend({
   },
 
   showContactDetails: function(card) {
-    console.log("hovered over a thing");
     var name = card.model.get('name');
     var email = card.model.get("email");
     var phone = card.model.get('phone');
-    this.$('#contact-details').html(card.detailsTemplate({email: email, name: name, phone: phone}));
+    this.$('#contact-details').html(this.detailsTemplate({email: email, name: name, phone: phone}));
     this.$('#contact-details').toggle();
   },
 
   hideContactDetails: function() {
-    console.log("stopped hovering over the thing");
     this.$('#contact-details').toggle();
   },
 
@@ -67,9 +60,7 @@ const RolodexView = Backbone.View.extend({
     'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearForm',
     'keyup': 'processKey',
-
   },
-
 
   processKey: function(e) {
     if(e.which === 13) { // enter key
@@ -87,15 +78,12 @@ const RolodexView = Backbone.View.extend({
   },
 
   createContact: function(event) {
-    event.preventDefault();
-    console.log('submit button clicked');
     var newContact = this.getInput();
     this.model.add(newContact);
     this.clearForm();
   },
 
   clearForm: function(event) {
-    console.log("'form' cleared");
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');

@@ -5,11 +5,9 @@ import $ from 'jquery';
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
     this.template = options.template;
-    this.detailsTemplate = _.template($('#tmpl-contact-details').html());
+
   },
   render: function() {
-    console.log(this.model.attributes);
-    console.log("This should be the name: " + this.model.get('name'));
     var html = this.template({name: this.model.get('name')});
     this.$el.html(html);
     this.delegateEvents();
