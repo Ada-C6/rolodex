@@ -3,6 +3,8 @@ import Backbone from 'backbone';
 
 import RolodexView from 'app/views/rolodex_view';
 
+import Rolodex from 'app/collections/rolodex';
+
 var contactData = [
     {
         name: 'hello world',
@@ -22,12 +24,14 @@ const ApplicationView = Backbone.View.extend({
     },
 
     render: function() { // render a new instance of RolodexView
-        var rolodex = new RolodexView({ // give the application the rolodex view to render within the #application div
+        var rolodex = new Rolodex(contactData);
+        var options = {
             el: $('#application'),
-            data: contactData
-        });
+            model: rolodex
+        };
+        var application = new RolodexView(options);
 
-        rolodex.render();
+        application.render();
 
         return this;
     }

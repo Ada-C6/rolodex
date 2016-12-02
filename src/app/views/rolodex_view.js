@@ -9,8 +9,8 @@ const RolodexView = Backbone.View.extend({
         // Compile a template to be shared between the individual contacts
         this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
-// THIS MIGHT HAVE BEEN WHAT I WAS MISSING ALL ALONG...
-        this.data = options.data;
+// THIS SEEMS TO BE THE MAIN PIECE I WAS MISSING EARLIER... WHY IS IT NEEDED HERE AND IT WASN'T NEEDED ONCE WE HAD OUR COLLECTION SET-UP IN OUR LIVE CODE?
+        // this.data = options.data;
 
         // Keep track of the <ul> element where the contact cards will live within
         this.listElement = this.$('#contact-cards'); // this.$() is telling Backbone to search within the element this TaskListView is responsible for (#application--ID, on the HTML) and look for '.task-list' within it.
@@ -18,19 +18,19 @@ const RolodexView = Backbone.View.extend({
         // We'll keep track of a list of contact models and a list of contact views.
         this.cardList = [];
 
-        this.data.forEach(function(rawContact) {
+        this.model.forEach(function(rawContact) {
             this.addContact(rawContact);
         }, this); // bind `this` to the initialize 'this' so it's available inside forEach
 
-// COME BACK TO THIS IN ANOTHER WAVE...
         // Keep track of our form input fields
-        // this.input = {
-        //     title: this.$('.new-task input[name="title"]'),
-        //     description: this.$('.new-task input[name="description"]')
-        // };
+        this.input = {
+            name: this.$('.contact-form input[name="name"]'),
+            email: this.$('.contact-form input[name="email"]'),
+            phone: this.$('.contact-form input[name="phone"]')
+        };
 
         // when a model is added to the collection, create a card for that model and add it to our list of cards
-        // this.listenTo(this.model, 'add', this.addTask);
+        this.listenTo(this.model, 'add', this.addContact);
     },
 
     render: function() {
@@ -49,10 +49,23 @@ const RolodexView = Backbone.View.extend({
         return this; // enable chained calls
     },
 
+// TYPICALLY, DO THESE BACKBONE KEYWORDS HAVE AN ORDER? Initialize, Render, Events, then custom created methods at the end?
+    events: {
+        'click .btn-save': 'createContact',
+        'click .btn-cancel': 'clearInput'
+    },
+
+    clearInput: function(event) {
+        console.log("clearInput called!");
+        this.input.name.val('');
+        this.input.email.val('');
+        this.input.phone.val('');
+    },
+
     // Turn a raw contact into a Contact model, add it to our list of contacts, create a card for it, and add that card to our list of cards.
     addContact: function(contact) { // this could have three arguments, we only have one: model, collection, options
         var card = new ContactView({ // create a card for the new contact
-            contact: contact, // WHAT IS THIS LINE?
+            // contact: contact, // WHAT IS THIS LINE? I'D LIKE TO UNDERSTAND IT'S PURPOSE. :)
             model: contact,
             template: this.contactTemplate
         });
