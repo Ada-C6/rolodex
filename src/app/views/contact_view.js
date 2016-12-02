@@ -12,7 +12,17 @@ const ContactView = Backbone.View.extend({
 
     this.modalTemplate = _.template($('#tmpl-contact-details').html());
 
+    this.contactInfo = {
+      name: this.model.get('name'),
+      phone: this.model.get('phone'),
+      email: this.model.get('email')
+    };
+
+    _.extend(this.contactInfo, Backbone.Events);
+
     this.listenTo(this, "showContactDetails", this.viewDetails);
+
+    this.toggleDetails();
   },
 
   render: function() {
@@ -26,20 +36,50 @@ const ContactView = Backbone.View.extend({
     'click .contact-card': 'showDetails'
   },
 
-  // toggleDetails: function(onIndicator) {
-  //   $('#tmpl-contact-details').toggle(!onIndicator);
-  // },
-
   showDetails: function() {
-    console.log("SHOW SOME DETAILS HERE");
-    //trigger something
-    this.trigger("showContactDetails");
+      console.log("SHOW SOME DETAILS HERE" + this.contactInfo.name);
+      //trigger something
+      this.trigger("showContactDetails");
+    },
+
+  toggleDetails: function(onIndicator) {
+    $('#contact-details').toggle(onIndicator);
   },
 
   viewDetails: function() {
     //show the details card somehow - ask google
-    console.log("VIEWING THE DETAILS CARD of: " + this); // TODO: how to we access the details of this contact
+    this.toggleDetails();
+
+    var html = this.modalTemplate({name: this.contactInfo.name, email: this.contactInfo.email, phone: this.contactInfo.phone });
+    
+    $('#contact-details').html(html);
+
+    console.log("VIEWING THE DETAILS CARD of: " + this.contactInfo.name); // TODO: how to we access the details of this contact
   }
 });
+
+// var ModalView = Backbone.ModalView.extend({
+//   name: "ModalView",
+//   model: this.model,
+//   template: _.template($('#tmpl-contact-details').html()),
+//   initialize: function() {
+//     _.bindAll(this, "render");
+//     this.template = _.template(this.template);
+//   },
+//   events: {
+//     'click .contact-card': 'showDetails'
+//   },
+//
+//   // showDetails: function() {
+//   //   console.log("SHOW SOME DETAILS HERE");
+//   //   //trigger something
+//   //   this.trigger("showContactDetails");
+//   // },
+//
+//   render: function () {
+//     $(this.el).html(this.template());
+//     return this;
+//   }
+// });
 
 export default ContactView;
