@@ -17,6 +17,7 @@ const ContactView = Backbone.View.extend({
     console.log("Name: " + this.model.name);
     this.$el.html(html);
 
+    // Ensure that event listeners re-initialize when re-rendering contact cards
     this.delegateEvents();
     return this;
   },
