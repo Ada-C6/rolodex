@@ -7,17 +7,21 @@ import Rolodex from 'app/collections/rolodex';
 
 var contactInfo = [
   {
-    name: 'Ian',
-    email: 'ian@ian.com',
+    name: 'Buffy',
+    email: 'buffy@buffy.com',
     phone: '4125556765'
   }, {
-    name: 'Erik',
-    email: 'erik@erik.com',
+    name: 'Xander',
+    email: 'xander@xander.com',
     phone: '7035553245'
   }, {
-    name: 'Mariah',
-    email: 'mariah@mariah.com',
+    name: 'Willow',
+    email: 'willow@willow.com',
     phone: '6125553257'
+  }, {
+    name: 'Spike',
+    email: 'spike@spike.com',
+    phone: '3025553257'
   }
 ];
 
@@ -27,13 +31,11 @@ const ApplicationView = Backbone.View.extend({
     // console.log("Bueller?");
     this.rolodex = new Rolodex(contactInfo);
     this.rolodexView = new RolodexView({
-      el: $('#contact-cards'),
+      el: $('html'),
       model: this.rolodex
     });
 
     this.rolodexView.render();
-
-    // this.render();
 
     // Keep track of our form input fields
     this.input = {
