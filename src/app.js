@@ -22,30 +22,32 @@ import RolodexView from 'app/views/rolodex_view';
 var contactData = [
   {
     name: "Lala Girl",
-    phone: "432 432 5433",
-    email: "sing@song.net"
+    email: "sing@song.net",
+    phone: "432 432 5433"
   }, {
     name: "Baby Bear",
-    phone: "123 456 7890",
-    email: "bear@bearland.net"
+    email: "bear@bearland.net",
+    phone: "123 456 7890"
   }, {
     name: "Happy Baloon",
-    phone: "987 654 3210",
-    email: "baloon@baloon.com"
+    email: "baloon@baloon.com",
+    phone: "987 654 3210"
   }, {
     name: "Sleepy Baby",
-    phone: "321 545 4324",
-    email: "sleepybear@baby.com"
+    email: "sleepybear@baby.com",
+    phone: "321 545 4324"
   }, {
     name: "Wild Child",
-    phone: "940 434 9212",
-    email: "wildchild@child.com"
+    email: "wildchild@child.com",
+    phone: "940 434 9212"
   }, {
     name: "Skeptical Cat",
-    phone: "904 654 3232",
-    email: "skepcat@cat.com"
+    email: "skepcat@cat.com",
+    phone: "904 654 3232"
   }
 ];
+
+// var contactList;
 
 $(document).ready(function() {
   $('#contact-details').hide(); // hide the contact-details when we haven't clicked on a contact-cards
@@ -58,6 +60,10 @@ $(document).ready(function() {
   var application = new RolodexView(options);
   application.render();
 });
+
+// var addContact = function(contact) {
+//   contactList.add(contact);
+// };
 
 
 // Wed 11:22AM: I can create an array of contact hashes. every time i iterate thru each hash, i will instantiate a Contact model object and a ContactView model object, in order to achieve a view of multiple contact cards. Note: a list of model objects can be make a COLLECTION of model objects!

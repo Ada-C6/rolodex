@@ -19,8 +19,8 @@ const RolodexView = Backbone.View.extend({
       this.addContact(rawContact);
     }, this);
 
-    // ?? any use?
-    this.listenTo(this.model, 'add', this.addContact);
+    // I am binding the rules for the Backbone models here.
+    this.listenTo(this.model, 'add', this.addContact); // setting up the rule. this.addContact will be triggered in the middle of the Backbone Model's code that process createContact >> this.model.add(rawContact) [run the Sources in Inspect/choose this line and press arrow button to see how the code evaluates the 'add' and 'update' functions in backbone.js]
     this.listenTo(this.model, 'update', this.render);
   },
 
@@ -60,25 +60,23 @@ const RolodexView = Backbone.View.extend({
 
   createContact: function(event) {
     console.log("createContact called");
-    // event.preventDefault(); // when i have this line, all CSS format gone! when i keep it, CSS stays
+    // event.preventDefault(); // this is a click event, which is different from a submit event (Dan's example). therefore it doesnt affect the page reloading.
     var rawContact = this.getInput();
-    this.model.add(rawContact);
+    this.model.add(rawContact); // go into backbone.collection and add a new contact
     this.clearInput();
   },
 
   clearInput: function(event) {
     console.log("clearInput called");
-    // console.log(this.$('input')[0].val());
-    this.$('input')[0].value = '';
-    this.$('input')[1].value = '';
-    this.$('input')[2].value = '';
-    // why the below doesnt work??
-    // var contactForm = this.$('input');
-    // var contactInput = contactForm.$('<input>');
-    // console.log(contactForm);
-    // contactForm[0].input.value = '';
-  //   this.$('.contact-form').label.input.phone.val('');
-  //   this.$('.contact-form').label.input.email.val('');
+    // what worked:
+    // this.$('input')[0].value = '';
+    // this.$('input')[1].value = '';
+    // this.$('input')[2].value = '';
+
+    // trying now // similar to CSS selector
+    this.$('.contact-form input[name="name"]').val('');
+    this.$('.contact-form input[name="email"]').val('');
+    this.$('.contact-form input[name="phone"]').val('');
   },
 });
 
