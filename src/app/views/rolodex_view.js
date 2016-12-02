@@ -135,8 +135,7 @@ const RolodexView = Backbone.View.extend({
   },
 
   otherClick: function(event){
-    console.log("clicking somewhere else");
-    this.hideModal(); 
+    this.hideModal();
   },
 
   hideModal: function() {

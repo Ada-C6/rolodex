@@ -39,11 +39,11 @@ var appView = new ApplicationView({
 $(document).ready(function(){
   // hide the modal by default
   $("#contact-details").hide();
-  
+
   var rolodexList = new Rolodex(peeps);
 
   var rolodex = new RolodexView( {
-    el: $('#application'),
+    el: $('body'),
     model: rolodexList
   });
 
