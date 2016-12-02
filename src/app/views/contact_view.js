@@ -1,6 +1,6 @@
-import Backbone from 'backbone';
-import _ from 'underscore';
 import $ from 'jquery';
+import _ from 'underscore';
+import Backbone from 'backbone';
 
 // import Contact from 'app/models/contact';
 
@@ -18,6 +18,15 @@ const ContactView = Backbone.View.extend({
     this.$el.html(html);
 
     return this;
+  },
+
+  events: {
+    'click .contact-card': 'cardClick'
+  },
+
+  cardClick: function(event) {
+    console.log("cardClick! " + this.model.name);
+    this.trigger('contact:click', this.model);
   }
 });
 

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-// import _ from 'underscore';
+import _ from 'underscore';
 import Backbone from 'backbone';
 
 import Rolodex from 'app/collections/rolodex';
@@ -36,14 +36,6 @@ var contactData = [
 const ApplicationView = Backbone.View.extend({
   // this.$el is '#application'
   initialize: function() {
-    this.rolodex = new Rolodex(contactData);
-    this.rolodexView = new RolodexView({
-      el: $('#contact-cards'),
-      model: this.rolodex
-    });
-
-    this.rolodexView.render();
-
     // Keep track of our form input fields
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
@@ -51,16 +43,31 @@ const ApplicationView = Backbone.View.extend({
       phone: this.$('.contact-form input[name="phone"]'),
     };
 
+    // Instantiate Rolodex & RolodexView
+    this.rolodex = new Rolodex(contactData);
+    this.rolodexView = new RolodexView({
+      el: $('main'),
+      model: this.rolodex
+    });
+
+    // // Keep track of modal element/template & listen for clicks
+    // // NOTE: trying moving this to RolodexView
+    // this.modalSection = this.$('#contact-details');
+    // this.modalTemplate = _.template($('#tmpl-contact-details').html());
+    // // this.listenTo() -- NOTE: should this be in RolodexView?
+
     this.render();
   },
 
   render: function() {
+    // this.modalSection.hide(); NOTE: moved to RolodexView
+    this.rolodexView.render();
     return this;
   },
 
   events: {
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'clearInput'
+    'click .btn-cancel': 'clearInput',
   },
 
   createContact: function(event) {
