@@ -19,7 +19,7 @@ header {
 }
 
 .contact-form {
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .contact-form label {
@@ -34,11 +34,14 @@ header {
   height: 30%;
   top: 30%;
   left: 30%;
-  background-color: #538ca3;
+  background-color: #ae360b;
+  color: white;
   text-align: center;
   border: 1em solid white;
+  padding-top: 2%;
   margin-left: 20%;
   border-radius: 20%;
+  display: none;
 }
 
 #contact-cards {
@@ -61,6 +64,6 @@ header {
     background-color: #538ca3;
 }
 
-.contact-card:hover h3 {
+.contact-card:hover h4 {
   color: white;
 }
