@@ -8,7 +8,7 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options){
     this.rolodexTemplate = _.template($('#tmpl-contact-card').html());
     this.element = this.$('#contact-cards');
-    this.cardTemplate = _.template($('#tmpl-contact-details').html());
+    this.cardTemplate = $('#contact-details');
 
 
     this.nameList = [];
@@ -25,6 +25,7 @@ const RolodexView = Backbone.View.extend({
     };
     this.listenTo(this.model, 'add', this.addName);
     this.listenTo(this.model, 'update', this.render);
+
   },
   render: function(){
     this.element.empty();
@@ -65,6 +66,7 @@ const RolodexView = Backbone.View.extend({
       template: this.rolodexTemplate
     });
     console.log("Add the card " + carta);
+    this.listenTo(carta, 'showOff', this.showBox);
     this.nameList.push(carta);
   },
   getInput: function(){
@@ -75,6 +77,9 @@ const RolodexView = Backbone.View.extend({
     };
     console.log("This is returning the contact" + JSON.stringify(contact));
     return contact;
+  },
+  showBox: function(contact){
+    this.cardTemplate.show();
   }
 });
 
