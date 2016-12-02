@@ -21,8 +21,14 @@ const RolodexView = Backbone.View.extend({
     // Compile a template to be shared between the individual tasks
     this.contactCardTemplate = _.template($('#tmpl-contact-card').html());
 
-    // this is the element that we're in charge of:
+    this.contactDetailsTemplate =
+    _.template($('#tmpl-contact-details').html());
+
+    // this is the list of contacts that we're in charge of:
     this.contactListElement = $('#contact-cards');
+
+    // this is the modal for displaying the details of a contact
+    this.contactDetails = $('#contact-details');
 
     // Create a card for each contact in our data set:
     this.model.forEach(function(rawContact) {
@@ -106,9 +112,26 @@ const RolodexView = Backbone.View.extend({
 
   showModal: function(peep) {
     console.log("showing modal for " + peep.get("name"));
-    // hide the modal by default
-    $("#contact-details").show();
+
+    // replace contents of modal with this peep's info
+    this.fillModal(peep);
+
+    // display the modal
+    this.contactDetails.show();
   },
+
+  fillModal: function(contact){
+    // do I want another view for the modal?
+
+    console.log(contact.attributes);
+
+    this.contactDetails.empty();
+
+    var deets = this.contactDetailsTemplate({name: contact.attributes.name, email: contact.attributes.email, phone: contact.attributes.phone});
+
+    this.contactDetails.append(deets);
+
+  }
 
   // otherClick: function(event){
   //   console.log("clicking somewhere else");
