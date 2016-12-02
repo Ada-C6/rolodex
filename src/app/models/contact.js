@@ -11,7 +11,7 @@ const Contact = Backbone.Model.extend({
     email: "yolo@aol.com"
   },
   initialize: function() {
-    // console.log("Created a new contact: " + this.name);
+    console.log("Created a new contact: " + this.name);
   }
 
 });
