@@ -19,6 +19,8 @@ const ApplicationView = Backbone.View.extend({
     //render RolodexView and pass in collection of models made in app.js
     var rolodexView = new RolodexView({
       model: this.model,
+      input: this.input,
+      el: $('main')
     });
     rolodexView.render();
 
@@ -28,7 +30,13 @@ const ApplicationView = Backbone.View.extend({
   events: {
     'click .btn-save': 'saveInput',
     'click .btn-cancel': 'clearInput',
+    // 'click .edit': 'editDetail'
   },
+
+  // editDetail: function(event){
+  //   console.log('ugh');
+  //   this.trigger("editMe", this.model);
+  // },
 
   clearInput: function(event) {
     $('input').val('');//clear all values in any input tags
