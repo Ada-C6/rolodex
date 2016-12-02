@@ -30,7 +30,7 @@ var ContactView = Backbone.View.extend({
   modalHandler: function(event) {
     console.log("modalHandler called");
     $('#contact-details').show();
-    
+    this.trigger('show', this);
   }
 });
 
