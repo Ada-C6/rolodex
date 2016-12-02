@@ -1,13 +1,13 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
 import $ from 'jquery';
-import ContactView from 'app/views/contact_view'
+import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
 
     // Store a the full list of tasks
-    this.contactData = options.contactData;
+    // this.contactData = options.contactData;
 
     // Compile a template to be shared between the individual tasks
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
@@ -19,12 +19,8 @@ const RolodexView = Backbone.View.extend({
 
     // Create a TaskView for each task
     this.cardList = [];
-    this.contactData.forEach(function(contact) {
-      var card = new ContactView({
-        contact: contact,
-        template: this.contactTemplate
-      });
-      this.cardList.push(card);
+    this.model.models.forEach(function(contact) {
+      this.addContact(contact);
     }, this); // bind `this` so it's available inside forEach
 
     this.input = {
@@ -75,14 +71,15 @@ const RolodexView = Backbone.View.extend({
 
     // Add the new task to our list of tasks
     //  gotta figure out where the data is stored
-   this.contactData.push(contact);
+   this.model.push(contact);
 
     // Create a card for the new task, and add it to our card list
-    var card = new ContactView({
-      contact: contact,
-      template: this.contactTemplate
-    });
-    this.cardList.push(card);
+    // var card = new ContactView({
+    //   model: contact,
+    //   template: this.contactTemplate
+    // });
+    // this.cardList.push(card);
+    this.addContact(contact);
 
     // Re-render the whole list, now including the new card
     this.render();
@@ -91,6 +88,13 @@ const RolodexView = Backbone.View.extend({
     this.clearInput();
   }, // end createTast();
 
+  addContact: function(contact){
+    var card = new ContactView({
+      model: contact,
+      template: this.contactTemplate
+    });
+    this.cardList.push(card);
+  },
 
   getInput: function() {
     var contact = {

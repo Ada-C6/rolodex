@@ -28,12 +28,14 @@ var contactData = [
   }
 ];
 
+var contactModel = new Rolodex(contactData);
 var rolView = new RolodexView({
   el: '#application',
-  contactData: contactData
+  model: contactModel
 });
-
 rolView.render();
+
+
 
 // var charlesmodel = new Contact(contactData[0]);
 //
