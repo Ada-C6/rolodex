@@ -121,14 +121,14 @@ const RolodexView = Backbone.View.extend({
   },
 
   fillModal: function(contact){
-    // do I want another view for the modal?
 
-    console.log(contact.attributes);
-
+    // clear the modal out if there's something in there already.
     this.contactDetails.empty();
 
+    // the data I'm passing to the template
     var deets = this.contactDetailsTemplate({name: contact.attributes.name, email: contact.attributes.email, phone: contact.attributes.phone});
 
+    // putting the html from this contact into the modal.  
     this.contactDetails.append(deets);
 
   }
