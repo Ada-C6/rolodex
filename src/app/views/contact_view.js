@@ -11,8 +11,8 @@ const ContactView = Backbone.View.extend({
     var html = this.template({contact: this.model.attributes});
     this.$el.html(html);
 
-    var modalHtml = this.modal({contact: this.model.attributes});
-    $('#contact-details').html(modalHtml);
+    // var modalHtml = this.modal({contact: this.model.attributes});
+    // $('#contact-details').html(modalHtml);
 
     // // Re-attach DOM event listeners to our new HTML
     // this.delegateEvents();
@@ -28,6 +28,9 @@ const ContactView = Backbone.View.extend({
   },
 
   contactDetails: function(event) {
+    var modalHtml = this.modal({contact: this.model.attributes});
+    $('#contact-details').html(modalHtml);
+
     $('#contact-details').show();
   }
 
