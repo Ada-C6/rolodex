@@ -10,6 +10,7 @@ var ContactView = Backbone.View.extend({
   render: function() {
     var html = this.template({name: this.model.get('name')});
     $(this.el).html(html);
+    this.delegateEvents();
     // ?? this.$el.append(html);
   },
 

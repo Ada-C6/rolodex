@@ -52,7 +52,8 @@ const RolodexView = Backbone.View.extend({
   events: {
     'click .btn-save' : 'createContact',
     'click .btn-cancel' : 'clearInput',
-    'click' : 'hideDetailCard'
+    'click' : 'hideDetailCard',
+    'click #contact-details' : 'stopProp'
   },
 
   getInput: function() {
@@ -100,6 +101,10 @@ const RolodexView = Backbone.View.extend({
   hideDetailCard: function() {
     console.log("hideDetailCard is called");
     this.detailCard.hide();
+  },
+
+  stopProp: function(event) {
+    event.stopPropagation();
   }
 });
 
