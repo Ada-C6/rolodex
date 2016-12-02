@@ -16,6 +16,10 @@ const RolodexView = Backbone.View.extend({
     this.model.forEach(function(contact) { // model is the Collection of Contacts
       this.addContactCard(contact);
     }, this);
+
+    this.listenTo(this.model, 'add', this.addContactCard);
+
+    this.listenTo(this.model, 'update', this.render);
   },
 
   render: function() {
@@ -29,6 +33,7 @@ const RolodexView = Backbone.View.extend({
 
     return this;
   },
+
 
   addContactCard: function(contact) {
     var card = new ContactView({
