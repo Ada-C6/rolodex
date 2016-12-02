@@ -34,7 +34,6 @@ const ContactView = Backbone.View.extend({
     this.listElement.html(popupHTML);
 
     $('#contact-details').show();
-
   }
 
 });
