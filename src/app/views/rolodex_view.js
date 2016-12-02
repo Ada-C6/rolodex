@@ -12,12 +12,14 @@ import Rolodex from 'app/collections/rolodex';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
+
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
     this.listElement = this.$('#contact-cards');
     // These are used when you add a card to the list.
-    // this.modelList = [];
+    this.modelList = [];
     // this list carries the list of cards that is displayed
     this.cardList = [];
+
 
     this.model.forEach(function(modelName) {
 
@@ -50,7 +52,22 @@ const RolodexView = Backbone.View.extend({
   },
 
   events: {
-    'click .btn-cancel': 'cancelInput'
+    'click .btn-cancel': 'cancelInput',
+
+    // NOTE, there is not a typical HTML-form for this form, so I think to submit, I need to click the button in and then pass in the values some other way.
+    'click .btn-save': 'createContact'
+  },
+
+  addContact: function(rawContact){
+    var contact = new Contact (rawContact);
+    this.modelList.push(contact);
+
+    var contactCard = new ContactView({
+      model: contact,
+      template: this.contactTemplate
+    });
+
+    this.cardList.push(contactCard);
   },
 
   cancelInput: function(event){
@@ -58,6 +75,24 @@ const RolodexView = Backbone.View.extend({
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
+  },
+
+  createContact: function(event){
+    console.log("createContact called");
+    event.preventDefault();
+    var contact = this.getInput();
+    this.addContact(contact);
+    this.render();
+    this.clearInput();
+  },
+
+  getInput: function(){
+    var contact = {
+      name: this.input.name.val(),
+      email: this.input.email.val(),
+      phone: this.input.phone.val()
+    };
+    return contact;
   }
 
 });
