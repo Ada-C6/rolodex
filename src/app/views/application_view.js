@@ -23,7 +23,7 @@ var contactData = [
 ];
 
 var ApplicationView = Backbone.View.extend({
-  render: function() {
+  initialize: function () {
     // create a new collection to use in the RolodexView
     var rolodexCollection = new Rolodex(contactData);
 
@@ -35,7 +35,13 @@ var ApplicationView = Backbone.View.extend({
       model: rolodexCollection
     });
 
-    rolodex.render();
+    this.rolodex = rolodex;
+  },
+
+  render: function() {
+
+
+    this.rolodex.render();
     return this;
   }
 });
