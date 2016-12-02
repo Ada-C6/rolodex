@@ -83,7 +83,7 @@ const RolodexView = Backbone.View.extend({
     var contact = this.getInput();
     this.addContact(contact);
     this.render();
-    this.clearInput();
+    this.cancelInput();
   },
 
   getInput: function(){
