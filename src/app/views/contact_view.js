@@ -13,7 +13,6 @@ const ContactView = Backbone.View.extend({
   },
 
 	render: function() {
-	    
 	    //could use .attributes but that's bad for some reason
 	    // var html = this.contactTemplate({contact: this.model.attributes})
 	    var html = this.contactTemplate({contact: this.model.toJSON()})
@@ -23,11 +22,15 @@ const ContactView = Backbone.View.extend({
 	  	//in the spot where <%-name %> is in the underscore template
 	  	this.$el.html(html);
     return this;
+  },
+
+  	sayHello: function(){
+  		console.log("sayHello")
+  },
+  events: {
+    "click .contact-card": "sayHello"
+    
   }
-  // events: {
-  //   "click .btn-cancel": "deleteHandler",
-  //   "submit .btn-save": "createContact"
-  // }
 });
 
 export default ContactView;

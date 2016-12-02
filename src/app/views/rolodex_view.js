@@ -52,7 +52,8 @@ const RolodexView = Backbone.View.extend({
     // Create a card for the new task
 	    var card = new ContactView({
 	      model: contact,
-	      template: this.contactTemplate
+	      template: this.contactTemplate,
+	      el: "#application"
 	    });
 	},
 
