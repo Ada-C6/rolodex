@@ -19,17 +19,16 @@ var contactData = [
 ];
 
 const ApplicationView = Backbone.View.extend({
-    initialize: function() {
-        this.render();
-    },
-
     render: function() { // render a new instance of RolodexView
         var rolodex = new Rolodex(contactData);
+
         var options = {
             el: $('#application'),
             model: rolodex
         };
         var application = new RolodexView(options);
+
+        application.render();
 
         return this;
     }

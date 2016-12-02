@@ -30,9 +30,7 @@ const RolodexView = Backbone.View.extend({
 
         // when a model is added to the collection, create a card for that model and add it to our list of cards
         this.listenTo(this.model, 'add', this.addContact);
-        this.listenTo(this.model, 'add', this.render);
-        this.render();
-// AT THIS POINT I'M PLAYING AROUND ABOVE. I'D LIKE TO BETTER UNDERSTAND WHERE MY RENDERS NEED TO OCCUR FOR EXPECTED FUNCTIONALITY.
+        this.listenTo(this.model, 'update', this.render);
     },
 
     render: function() {
