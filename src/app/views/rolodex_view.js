@@ -2,6 +2,7 @@ import Backbone from 'backbone';
 import _ from 'underscore';
 import $ from 'jquery';
 import ContactView from 'app/views/contact_view';
+import DetailView from 'app/views/detail_view';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
@@ -52,7 +53,8 @@ const RolodexView = Backbone.View.extend({
 
   events: {
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'clearInput'
+    'click .btn-cancel': 'clearInput',
+    'click': 'hideDetail'
   },
 
   clearInput: function(event) {
@@ -94,6 +96,7 @@ const RolodexView = Backbone.View.extend({
       template: this.contactTemplate
     });
     this.cardList.push(card);
+    this.listenTo(card, "contactInfo", this.showDetail);
   },
 
   getInput: function() {
@@ -104,6 +107,22 @@ const RolodexView = Backbone.View.extend({
     };
     return contact;
   }, // end getInput();
+
+  showDetail: function(model){
+    this.detail = new DetailView({
+      model: model,
+      template: this.contactDetailTemplate,
+      el: $('#contact-details')
+    });
+    $('#contact-details').show();
+    this.detail.render();
+  },
+
+  hideDetail: function(){
+    console.log("hidedetail");
+    $('#contact-details').hide();
+    this.render();
+  }
 });
 
 export default RolodexView;

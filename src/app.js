@@ -30,7 +30,7 @@ var contactData = [
 
 var contactModel = new Rolodex(contactData);
 var rolView = new RolodexView({
-  el: '#application',
+  el: 'body',
   model: contactModel
 });
 rolView.render();

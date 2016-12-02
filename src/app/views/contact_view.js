@@ -10,13 +10,22 @@ const ContactView = Backbone.View.extend({
   },
 
   render: function() {
+    this.delegateEvents();
     var html = this.template({name: this.model.get("name")});
     this.$el.html(html);
 
     // Enable chained calls
     return this;
-  }
+  },
 
+  events: {
+    'click': 'showDetail'
+  },
+
+  showDetail: function(){
+    this.trigger( 'contactInfo', this.model);
+    event.stopPropagation();
+  }
 });
 
 export default ContactView;
