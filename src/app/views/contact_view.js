@@ -14,20 +14,14 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-    'click': 'detailsHandler',
-    'dblclick': 'editHandler'
+    'click': 'detailsHandler'
   },
 
   detailsHandler: function(event) {
 //    console.log("clicked on " + this.model.get('name'));
     event.stopPropagation();
     this.trigger('display', this);
-  },
-
-  editHandler: function(event) {
-    this.trigger('edit', this);
   }
-
 });
 
 export default ContactView;

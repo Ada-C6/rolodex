@@ -46,7 +46,7 @@ const RolodexView = Backbone.View.extend({
       phone: card.model.get('phone')});
     detailsDiv.html(html);
     detailsDiv.removeClass("hide-item");
-  },
+  }
 });
 
 export default RolodexView;

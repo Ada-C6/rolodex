@@ -15,19 +15,12 @@ const ApplicationView = Backbone.View.extend({
       el: $("main"),
       model: this.model.rolodex
     });
+
+
     },
 
     render: function() {
       this.rolodexDisplay.render();
-      console.log(this.model.rolodex);
-
-      // this.listenTo(this.model.rolodex.models, 'edit', this.editContact);
-
-      this.model.rolodex.each(function(model) {
-//        console.log(model);
-//       this.listenTo(model, 'edit', this.editContact);
-      });
-
       this.delegateEvents();
       return this;
     },
@@ -61,12 +54,6 @@ const ApplicationView = Backbone.View.extend({
       this.model.rolodex.add(collectContact);
       this.clearForm();
       //  console.log('createContact clicked');
-    },
-
-    editContact: function(card) {
-      console.log("in editContact for contact: " + card.model.get('name'));
-//      this.setInput(card.model);
-//      card.model.destroy();
     },
 
     hideDetails: function(event) {
