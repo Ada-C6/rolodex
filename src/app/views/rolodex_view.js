@@ -53,7 +53,6 @@ const RolodexView = Backbone.View.extend({
     //Events for the form (cancel & save) and hiding the modal
     'click .btn-cancel': 'clearForm',
     'click .btn-save': 'createContact',
-    // 'click .btn-edit': 'editDetails',
     'click .popup': 'hideDetails'
   },
   clearForm: function(){
