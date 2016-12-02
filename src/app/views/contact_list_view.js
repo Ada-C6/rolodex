@@ -9,12 +9,12 @@ import ContactView from 'app/views/contact_view';
 //
 // // const ContactView = Backbone.View.extend({
 // // });
-var ContactListView = Backbone.View.extend({
+var ContactListView = Backbone.View.extend({ // parent
   initialize: function(options) {
   this.template = _.template($('#tmpl-contact-card').html());
   console.log('What is this at the moment? ' + this);
   console.log('What is options.contacts at the moment? ' + options.contacts);
-  console.log('What is this.model at the moment? ' + this.model);
+  // console.log('What is this.model at the moment? ' + this.model);
   this.modelList = [];
   this.cardList = [];
 
@@ -50,7 +50,7 @@ var ContactListView = Backbone.View.extend({
   },
   addContact: function(rawData) {
     // Create a Task from this raw data
-    var contact = new Contact(rawData);
+    var contact = new Contact(rawData); // child
 
     // Add the new task model to our list
     this.modelList.push(contact);
@@ -65,22 +65,12 @@ var ContactListView = Backbone.View.extend({
     this.cardList.push(card);
   },
 
-  createContact: function(event) {
-      event.preventDefault();
-      // console.log();
-      console.log('Time to create a new contact');
-// THIS IS A COPY FROM TASKS
-      // // Get the input data from the form and turn it into a task
-      // var rawData = this.getInput();
-      //
-      // this.addTask(rawTask);
-      //
-      // // Re-render the whole list, now including the new card
-      // this.render();
-      //
-      // // Clear the input form so the user can add another task
-      // this.clearInput();
-    }
+  createContact: function(rawData) {
+    // event.preventDefault();
+    console.log('Time to create a new contact');
+    this.addContact(rawData);
+    this.render();
+  }
 
 });
 //

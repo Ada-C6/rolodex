@@ -5,10 +5,6 @@ import _ from 'underscore';
 
 // import Contact from 'app/models/contact';
 
-//
-// // const ContactView = Backbone.View.extend({
-// // });
-
 var ContactView = Backbone.View.extend({
   initialize: function(options) {
     // this.options = this.model
@@ -19,7 +15,6 @@ var ContactView = Backbone.View.extend({
   },
   render: function() {
     // console.log('Rendering ContactView');
-    // console.log(this.model);
     var cardName = {name: this.model.attributes.name};
     var html = this.template(cardName); //instance of Contact
     this.$el.html(html);
@@ -28,6 +23,6 @@ var ContactView = Backbone.View.extend({
     this.delegateEvents();
 
     return this;
-  },
+  }
 });
 export default ContactView;

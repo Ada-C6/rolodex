@@ -4,7 +4,7 @@ import Backbone from 'backbone';
 // //   // This model should have the attributes for
 // //   // a single contact: name, phone number, and email.
 // // });
-//
+
 var Contact = Backbone.Model.extend({
   defaults: { // backbone keyword, similar to schema in rails
     name: "Contact Name",

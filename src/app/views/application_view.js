@@ -3,30 +3,28 @@ import $ from 'jquery';
 import ContactListView from 'app/views/contact_list_view';
 
 
-const ApplicationView = Backbone.View.extend({
+const ApplicationView = Backbone.View.extend({ // parent
   initialize: function(options) {
     // this.listElem = options.el;
     this.rawList = options.contacts;
-    console.log('THIS>>' + this.model);
+    // console.log('THIS>>' + this.model);
 
     var listElement = $('#contact-cards');
     var formElement = $('.contact-form');
 
    // console.log('CHECKPOINT');
-    //  var contactBox = new ContactView( {
-    //    el: listElement //,
-    //   //  model: rawList
-    //  });
-     var contactGrid = new ContactListView( {
+     this.contactGrid = new ContactListView( { //child
        el: listElement,
        contacts: this.rawList
      });
-     console.log('This grid' + contactGrid);
-     contactGrid.render();
+     this.contactGrid.render();
+     console.log(this.contactGrid.modelList + "modelList");
+    //  console.log('This grid was created in application_view: ' + contactGrid);
 
   },
 
   render: function() {
+    // // EVERYTHING IS ALREADY RENDERED
     // var saveButton = new ButtonView();
     // var cancelButton = new ButtonView();
     //
@@ -34,7 +32,7 @@ const ApplicationView = Backbone.View.extend({
     // saveButton.render();
     // cancelButton.render();
     //
-    // // Put the buttons on the page
+    // // Put the buttons on the page // nope they are already there
     // // remember we want them inside the contact-form 'box'
     // this.$('btn-save').append(saveButton.$el);
     // this.$('btn-cancel').append(cancelButton.$el);
@@ -43,18 +41,18 @@ const ApplicationView = Backbone.View.extend({
   },
   events: {
     'click .btn-save': 'saveOnClick',
-    'click .btn-cancel': 'cancelOnClick'
+    'click .btn-cancel': 'clearOnClick'
   },
   saveOnClick: function() {
     console.log('Ready to save?');
-    // console.log('How to sent it to the ContactListView next?');
     var rawData = this.getInput();
     // console.log('what is THISMODEL? ' + JSON.stringify(this.model));
-    this.model.add(rawData);
-    this.trigger('saving');
+    // this.model.add(rawData);
+    // this.trigger('saving');
+    this.savingContact(rawData);
   },
-  cancelOnClick: function() {
-    console.log('Cancel form input!');
+  clearOnClick: function() {
+    console.log('Clear form input!');
     this.$('input')[0].value = '';
     this.$('input')[1].value = '';
     this.$('input')[2].value = '';
@@ -67,16 +65,12 @@ const ApplicationView = Backbone.View.extend({
     };
     console.log(contact);
     return contact;
-    // var contact = {
-    //  name: this.input.name.val(),
-    //  email: this.input.email.val()
-    //  phone: this.input.phone.val()
-    // };
-    // return contact;
   },
-  // createContact HERE Use same syntaxt as cancel to pull values, not like tasklist
-  //DONT FORGET TO USE THE MODEL to push the new contact this.model.add(rawData)
-  // then clear the form and listen in ContactListView
+  savingContact: function(rawData) {
+    this.contactGrid.createContact(rawData);
+    console.log('Contact created');
+    this.clearOnClick();
+  }
 });
 
 export default ApplicationView;
