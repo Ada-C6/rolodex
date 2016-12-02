@@ -21,7 +21,6 @@ const ApplicationView = Backbone.View.extend({
         phoneNumber: 7922222,
         email: 'mochi@example.com'
       }];
-    // this.render();
 
     // Keep track of form input fields
     this.input = {
@@ -36,15 +35,10 @@ const ApplicationView = Backbone.View.extend({
       el: 'main',
       model: contactList
     });
-
-    // this.rolodexView.render();
   },
 
   render: function() {
-
     this.rolodexView.render();
-
-    return this;
   },
 
   events: {
@@ -61,7 +55,6 @@ const ApplicationView = Backbone.View.extend({
   createContact: function(event) {
     event.preventDefault();
     var contact = this.getInput();
-    console.log(contact);
 
     this.rolodexView.model.add(contact);
 
