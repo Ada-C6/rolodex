@@ -22,7 +22,7 @@ const RolodexView = Backbone.View.extend({
 
     this.input = {
       name: this.$('.columns input[name="name"]'),
-      phoneNumber: this.$('.columns input[name="phone"]'),
+      phone: this.$('.columns input[name="phone"]'),
       email: this.$('.columns input[name="email"]')
     };
 
@@ -46,12 +46,14 @@ const RolodexView = Backbone.View.extend({
 
   events: {
     'click .btn-cancel': 'clearInput',
-    'click .btn-save': 'createContact'
+    'click .btn-save': 'createContact',
+    'click .contact-card': 'viewContact',
+    //'click // document except contact card and contact details': 'hideModal'
   },
 
   clearInput: function(event) {
     this.input.name.val('');
-    this.input.phoneNumber.val('');
+    this.input.phone.val('');
     this.input.email.val('');
   },
 
@@ -65,7 +67,7 @@ const RolodexView = Backbone.View.extend({
   getInput: function() {
     var contact = {
       name: this.input.name.val(),
-      phoneNumber: this.input.phoneNumber.val(),
+      phone: this.input.phone.val(),
       email: this.input.email.val()
     };
     return contact;
@@ -80,7 +82,12 @@ const RolodexView = Backbone.View.extend({
 
     // Add the card to our card list
     this.cardList.push(card);
-  }
+  },
+
+  // viewContact: function(contact) {
+  //
+  // }
+
 });
 
 export default RolodexView;

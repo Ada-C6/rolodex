@@ -9,19 +9,19 @@ import Rolodex from 'app/collections/rolodex';
 var contactData = [
   {
     name: 'Ellen Ochoa',
-    phoneNumber: '555-555-5555',
+    phone: '555-555-5555',
     email: 'awesomeastronaut@nasa.gov'
   }, {
     name: 'Duy-Loan Le',
-    phoneNumber: '444-444-4444',
+    phone: '444-444-4444',
     email: 'calculatorprime@ti.com'
   }, {
     name: 'Margaret Hamilton',
-    phoneNumber: '333-333-3333',
+    phone: '333-333-3333',
     email: 'apolloteamleader@nasa.gov'
   }, {
     name: 'Katherine Johnson',
-    phoneNumber: '222-222-2222',
+    phone: '222-222-2222',
     email: 'humancomputer@nasa.gov'
   }
 ];
@@ -34,4 +34,17 @@ $(document).ready(function() {
     model: rolodex
   });
   appView.render();
+});
+
+$(document).click(function (event)
+{
+    var element = $('.contact-card');
+    var container = $('#contact-details')
+
+    if (!element.is(event.target) && element.has(event.target).length === 0)  // if the target of the click isn't the container... nor a descendant of the container
+    {
+      container.hide();
+    } else {
+      container.show();
+    }
 });
