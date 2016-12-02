@@ -31,7 +31,8 @@ const ContactView = Backbone.View.extend({
     'click .contact-card': 'showModal'
   },
   //
-  showModal : function(element) {
+  showModal : function(event) {
+    event.stopPropagation();
     var bubble = $('#contact-details')
     // console.log(element);
     // console.log(this.model.get("name"))

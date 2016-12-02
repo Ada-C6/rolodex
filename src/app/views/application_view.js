@@ -23,19 +23,25 @@ const ApplicationView = Backbone.View.extend({
 
   events: {
     'click .btn-cancel': 'clearInput',
-    'click .btn-save': 'saveButton'
-    // 'click ': 'hideModal'
+    'click .btn-save': 'saveButton',
+    'click ': 'hideModal',
+    'click #contact-details': 'dontHideModal'
   }, //end of events
 
   hideModal: function() {
     $('#contact-details').hide()
   },
 
+  dontHideModal: function(event) {
+    // alert("you clicked it!");
+    event.stopPropagation();
+  },
+
   clearInput: function(event) {
     console.log("clearing");
-    $('input[name="name"]').val("");
-    $('input[name="email"]').val("");
-    $('input[name="phone"]').val("");
+    this.input.name.val("");
+    this.input.email.val("");
+    this.input.phone.val("");
 
   }, // end of clear
 
@@ -45,8 +51,8 @@ const ApplicationView = Backbone.View.extend({
     if (contact.name == "" || contact.email == "" || contact.phone == "") {
       alert("please enter all contact details to save.")
     } else {
+      console.log("saving", contact.name);
       this.model.add(contact);
-      console.log("saving that contact");
       this.clearInput();
     }
   }, // end of save
