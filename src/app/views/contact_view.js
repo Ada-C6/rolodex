@@ -5,38 +5,26 @@ import Contact from 'app/models/contact';
 
 const ContactView = Backbone.View.extend({
 	initialize: function(options) {
+		this.template = options.template;
 
-//GOING WITH EASY FOR NOW, MVP
-
-		this.template = _.template($('#tmpl-contact-card').html());
-
-		this.model = options.model
-
-		this.listElement = this.$("contact-cards");
-
+// if my contact changes, we re-render
+		this.listenTo(this.model, 'change', this.render );
   }, //initialize end
 
+
+
   render: function() {
-
-  	var html = this.template({name: this.model.attributes.name});
-  // var html = this.model.attributes.name;
-
-    console.log("red " + html);
+// this sets what we want to see
+  var html = this.template({name: this.model.attributes.name});
 
   this.$el.html(html);
 
+// this helps re-bind events since the html is all new
+  this.delegateEvents();
 
     // Enable chained calls
-    return this;
+  return this;
   }, //render end
-
-  addContact: function(contact) {
-  	var card = new Contact({
-  	model: contact,
-  	template: this.template
-  })
-  },
-
 
 });
 
