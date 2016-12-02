@@ -39,11 +39,15 @@ $(document).ready(function() {
 $(document).click(function (event) {
   var element = $('.contact-card');
   var container = $('#contact-details')
+  console.log("CLICKED!", event.target);
 
   // if the target of the click isn't the container, nor a descendant of the container
-  if (!element.is(event.target) && element.has(event.target).length === 0) {
-    container.hide();
-  } else {
+  if (element.is(event.target) || element.has(event.target).length > 0 )  {
     container.show();
+  } else if (container.is(event.target) || container.has(event.target).length > 0) {
+    container.show();
+  }
+   else {
+    container.hide();
   }
 });
