@@ -18,11 +18,14 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-    'click .contact-card': 'editHandler'
+    'click .contact-card': 'detailsHandler'
   },
 
-  editHandler: function(event) {
-    console.log("editHandler called on: " + this.model.attributes.name);
+  detailsHandler: function(event) {
+    // is this where I'd stop the propogation? I want the trigger to go up exactly ONE level.
+    event.stopPropagation();
+    
+    console.log("detailsHandler called on: " + this.model.attributes.name);
     this.trigger('edit', this.model);
   }
 });

@@ -66,7 +66,8 @@ const RolodexView = Backbone.View.extend({
 
   events: {
     'click .btn-cancel': 'clearInput',
-    'click .btn-save': 'createContact'
+    'click .btn-save': 'createContact',
+    'click': 'otherClick'
   },
 
   clearInput: function(event) {
@@ -128,18 +129,19 @@ const RolodexView = Backbone.View.extend({
     // the data I'm passing to the template
     var deets = this.contactDetailsTemplate({name: contact.attributes.name, email: contact.attributes.email, phone: contact.attributes.phone});
 
-    // putting the html from this contact into the modal.  
+    // putting the html from this contact into the modal.
     this.contactDetails.append(deets);
 
-  }
+  },
 
-  // otherClick: function(event){
-  //   console.log("clicking somewhere else");
-  // },
-  //
-  // hideModal: function() {
-  //
-  // }
+  otherClick: function(event){
+    console.log("clicking somewhere else");
+    this.hideModal(); 
+  },
+
+  hideModal: function() {
+    this.contactDetails.hide();
+  }
 
 });
 
