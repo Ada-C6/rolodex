@@ -6,12 +6,14 @@ const ApplicationView = Backbone.View.extend({
 
 
   initialize: function() {
-    this.render();
+    // this.render();
     this.input = {
       name: this.$('input[name="name"]'),
       email: this.$('input[name="email"]'),
       phone: this.$('input[name="phone"]')
     };
+    // this.listenTo(this.model, "update", this.render)
+    // this.listenTo(this.model, "add", this.addContact)
   },
 
   render: function() {
@@ -34,7 +36,8 @@ const ApplicationView = Backbone.View.extend({
 
   saveButton: function(event) {
     event.preventDefault();
-    var contact = new Contact(this.getInput());
+    var contact = this.getInput();
+    this.model.add(contact);
     console.log("saving that contact");
     this.clearInput();
   }, // end of save

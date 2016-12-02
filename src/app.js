@@ -31,16 +31,18 @@ $(document).ready(function(){
   var rolodex = new Rolodex(hardCodedContacts);
   // console.log("this is the rolodex",rolodex)
 
-  var application = new RolodexView({
+  var application2 = new ApplicationView({
+    el: $('body'),
+    model: rolodex
+  });
+
+  var rolodexView = new RolodexView({
     el: $('#contact-cards'),
     model: rolodex
   });
 
-  var application2 = new ApplicationView({
-    el: $('body') // this was #application if it's not working that's why
-  });
-  application2.render();
-  application.render();
+  // application2.render();
+  rolodexView.render();
 
 
 // for each hard-coded contact, make them a new contact. use the #contact-cards element, and the model that belongs to the hard-coded contact element.
