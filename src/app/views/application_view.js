@@ -78,11 +78,11 @@ const ApplicationView = Backbone.View.extend({ // parent
     console.log('Contact created');
     this.clearOnClick();
   },
-  setModal: function() {
-    // show modal
-    this.currentContact = this.contactGrid.currentContact;
-    console.log(this.currentContact);
-  }
+  // setModal: function() {
+  //   // show modal
+  //   this.currentContact = this.contactGrid.currentContact;
+  //   console.log(this.currentContact);
+  // }
 });
 
 export default ApplicationView;
