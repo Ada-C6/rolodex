@@ -3,14 +3,20 @@ import $ from 'jquery';
 
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
-import Contact from 'app/models/contact';
-import ContactView from 'app/views/contact_view';
+import Rolodex from 'app/collections/rolodex';
+import RolodexView from 'app/views/rolodex_view';
 
-var contactData = [{
-  name: "Yasmin",
-  phone: "555-5555",
-  email: "you_wish@gmail.com"
-}];
+var contactData = [
+  {
+    name: "Yasmin",
+    phone: "555-5555",
+    email: "you_wish@gmail.com"
+  }, {
+    name: "Erin",
+    phone: "777-7777",
+    email: "oshkosh@yahoo.com"
+  }
+];
 
 var application = new Application();
 
@@ -21,10 +27,10 @@ var appView = new ApplicationView({
 
 
 $(document).ready(function() {
-  var contct = new Contact(contactData[0]);
-  var contctView = new ContactView({
-    el: ("#contact-cards"),
-    model: contct
+  var contactList = new Rolodex(contactData);
+  var contactListView = new RolodexView({
+    el: ("#application"),
+    model: contactList
   });
-  contctView.render();
+  contactListView.render();
 });
