@@ -7,6 +7,7 @@ import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
 
+//Contacts data
 var contactData = [
   {
     name: 'Human',
@@ -27,8 +28,10 @@ var contactData = [
 
 
 $(document).ready(function() {
+  //Creating a new Rolodex collection of the data
   var contactList = new Rolodex(contactData);
 
+  //Creating a new RolodexView with the body as its scope
   var application = new RolodexView({
     el: $('body'),
     model: contactList
