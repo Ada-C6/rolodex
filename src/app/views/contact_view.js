@@ -4,37 +4,37 @@ import _ from 'underscore';
 
 
 const ContactView = Backbone.View.extend({
-  template: _.template($('#tmpl-contact-card').html()),
-
-
+  // template: _.template($('#tmpl-contact-card').html()),
   initialize: function(options) {
-    // this.el = options.el;
-    this.name = options.name;
-    this.email = options.email;
-    this.phone = options.phone;
-    this.render();
-    // this.thisTemplate = ;
-    // this.listenTo(this.model, "change", this.render);
-  },
+    // this.model = options.model
+    // console.log("we are in the contactview function, and these are the options:", this.model)
+    this.name = this.model.name;
+    this.email = this.model.email;
+    this.phone = this.model.phone;
+    this.template = options.template;
+    this.listenTo(this.model, "change", this.render);
+  }, // end of initialize
 
   render: function() {
-    var html = this.template(this.model.toJSON());
+    // console.log("inside contact render, here is this.model", this.model)
+
+    var html = this.template({contact: this.model.toJSON()});
     this.$el.html(html);
+    // console.log("this is the html variable",html)
     // // reconnects the DOM event handlers
-    // this.delegateEvents();
+    this.delegateEvents();
     // // Enable chained calls
     return this;
-  },
-
-  events: {
-    'click .contact-card': 'openContact'
-  },
-
-  openContact: function(){
-
-  }
-
+  } //,
+  //
+  // events: {
+  //   'click .contact-card': 'openContact',
+  //   'click .'
+  // },
+  //
+  // openContact: function(){
+  //
+  // }
 });
-
 // accessible elsewhere
 export default ContactView;
