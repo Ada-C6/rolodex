@@ -9,8 +9,10 @@ import _ from 'underscore';
 const ContactView = Backbone.View.extend({
   initialize: function(options){
     this.template = options.template;
-    this.detailsTemplate = _.template($('#tmpl-contact-details').html());
-    this.element = $('#contact-details');
+    // this.detailsTemplate = _.template($('#tmpl-contact-details').html());
+    // this.element = $('#contact-details');
+
+    this.listenTo(this.model, "change", this.render);
   },
   render: function() {
     this.delegateEvents();
@@ -23,12 +25,14 @@ const ContactView = Backbone.View.extend({
     'click .contact-card': 'showDetails'
   },
   showDetails: function(e){
-    var detailsHTML = this.detailsTemplate({name: this.model.get("name"), email: this.model.get("email"), phone: this.model.get("phone")});
-    this.element.html(detailsHTML);
-    $('#contact-details').show();
-    $('#application').addClass('popup');
-    console.log("showing details - ");
-    console.log(e.target);
+    // var detailsHTML = this.detailsTemplate({name: this.model.get("name"), email: this.model.get("email"), phone: this.model.get("phone")});
+    // this.element.html(detailsHTML);
+    // $('#contact-details').show();
+    // $('#application').addClass('popup');
+    // console.log("showing details - ");
+    // console.log(e.target);
+    this.trigger("showThis", this.model);
+    console.log("clicking it");
   }
   // hideDetails: function(){
   //   console.log("CLICKING");

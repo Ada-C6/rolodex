@@ -9,6 +9,9 @@ const RolodexView = Backbone.View.extend({
     this.template = _.template($('#tmpl-contact-card').html());
     this.element = this.$('#contact-cards');
 
+    this.detailsTemplate = _.template($('#tmpl-contact-details').html());
+    this.detailsElement = $('#contact-details');
+
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
       phone: this.$('.contact-form input[name="phone"]'),
@@ -20,7 +23,6 @@ const RolodexView = Backbone.View.extend({
     this.model.forEach(function(contact){
       var card = new ContactView({model: contact, template: this.template});
       console.log("new contactview");
-
       this.contactList.push(card);
     }, this);
 
@@ -33,6 +35,7 @@ const RolodexView = Backbone.View.extend({
     this.contactList.forEach(function(card){
       card.render();
       console.log("render contact");
+      this.listenTo(card, "showThis", this.showCard);
       this.element.append(card.$el);
     }, this);
 
@@ -87,6 +90,15 @@ const RolodexView = Backbone.View.extend({
       $('#contact-details').hide();
       $('#application').removeClass('popup');
     }
+  },
+  showCard: function(contactModel){
+    console.log("in showCard");
+    var detailsHTML = this.detailsTemplate({name: contactModel.get("name"), email: contactModel.get("email"), phone: contactModel.get("phone")});
+    this.detailsElement.html(detailsHTML);
+    $('#contact-details').show();
+    $('#application').addClass('popup');
+    console.log("showing details - ");
+    console.log(contactModel);
   }
 });
 

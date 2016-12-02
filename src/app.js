@@ -37,7 +37,6 @@ $(document).ready(function() {
   var contactList = new Rolodex(contactData);
 
   var application = new RolodexView({
-    // el: $('#application'), //setting the el as 'this' when 'this' is referenced in TaskListView
     el: $('body'),
     model: contactList
   });
