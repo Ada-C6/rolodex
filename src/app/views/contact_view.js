@@ -22,20 +22,16 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-    "click .contact-card": "contactDetailsHandler"  },
+    "click .contact-card": "contactDetailsHandler"
+  },
 
   contactDetailsHandler: function(event) {
     event.stopPropagation();
-    console.log("clickey click");
     $("#contact-details").show();
     var htmlForDetails = this.detailsTemplate({contact: this.model.attributes});
 
     $("#contact-details").html(htmlForDetails);
-    // $("#application").click(function() {
-    //   $("#contact-details").hide();
-    // })
   }
-  // remove:
 });
 
 export default ContactView;

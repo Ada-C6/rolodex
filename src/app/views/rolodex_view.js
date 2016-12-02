@@ -16,13 +16,6 @@ const RolodexView = Backbone.View.extend({
       this.addContact(contact); //creates Contact objects and throws them in contactCardsList
     }, this);
 
-    // This is just telling us where the name value LIVES
-    this.fieldFromNewContactForm = {
-      name: this.$('.contact-form input[name="name"]'),
-      email: this.$('.contact-form input[name="email"]'),
-      phone: this.$('.contact-form input[name="phone"]')
-    };
-
     // When a model is added to the collection, create a contactCard for that model and add it to contactCardsList
     this.listenTo(this.model, "add", this.addContact);
 
@@ -44,45 +37,6 @@ const RolodexView = Backbone.View.extend({
     return this; // enable chained calls
   },
 
-  events: {
-    "click .btn-cancel": "clearInput",
-    // "submit .btn-save": "createNewContact"
-  },
-
-  clearInput: function(event) {
-    this.input.name.val("");
-    this.input.email.val("");
-    this.input.phone.val("");
-  },
-
-  createNewContact: function(event) {
-    // No post-form-submission refresh for you!
-    event.preventDefault();
-
-    // Get the input data from the form and turn it into a task
-    var inputFormData = this.getInput();
-
-    // Keep track of this task
-    this.model.add(inputFormData)
-
-    // Re-render the whole list, now including the new card
-    this.render();
-
-    // Clear the input form so the user can add another task
-    this.clearInput();
-  },
-
-  // Build a contact from the data inside the fields specified in initialize
-  getInput: function() {
-    var contact = {
-      name: this.fieldFromNewContactForm.name.val(),
-      email: this.fieldFromNewContactForm.email.val(),
-      phone: this.fieldFromNewContactForm.phone.val()
-    };
-    return contact;
-  },
-
-  // Turn a raw contact into a Contact model, add it to our list of tasks, create a card for it, and add that card to our list of cards.
   addContact: function(contact) {
    // Create a card for the new contact
    var contactCard = new ContactView({
@@ -93,7 +47,6 @@ const RolodexView = Backbone.View.extend({
    // Add the contactCard to our contactCard list
    this.contactCardsList.push(contactCard);
  }
-
 });
 
 export default RolodexView;
