@@ -11,7 +11,8 @@ const Contact = Backbone.Model.extend({
   },
 
   initialize: function() {
-  	console.log("created new contact card for" + this.name);
+  	// console.log(this.defaults.name);
+  	console.log("created the contact card for " + this.defaults.name);
   }
 });
 
