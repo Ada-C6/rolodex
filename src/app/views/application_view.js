@@ -38,17 +38,6 @@ var ApplicationView = Backbone.View.extend({
     rolodex.render();
     return this;
   }
-
-  // events: {
-  //   'click': 'toggleContactDetails'
-  // },
-  //
-  // toggleContactDetails: function(onIndicator) {
-  //   if ($('#contact-details').is(":visible")) {
-  //     console.log("contact details visible");
-  //     $('#contact-details').toggle(onIndicator);
-  //   }
-  // }
 });
 
 export default ApplicationView;

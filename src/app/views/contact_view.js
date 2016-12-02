@@ -9,14 +9,6 @@ import Contact from 'app/models/contact';
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
     this.template = _.template($('#tmpl-contact-card').html());
-
-    // this.modalTemplate = _.template($('#tmpl-contact-details').html());
-    //
-    // _.extend(this.contactInfo, Backbone.Events);
-
-    // this.listenTo(this, "showContactDetails", this.viewDetails);
-
-    // this.toggleDetails();
   },
 
   render: function() {
@@ -36,45 +28,6 @@ const ContactView = Backbone.View.extend({
     console.log("detailsHandler called on: " + this.model.attributes.name);
     this.trigger('modal', this.model);
     }
-  //
-  // toggleDetails: function(onIndicator) {
-  //   $('#contact-details').toggle(onIndicator);
-  // },
-  //
-  // viewDetails: function() {
-  //   //show the details card somehow - ask google
-  //   this.toggleDetails();
-  //
-  //   var html = this.modalTemplate({name: this.contactInfo.name, email: this.contactInfo.email, phone: this.contactInfo.phone });
-  //
-  //   $('#contact-details').html(html);
-  //
-  //   console.log("VIEWING THE DETAILS CARD of: " + this.contactInfo.name); // TODO: how to we access the details of this contact
-  // }
 });
-
-// var ModalView = Backbone.ModalView.extend({
-//   name: "ModalView",
-//   model: this.model,
-//   template: _.template($('#tmpl-contact-details').html()),
-//   initialize: function() {
-//     _.bindAll(this, "render");
-//     this.template = _.template(this.template);
-//   },
-//   events: {
-//     'click .contact-card': 'showDetails'
-//   },
-//
-//   // showDetails: function() {
-//   //   console.log("SHOW SOME DETAILS HERE");
-//   //   //trigger something
-//   //   this.trigger("showContactDetails");
-//   // },
-//
-//   render: function () {
-//     $(this.el).html(this.template());
-//     return this;
-//   }
-// });
 
 export default ContactView;
