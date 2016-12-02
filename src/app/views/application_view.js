@@ -9,26 +9,6 @@ import ContactView from 'app/views/contact_view';
 const ApplicationView = Backbone.View.extend({
   initialize: function(options){
     // Keep track of our form input fields
-  
-    // this.listElement = this.$('.contact-cards');
-    // this.contactTemplate = _.template($('#tmpl-contact-details').html());
-    //
-    // this.contactList = [];
-    //
-    // this.model.forEach(function(rawContact) {
-    //   this.addContact(rawContact);
-    // }, this);
-
-    this.input = {
-      name: this.$('.contact-form input[name="name"]'),
-      email: this.$('.contact-form input[email="email"]'),
-      phone: this.$('.contact-form input[phone="phone"]')
-    };
-
-    this.listenTo(this.model, 'add', this.addContact);
-    this.listenTo(this.model, 'update', this.render);
-    this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.model, 'remove', this.removeContact);
   },
 
   render: function() {

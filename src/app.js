@@ -12,23 +12,23 @@ import ApplicationView from 'app/views/application_view';
 
 var contactList = [
   {
-  //   name: 'Crispin Jockers',
-  //   email: 'crispy@me.com',
-  //   phone: '2062823396'
-  // }, {
-  //   name: 'Royale King',
-  //   email: 'royal@me.com',
-  //   phone: '2062823200'
-  // }, {
-  //   name: 'Chelsea Kennedy',
-  //   email: 'chel@me.com',
-  //   phone: '2062829980'
-  // },
-
-      name: 'Jihan Zencirli',
-      email: 'witwijs@me.com',
-      phone: '2062821212'
-    }
+    name: 'Crispin Jockers',
+    email: 'crispy@me.com',
+    phone: '2062823396'
+  }, {
+    name: 'Royale King',
+    email: 'royal@me.com',
+    phone: '2062823200'
+  }, {
+    name: 'Chelsea Kennedy',
+    email: 'chel@me.com',
+    phone: '2062829980'
+  },
+  {
+    name: 'Jihan Zencirli',
+    email: 'witwijs@me.com',
+    phone: '2062821212'
+  }
 ];
 
 $(document).ready(function() {
@@ -39,7 +39,7 @@ $(document).ready(function() {
   //   contactList: rawData
   // }),
 
-  var cardView = new ContactView({
+  var cardView = new RolodexView({
     el: $('#contact-cards'),
     model: contactList
   });
@@ -51,4 +51,4 @@ $(document).ready(function() {
   cardView.render();
   // rolodexView.render();
   // applicationView.render();
-  });
+});
