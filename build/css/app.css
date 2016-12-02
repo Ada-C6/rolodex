@@ -22,7 +22,7 @@ header {
 
 .contact-form {
   background-color: rgba(140, 193, 189, 0.48);
-
+  border-radius: 2%;
 }
 
 .contact-form label {
@@ -34,16 +34,18 @@ header {
   display: none;
   z-index: 10;
   position: fixed;
-  width: 30%;
-  height: 30%;
+  width: auto;
+  height: auto;
   top: 30%;
   left: 30%;
-  background-color: rgba(140, 193, 189, 0.48);
+  background-color: rgb(140, 193, 189);
   text-align: center;
-  border: 1px solid black;
+  border: 10px solid rgba(47, 53, 54, 0.84);
   margin-left: 20%;
   border-radius: 20%;
-  padding-top: 3%;
+  padding: 3%;
+  color: rgb(14, 60, 70);
+  font-weight: bolder;
 }
 
 #contact-cards {
