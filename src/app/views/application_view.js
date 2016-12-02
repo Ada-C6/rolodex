@@ -25,7 +25,6 @@ const ApplicationView = Backbone.View.extend({
   }, //end of events
 
   clearInput: function(event) {
-    event.preventDefault();
     console.log("clearing");
     $('input[name="name"]').val("");
     $('input[name="email"]').val("");
@@ -37,6 +36,7 @@ const ApplicationView = Backbone.View.extend({
     event.preventDefault();
     var contact = new Contact(this.getInput());
     console.log("saving that contact");
+    this.clearInput();
   }, // end of save
 
   getInput: function(event) {

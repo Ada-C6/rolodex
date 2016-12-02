@@ -19,8 +19,8 @@ const RolodexView = Backbone.View.extend({
 
     this.model.forEach(function(contact) {
       // console.log("in the forEach loop", contact.attributes.name)
-          this.addContact(contact);
-        }, this); // bind `this` so it's available inside forEach
+      this.addContact(contact);
+      }, this); // bind `this` so it's available inside forEach
 
     this.listenTo(this.model, "remove", this.removeContact);
     this.listenTo(this.model, "update", this.render);
