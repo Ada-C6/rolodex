@@ -45,6 +45,14 @@ const RolodexView = Backbone.View.extend({
         return this; // enable chained calls
     },
 
+    events: {
+        'click #contact-details': 'stopProp'
+    },
+
+    stopProp: function(event) {
+        event.stopPropagation();
+    },
+
     // Turn a raw contact into a Contact model, add it to our list of contacts, create a card for it, and add that card to our list of cards.
     addContact: function(contact) { // this could have three arguments, we only have one: model, collection, options
         var card = new ContactView({ // create a card for the new contact

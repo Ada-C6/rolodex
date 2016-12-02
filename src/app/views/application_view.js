@@ -38,9 +38,7 @@ const ApplicationView = Backbone.View.extend({
         this.contactDetailSection = this.$('#contact-details');
     },
 
-    render: function() { // render a new instance of RolodexView
-
-
+    render: function() { 
         this.application.render();
 
         return this;
