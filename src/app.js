@@ -26,6 +26,7 @@ var someContact = [
 
 
 $(document).ready(function(){
+  $("#contact-details").hide();
   // var application = new Application();
   //
   // var appView = new ApplicationView({
