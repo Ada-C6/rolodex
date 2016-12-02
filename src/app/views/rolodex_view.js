@@ -37,19 +37,26 @@ const RolodexView = Backbone.View.extend({
     this.listElement.empty();
 
     // Loop through the data assigned to this view
-    this.contactList.forEach(function(card) {
+    this.contactList.forEach(function(contact) {
       // Cause the task to render
-      card.render();
+      contact.render();
 
       // Add that HTML to our task list
-      this.listElement.append(card.$el);
+      this.listElement.append(contact.$el);
     }, this);
 
     return this; // enable chained calls
   },
   events: {
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'clearInput'
+    'click .btn-cancel': 'clearInput',
+    'click body': 'hideContact',
+    'click #contact-details': (e) => { e.stopPropagation() }
+  },
+
+  hideContact: function() {
+      event.stopPropagation();
+    $('#contact-details').hide();
   },
 
   createContact: function(event) {
@@ -67,7 +74,7 @@ const RolodexView = Backbone.View.extend({
     console.log("in getInput");
     var contact = {
       name: this.input.name.val(),
-      number: this.input.phone.val(),
+      phone: this.input.phone.val(),
       email: this.input.email.val()
     };
     return contact;
