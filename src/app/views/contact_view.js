@@ -35,10 +35,6 @@ const ContactView = Backbone.View.extend({
     // $('#contact-details').show();
   }
 
-  // editDetails: function(event) {
-  //
-  // }
-
 });
 
 export default ContactView;

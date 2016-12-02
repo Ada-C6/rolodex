@@ -84,10 +84,6 @@ const RolodexView = Backbone.View.extend({
     this.cardList.push(card);
   },
 
-  // viewContact: function(contact) {
-  //
-  // }
-
 });
 
 export default RolodexView;
