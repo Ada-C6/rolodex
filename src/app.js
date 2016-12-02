@@ -5,7 +5,7 @@ import ApplicationView from 'app/views/application_view';
 import ContactView from 'app/views/contact_view';
 import Contact from 'app/models/contact';
 import Rolodex from 'app/collections/rolodex';
-
+import RolodexView from 'app/views/rolodex_view';
 var someContact = [
   {
     name: 'Binks',
@@ -34,18 +34,18 @@ $(document).ready(function(){
   // });
   var rolodex = new Rolodex(someContact);
   var element = _.template($('#tmpl-contact-card').html());
-  var contact = new Contact(someContact);
-  console.log(">>>>>>" + contact);
+  // var contact = new Contact(someContact);
+  // console.log(">>>>>>" + contact);
 
   var options = {
-    contact: contact,
-    el: $('#contact-cards'),
+    model: rolodex,
+    el: $('#application'),
     // template: element
 
   };
-  var contactView = new ContactView(options);
+  var contactView = new RolodexView(options);
   // element.append(contactView.$el);
   contactView.render();
-  console.log(contactView.contact);
+
 
 });

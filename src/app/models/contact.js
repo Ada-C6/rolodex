@@ -9,7 +9,8 @@ const Contact = Backbone.Model.extend({
     phone: 7082873399
   },
   initialize: function (){
-    console.log("You created a card for" + this.name);
+    console.log("You created a card for" + this.attributes.name);
+  
   },
 });
 
