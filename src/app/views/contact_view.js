@@ -22,6 +22,14 @@ const ContactView = Backbone.View.extend({
     this.delegateEvents();
     return this;
   },
+  events: {
+    'click .contact-card': 'showOff',
+
+  },
+  showOff: function(){
+    console.log( "You clicked me!");
+    this.trigger('showOff', this.model);
+  }
 
 });
 
