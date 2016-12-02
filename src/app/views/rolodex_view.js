@@ -13,7 +13,7 @@ import Rolodex from 'app/collections/rolodex';
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
 
-    this.contactTemplate = _.template($('#tmpl-contact-card').html());
+    this.contactTemplate = _.template($('#tmpl-contact-details').html());
     this.listElement = this.$('#contact-cards');
     // These are used when you add a card to the list.
     this.modelList = [];
@@ -28,6 +28,8 @@ const RolodexView = Backbone.View.extend({
         model: modelName,
         template: this.contactTemplate
       });
+
+      this.listenTo(contactOptions, "displayHandler", this.displayContactDetails);
       this.cardList.push(contactOptions);
     }, this);
 
@@ -46,6 +48,7 @@ const RolodexView = Backbone.View.extend({
       // console.log(card.el);
       // console.log(card.$el);
       this.listElement.append(card.$el);
+
     }, this);
     return this;
   },
@@ -66,7 +69,9 @@ const RolodexView = Backbone.View.extend({
       template: this.contactTemplate
     });
 
+    // Need to include the listenTo displayHandler in both the initialize and the addContact because the add contact adds it to new contacts and the initialize includes it in the creating of the built in contacts
     this.listenTo(contactCard, "displayHandler", this.displayContactDetails);
+    // this.listenTo(contactCard, "displayHandler", function(){console.log("EnETTERED ANAD PRINTING!!");});
 
     this.cardList.push(contactCard);
   },
@@ -74,7 +79,15 @@ const RolodexView = Backbone.View.extend({
   // No event, because it is triggered by another event.
   displayContactDetails: function(){
     console.log("displayHandler called");
-    var el = this.$("#contact-details");
+    var element = this.$("#contact-details");
+    //
+    console.log(element);
+    console.log(this.model);
+    var html = this.contactTemplate({contact: this.model.attributes});
+    console.log(html);
+    // element.append(html);
+    // console.log(html);
+    // console.log(element);
   },
 
   cancelInput: function(event){
