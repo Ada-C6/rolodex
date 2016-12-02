@@ -4,13 +4,9 @@ import $ from 'jquery';
 import _ from 'underscore';
 
 
-//Maybe set a variable to if the modal is showing or not and use something more like a toggle function...but you need to be able to click anywhere to close...
-
 const ContactView = Backbone.View.extend({
   initialize: function(options){
     this.template = options.template;
-    // this.detailsTemplate = _.template($('#tmpl-contact-details').html());
-    // this.element = $('#contact-details');
 
     this.listenTo(this.model, "change", this.render);
   },
