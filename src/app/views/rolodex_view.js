@@ -33,6 +33,7 @@ const RolodexView = Backbone.View.extend({
     return this;
   },
   events: {
+    "click .btn-cancel" : 'clearInput',
     "click .btn-save": "createCard"
   },
   clearInput: function(event){
