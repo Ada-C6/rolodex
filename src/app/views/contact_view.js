@@ -17,22 +17,26 @@ const ContactView = Backbone.View.extend({
     // // Re-attach DOM event listeners to our new HTML
     // this.delegateEvents();
 
-    $('#contact-details').hide();
+    // $('#contact-details').hide();
 
     // Enable chained calls
     return this;
   },
 
   events: {
-    'click .contact-card': 'contactDetails'
+    'click .contact-card': 'createModal'
   },
 
-  contactDetails: function(event) {
+  createModal: function(event) {
     var modalHtml = this.modal({contact: this.model.attributes});
     $('#contact-details').html(modalHtml);
 
     $('#contact-details').show();
+    console.log('showing');
+    return false;
   }
+
+
 
 
 });

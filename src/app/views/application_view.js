@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import Backbone from 'backbone';
 
 import RolodexView from 'app/views/rolodex_view';
@@ -35,6 +36,9 @@ const ApplicationView = Backbone.View.extend({
       el: 'main',
       model: contactList
     });
+
+    $('#contact-details').hide();
+
   },
 
   render: function() {
@@ -43,7 +47,9 @@ const ApplicationView = Backbone.View.extend({
 
   events: {
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'clearContact'
+    'click .btn-cancel': 'clearContact',
+    'click *': 'hideModal',
+    'click #contact-details': 'showModal'
   },
 
   clearContact: function(event) {
@@ -68,6 +74,17 @@ const ApplicationView = Backbone.View.extend({
       phoneNumber: this.input.phoneNumber.val()
     };
     return contact;
+  },
+
+  hideModal: function(event){
+    console.log('hideModal called');
+    $('#contact-details').hide();
+  },
+
+  showModal: function(event){
+    console.log('showModal');
+    event.stopPropagation();
+    $('#contact-details').show();
   }
 
 });
