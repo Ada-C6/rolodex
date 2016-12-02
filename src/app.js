@@ -32,14 +32,8 @@ var contactList = [
 ];
 
 $(document).ready(function() {
-  //wave two
-  // var rolodex = new Rolodex();
-  // var rolodexView = new RolodexView({
-  //   el: $('#contact-cards'),
-  //   contactList: rawData
-  // }),
 
-  var cardView = new RolodexView({
+  var rolodexView = new RolodexView({
     el: $('#contact-cards'),
     model: contactList
   });
@@ -48,7 +42,7 @@ $(document).ready(function() {
   //   el: $('#application'),
   //   model: application
   // });
-  cardView.render();
+  rolodexView.render();
   // rolodexView.render();
   // applicationView.render();
 });
