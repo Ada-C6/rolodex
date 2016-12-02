@@ -3,6 +3,7 @@
 import _ from 'underscore';
 import $ from 'jquery';
 import Backbone from 'backbone';
+
 import Contact from 'app/models/contact';
 
 const ContactView = Backbone.View.extend({
@@ -11,7 +12,8 @@ const ContactView = Backbone.View.extend({
   },
 
   render: function() {
-    var html = this.template({name: this.model.name});
+    var html = this.template({name: this.model.get('name')});
+    // console.log("===========" + this.model.attributes);
     this.$el.html(html);
     return this;
   }

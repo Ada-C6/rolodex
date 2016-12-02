@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 
 import RolodexView from 'app/views/rolodex_view';
+import Rolodex from 'app/collections/rolodex';
 
 var contactData = [
   {
@@ -22,17 +23,16 @@ var contactData = [
 ];
 
 var ApplicationView = Backbone.View.extend({
-  initialize: function() {
-    this.render();
-  },
-
   render: function() {
+    // create a new collection to use in the RolodexView
+    var rolodexCollection = new Rolodex(contactData);
+
     //render a new instance of RolodexView
     var rolodexTag = $('#application'); //set a HTML tag for this to end up in the rolodex section
 
     var rolodex = new RolodexView({ //give the application the rolodex view to render
       el: rolodexTag,
-      data: contactData
+      model: rolodexCollection
     });
 
     rolodex.render();
