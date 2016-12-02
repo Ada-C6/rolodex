@@ -32,7 +32,7 @@ const RolodexView = Backbone.View.extend({
 
     // Listen for clicks on modal area & non-modal area. Show/hide depending.
     // this.listenTo(this.modalSection, 'click', );
-    this.listenTo(this, 'main:click', this.hideModal);
+    // this.listenTo(this, 'main:click', this.hideModal);
   },
 
   render: function() {
@@ -45,11 +45,12 @@ const RolodexView = Backbone.View.extend({
       this.listElement.append(card.$el);
     }, this);
 
+    // this.delegateEvents();
     return this;
   },
 
   events: {
-    'click': 'mainClick'
+    'click #contact-details': 'suppressModalHide'
   },
 
   addContactCard: function(contact) {
@@ -81,15 +82,20 @@ const RolodexView = Backbone.View.extend({
     return this;
   },
 
-  mainClick: function(event) {
-    console.log("main click!!!");
-    this.trigger('main:click');
-  },
-
-  hideModal: function(event) {
-    console.log("Modal should go away now...");
-    this.modalElement.hide();
+  suppressModalHide: function(event) {
+    event.stopPropagation();
   }
+
+
+  // mainClick: function(event) {
+  //   console.log("main click!!!");
+  //   this.trigger('main:click');
+  // },
+  //
+  // hideModal: function(event) {
+  //   console.log("Modal should go away now...");
+  //   this.modalElement.hide();
+  // }
 });
 
 export default RolodexView;

@@ -56,18 +56,24 @@ const ApplicationView = Backbone.View.extend({
     // this.modalTemplate = _.template($('#tmpl-contact-details').html());
     // // this.listenTo() -- NOTE: should this be in RolodexView?
 
+    // Listen for clicks on modal area & non-modal area. Show/hide depending.
+    // this.listenTo(this.modalSection, 'click', );
+    // this.listenTo(this.$el, 'main:click', this.hideModal);
+
     this.render();
   },
 
   render: function() {
     // this.modalSection.hide(); NOTE: moved to RolodexView
     this.rolodexView.render();
+    // this.delegateEvents();
     return this;
   },
 
   events: {
+    'click': 'hideModal',
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'clearInput',
+    'click .btn-cancel': 'clearInput'
   },
 
   createContact: function(event) {
@@ -97,6 +103,16 @@ const ApplicationView = Backbone.View.extend({
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
+  },
+  //
+  // mainClick: function(event) {
+  //   console.log("main click!!!");
+  //   this.trigger('main:click');
+  // },
+
+  hideModal: function(event) {
+    console.log("Modal should go away now...");
+    this.$('#contact-details').hide();
   }
 
 });

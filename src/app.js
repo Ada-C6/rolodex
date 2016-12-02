@@ -42,7 +42,7 @@ import ApplicationView from 'app/views/application_view';
 var application = new Application();
 
 var appView = new ApplicationView({
-  el: '#application',
+  el: $('#application'),
   model: application
 });
 

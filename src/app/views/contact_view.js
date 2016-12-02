@@ -17,6 +17,7 @@ const ContactView = Backbone.View.extend({
     console.log("Name: " + this.model.name);
     this.$el.html(html);
 
+    this.delegateEvents();
     return this;
   },
 
