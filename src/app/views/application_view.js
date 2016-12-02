@@ -44,6 +44,7 @@ const ApplicationView = Backbone.View.extend({
       model: this.rolodex
     });
 
+    this.listenTo(this.roloView, 'edit', this.editInput);
       // console.log(roloView.$el);
     // this.template = _.template($("#tmpl-contact-card").html());
     // //
@@ -82,11 +83,12 @@ const ApplicationView = Backbone.View.extend({
   },
 
   hideModal: function(e) {
-    if (e.target.id == 'contact-details' || e.target.class == 'contact-card') {
-      console.log(e.target.id);
+    if (e.target.id == 'contact-details' || $(e.target).closest('#contact-details').length
+  /*|| e.target.class == 'contact-card'*/) {
+      // console.log(e.target.id);
       return;
-    } else if ($(e.target).closest('#contact-details').length || $(e.target).closest('.contact-card').length) {
-      return;
+    // } else if ($(e.target).closest('#contact-details').length || $(e.target).closest('.contact-card').length) {
+    //   return;
     } else {
     console.log('hiding stuff');
     $('#contact-details').hide();
@@ -101,24 +103,50 @@ const ApplicationView = Backbone.View.extend({
     // email: form.input.email.val(),
     // phone: form.input.phone.val()
     // console.log(this.$('.contact-form'));
+    // console.log('createContact ' + JSON.stringify(event));
     var rawContact = this.getInput();
-    // console.log('raw contact ' + rawContact.name);
-    this.rolodex.add(rawContact);
+    console.log('raw contact update ' + rawContact.update);
+    if (rawContact.update == 'true') {
+      console.log('inside rawContact.update == true');
+      this.updateModel.set({'name': rawContact.name});
+      this.updateModel.set({'email': rawContact.email});
+      this.updateModel.set({'phone': rawContact.phone});
+    } else {
+      console.log('inside else');
+      this.rolodex.add(rawContact);
+    }
+
+    console.log('updated model name ' + this.updateModel.attributes.name);
     // console.log('contact model ' + contactModel.attributes);
     // var card = new ContactView({
     //   model: contactModel,
     //   template: this.roloView.template
     // });
     // this.roloView.contactViewList.push(card);
+
     this.clearInput();
     // console.log('after clearInput');
     // return this;
+  },
+
+  editInput: function(e) {
+    // console.log(e);
+    this.$("input[name='name']").val(e.attributes.name);
+    this.$("input[name='email']").val(e.attributes.email);
+    this.$("input[name='phone']").val(e.attributes.phone);
+    this.$("input[name='update']").val('true');
+    console.log('editInput ' + JSON.stringify(e));
+    console.log('edit Input update ' + this.$("input[name='update']").val());
+    this.updateModel = e;
+    // this.render();
   },
 
   clearInput: function(event) {
     this.$("input[name='name']").val('');
     this.$("input[name='email']").val('');
     this.$("input[name='phone']").val('');
+    this.$("input[name='update']").val('false');
+    console.log('after clear input: ' + this.$("input[name='update']").val());
   },
 
   getInput: function(form) {
@@ -127,8 +155,10 @@ const ApplicationView = Backbone.View.extend({
     var contact = {
       name: this.$("input[name='name']").val(),
       email: this.$("input[name='email']").val(),
-      phone: this.$("input[name='phone']").val()
+      phone: this.$("input[name='phone']").val(),
+      update: this.$("input[name='update']").val()
     };
+    console.log('get input ' +  contact.update);
     return contact;
   }
 

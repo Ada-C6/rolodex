@@ -8,7 +8,7 @@ import ApplicationView from 'app/views/application_view';
 $(document).ready(function() {
   var application = new Application();
   var appView = new ApplicationView({
-    el: 'html',
+    el: 'body',
     model: application
   });
   appView.render();

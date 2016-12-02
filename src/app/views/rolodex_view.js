@@ -22,23 +22,16 @@ const RolodexView = Backbone.View.extend({
 
     this.listenTo(this.model, 'add', this.addContact);
     this.listenTo(this.model, 'update', this.render);
+    this.listenTo(this.model, 'change', this.render);
     // this.cView = new ContactView({
     //   template: this.template
     // });
     // this.render();
   },
 
-  showDeets: function(e) {
-    var temp = _.template($('#tmpl-contact-details').html());
-    var deetsHtml = temp(e);
-    this.deets.html(deetsHtml);
-    this.deets.show();
-    console.log('details ' + e.name);
-  },
-
   render: function() {
     this.ulEl.empty();
-    this.deets.hide();
+    // this.deets.hide();
 
     this.contactViewList.forEach(function(view) {
       view.render();
@@ -48,8 +41,17 @@ const RolodexView = Backbone.View.extend({
     }, this);
     // this.cView.render();
 
-
     return this;
+  },
+
+  showDeets: function(e) {
+    // e.stopPropagation();
+    var temp = _.template($('#tmpl-contact-details').html());
+    var deetsHtml = temp(e.attributes);
+    this.contactModel = e;
+    this.deets.html(deetsHtml);
+    this.deets.show();
+    // console.log('details ' + e.name);
   },
 
   addContact: function(contactModel) {
@@ -63,18 +65,26 @@ const RolodexView = Backbone.View.extend({
   },
 
   events: {
+    'dblclick #contact-details': 'editHandler'
     // 'click': 'hideModal',
     // 'click #contact-details': 'suppress'
   },
 
-  suppress: function(e){
-    return false;
+  editHandler: function(e){
+    this.contactModel.attributes.update = true;
+    this.trigger('edit', this.contactModel);
+    console.log(this.contactModel.attributes);
+    // console.log(e);
   },
 
-  hideModal: function(e){
-    console.log('this is hiding something');
-    this.deets.hide();
-  }
+  // suppress: function(e){
+  //   return false;
+  // },
+  //
+  // hideModal: function(e){
+  //   console.log('this is hiding something');
+  //   this.deets.hide();
+  // }
 });
 
 export default RolodexView;

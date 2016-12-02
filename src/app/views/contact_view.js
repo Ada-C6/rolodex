@@ -28,9 +28,10 @@ const ContactView = Backbone.View.extend({
   },
 
   triggerDetails: function(e){
-    console.log('this is the trigger sending');
-    console.log(this.model.attributes);
-    this.trigger('details', this.model.attributes);
+    // console.log('this is the trigger sending');
+    // console.log(this.model.attributes);
+    e.stopPropagation();
+    this.trigger('details', this.model);
     // return false; // use stop propogation here
   }
 });

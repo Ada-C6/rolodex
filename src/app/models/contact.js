@@ -6,7 +6,8 @@ const Contact = Backbone.Model.extend({
   defaults: {
     name: 'Name Here',
     phone: '555-555-5555',
-    email: 'name@email.com'
+    email: 'name@email.com',
+    update: false
   },
 
   initialize: function() {
