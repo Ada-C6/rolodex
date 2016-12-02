@@ -68,6 +68,6 @@ header {
     background-color: #538ca3;
 }
 
-.contact-card:hover h3 {
+.contact-card:hover h4 {
   color: white;
 }
