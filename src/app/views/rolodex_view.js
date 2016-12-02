@@ -22,7 +22,6 @@ const RolodexView = Backbone.View.extend({
 
     this.model.forEach(function(contact){
       var card = new ContactView({model: contact, template: this.template});
-      console.log("new contactview");
       this.contactList.push(card);
     }, this);
 
@@ -34,7 +33,6 @@ const RolodexView = Backbone.View.extend({
 
     this.contactList.forEach(function(card){
       card.render();
-      console.log("render contact");
       this.listenTo(card, "showThis", this.showCard);
       this.element.append(card.$el);
     }, this);
@@ -48,7 +46,6 @@ const RolodexView = Backbone.View.extend({
     'click .popup': 'hideDetails'
   },
   clearForm: function(){
-    console.log("Clear card");
     this.input.name.val("");
     this.input.phone.val("");
     this.input.email.val("");
@@ -61,13 +58,11 @@ const RolodexView = Backbone.View.extend({
     var newContact = new Contact({name: this.input.name.val(), phone: this.input.phone.val(), email: this.input.email.val()});
 
     this.model.add(newContact);
-    console.log("Submit card");
 
     this.clearForm();
   },
   addContact: function(contact){
     var newContactView = new ContactView({model: contact, template: this.template});
-    console.log("Add card");
     this.contactList.push(newContactView);
   },
   editDetails: function(e){
@@ -78,27 +73,18 @@ const RolodexView = Backbone.View.extend({
     // modal.html(editTemplate);
   },
   hideDetails: function(e){
-    console.log("not within if statement - ");
-    console.log(e.target);
-
     var container = $('#contact-details');
 
     if (!container.is(e.target) && container.has(e.target).length === 0 && !$(e.target).is('.contact-card') && !$(e.target).is('.contact-card h4')) {
-      console.log("within if statement - ");
-      console.log(e.target);
-      console.log("CLICKING");
       $('#contact-details').hide();
       $('#application').removeClass('popup');
     }
   },
   showCard: function(contactModel){
-    console.log("in showCard");
     var detailsHTML = this.detailsTemplate({name: contactModel.get("name"), email: contactModel.get("email"), phone: contactModel.get("phone")});
     this.detailsElement.html(detailsHTML);
     $('#contact-details').show();
     $('#application').addClass('popup');
-    console.log("showing details - ");
-    console.log(contactModel);
   }
 });
 
