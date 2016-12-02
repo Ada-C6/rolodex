@@ -6,6 +6,8 @@ import Contact from 'app/models/contact';
 
 import RolodexView from 'app/views/rolodex_view';
 import Rolodex from 'app/collections/rolodex';
+import ApplicationView from 'app/views/application_view';
+import Application from 'app/models/application';
 
 var contactData = [
   {
@@ -27,7 +29,8 @@ var contactData = [
 $(document).ready(function() {
   var rolodex = new Rolodex(contactData);
   var options = {
-    el: $('#contact-cards'),
+    // Need to be #application so that input fields are available to rolodex and contact 
+    el: $('#application'),
     model: rolodex
   };
   var rolodexView = new RolodexView(options);
@@ -37,9 +40,9 @@ $(document).ready(function() {
 
 
 
-// var application = new Application();
-//
-// var appView = new ApplicationView({
-//   el: '#application',
-//   model: application
-// });
+var application = new Application();
+
+var appView = new ApplicationView({
+  el: '#application',
+  model: application
+});
