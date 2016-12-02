@@ -6,6 +6,7 @@ import _ from 'underscore';
 // import Contact from 'app/models/contact';
 
 var ContactView = Backbone.View.extend({
+
   initialize: function(options) {
     // this.options = this.model
     this.template = _.template($('#tmpl-contact-card').html());

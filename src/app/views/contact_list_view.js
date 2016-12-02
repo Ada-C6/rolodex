@@ -3,6 +3,7 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 import _ from 'underscore';
 
+
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
 
@@ -14,15 +15,15 @@ var ContactListView = Backbone.View.extend({ // parent
   console.log('What is this at the moment? ' + this);
   console.log('What is options.contacts at the moment? ' + options.contacts);
   // console.log('What is this.model at the moment? ' + this.model);
-  this.modelList = [];
+  // this.modelList = [];
   this.cardList = [];
 
-  options.contacts.forEach(function(rawData) {
-    this.addContact(rawData);
+  this.model.forEach(function(contact) {
+    this.addContact(contact);
   }, this);
 
-  this.listenTo(options.contacts, 'saving', this.render);
-  this.listenTo(options.contacts, 'saving', console.log('THIS?'));
+  // this.listenTo(options.contacts, 'saving', this.render);
+  // this.listenTo(options.contacts, 'saving', console.log('THIS?'));
 
 //
     // this.listenTo(this.model, 'change', this.render);
@@ -47,16 +48,15 @@ var ContactListView = Backbone.View.extend({ // parent
     return this;
   },
   events: {
-    'click .contact-card': 'setCurrentContact'
-
+    'click .contact-card': 'getCurrentContact'
   },
 
-  addContact: function(rawData) {
-    // Create a Task from this raw data
-    var contact = new Contact(rawData); // child
-
-    // Add the new task model to our list
-    this.modelList.push(contact);
+  addContact: function(contact) {
+    // // Create a Task from this raw data
+    // var contact = new Contact(rawData); // child
+    //
+    // // Add the new task model to our list
+    // this.modelList.push(contact);
 
     // Create a card for the new task
     var card = new ContactView({
@@ -70,12 +70,15 @@ var ContactListView = Backbone.View.extend({ // parent
 
   createContact: function(rawData) {
     // event.preventDefault();
+
+    var newContact = new Contact(rawData); //child
+    this.model.add(newContact);
     console.log('Time to create a new contact');
-    this.addContact(rawData);
+    this.addContact(newContact);
     this.render();
   },
 
-  setCurrentContact: function() {
+  getCurrentContact: function() {
     console.log('setCurrentContact');
     var currentName = function(e) {
       e = e || window.event; // e=e?
@@ -83,17 +86,16 @@ var ContactListView = Backbone.View.extend({ // parent
     };
     console.log('currentName: ' + currentName());
     console.log('this.modelList[i].attributes.name:' + this.modelList[1].attributes.name);
-    console.log('NAME: ' + currentName());
     for (var i = 0; i < this.modelList.length; i++) {
       if (currentName() == this.modelList[i].attributes.name) {
         this.currentContact = this.modelList[i].attributes;
         console.log('currentContact: ' + this.currentContact);
       }
     }
-
+    // this.trigger('current-contact'); //?
     // this.currentContact = this.modelList[2].attributes;
     console.log('CC: ' + this.currentContact.name);
-  }
+  } // @TODO WHERE TO PUT THIS NEXT?
 
 });
 //

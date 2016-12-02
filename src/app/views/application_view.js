@@ -1,26 +1,32 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
+import Rolodex from 'app/collections/rolodex';
 import ContactListView from 'app/views/contact_list_view';
 
 
 const ApplicationView = Backbone.View.extend({ // parent
   initialize: function(options) {
     // this.listElem = options.el;
-    this.rawList = options.contacts;
+    console.log(options.contacts);
+    console.log(Rolodex);
+    this.contactCollection = new Rolodex(options.contacts);
     // console.log('THIS>>' + this.model);
 
     var listElement = $('#contact-cards');
     // var formElement = $('.contact-form');
 
+
+
    // console.log('CHECKPOINT');
      this.contactGrid = new ContactListView( { //child
        el: listElement,
-       contacts: this.rawList
+       model: this.contactCollection
      });
      this.contactGrid.render();
      console.log(this.contactGrid.modelList + "modelList");
     //  console.log('This grid was created in application_view: ' + contactGrid);
 
+    // this.listenTo(ContactListView, 'current-contact', setModal); //?
   },
 
   render: function() {
@@ -42,7 +48,7 @@ const ApplicationView = Backbone.View.extend({ // parent
   events: {
     'click .btn-save': 'saveOnClick',
     'click .btn-cancel': 'clearOnClick',
-    // 'click #tmpl-contact-card': 'setModal'
+    // 'click .contact-card': 'setModal'
   },
   saveOnClick: function() {
     console.log('Ready to save?');
@@ -73,8 +79,9 @@ const ApplicationView = Backbone.View.extend({ // parent
     this.clearOnClick();
   },
   setModal: function() {
-    console.log(this);
-    console.log(this.model);
+    // show modal
+    this.currentContact = this.contactGrid.currentContact;
+    console.log(this.currentContact);
   }
 });
 

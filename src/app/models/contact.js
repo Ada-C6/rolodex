@@ -13,7 +13,7 @@ var Contact = Backbone.Model.extend({
   },
   initialize: function() { // it can do more complex things we wont see today/this week
     console.log("Created new contact with name " + this.get('name'));
-  },
+  }
 //
 });
 //
