@@ -32,7 +32,6 @@ const ContactView = Backbone.View.extend({
       name: this.model.get("name"), phone: this.model.get("phone"), email: this.model.get("email")});
 
     this.listElement.html(popupHTML);
-
     // $('#contact-details').show();
   }
 

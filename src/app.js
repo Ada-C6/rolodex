@@ -37,13 +37,13 @@ $(document).ready(function() {
 });
 
 $(document).click(function (event) {
-    var element = $('.contact-card');
-    var container = $('#contact-details')
+  var element = $('.contact-card');
+  var container = $('#contact-details')
 
-    if (!element.is(event.target) && element.has(event.target).length === 0)  // if the target of the click isn't the container... nor a descendant of the container
-    {
-      container.hide();
-    } else {
-      container.show();
-    }
+  // if the target of the click isn't the container, nor a descendant of the container
+  if (!element.is(event.target) && element.has(event.target).length === 0) {
+    container.hide();
+  } else {
+    container.show();
+  }
 });
