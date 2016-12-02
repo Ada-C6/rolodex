@@ -1,54 +1,64 @@
 body {
-  background-color: #16202C;
+  /*background-color: #16202C;*/
 }
 
 h1, h2, h3, h4, h5, h6, p, label {
-  font-family: 'Nunito', sans-serif;
+  font-family: Helvetica, sans-serif;
 }
 
 header {
   text-align: center;
   width: 30%;
   position: fixed;
-  background-image: url("/imgs/sparks.jpeg");
+  /*background-image: url("/imgs/sparks.jpeg");*/
+  padding-right: 10px;
+  border-right: 1px solid rgba(47, 53, 54, 0.84);
   background-size: cover;
   background-position: center;
   height: 100%;
   z-index: 5;
-  color: rgb(211, 231, 231);
+  color: rgba(47, 53, 54, 0.84);
 }
 
 .contact-form {
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(140, 193, 189, 0.48);
+  border-radius: 2%;
 }
 
 .contact-form label {
-  color: white;
+  color: rgb(14, 60, 70);
   font-size: 1.5rem;
 }
 
 #contact-details {
+  display: none;
   z-index: 10;
   position: fixed;
-  width: 30%;
-  height: 30%;
+  width: auto;
+  height: auto;
   top: 30%;
   left: 30%;
-  background-color: #538ca3;
+  background-color: rgb(140, 193, 189);
   text-align: center;
-  border: 1em solid white;
+  border: 10px solid rgba(47, 53, 54, 0.84);
   margin-left: 20%;
   border-radius: 20%;
+  padding: 3%;
+  color: rgb(14, 60, 70);
+  font-weight: bolder;
 }
 
 #contact-cards {
+  /*border-left: 1px solid black;*/
   width: 70%;
   margin: 0 auto;
   float: right;
   text-align: center;
+  color: rgba(47, 53, 54, 0.84);
 }
 
 .contact-card {
+  border: 1px solid rgba(47, 53, 54, 0.84);
   display: inline-block;
   padding: 2%;
   margin: 2%;
@@ -58,7 +68,7 @@ header {
 
 .contact-card:hover {
     cursor: pointer;
-    background-color: #538ca3;
+    background-color: rgba(140, 193, 189, 0.48);
 }
 
 .contact-card:hover h3 {

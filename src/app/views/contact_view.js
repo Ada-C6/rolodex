@@ -25,16 +25,23 @@ const ContactView = Backbone.View.extend({
     this.delegateEvents();
     // // Enable chained calls
     return this;
-  } //,
+  }, //,
+
+  events: {
+    'click .contact-card': 'showModal'
+  },
   //
-  // events: {
-  //   'click .contact-card': 'openContact',
-  //   'click .'
-  // },
-  //
-  // openContact: function(){
-  //
-  // }
+  showModal : function(event) {
+    event.stopPropagation();
+    var bubble = $('#contact-details')
+    // console.log(element);
+    // console.log(this.model.get("name"))
+    var templateA = _.template($('#tmpl-contact-details').html());
+    bubble.empty();
+    var html = templateA({contact: this.model.toJSON()});
+    bubble.html(html);
+    bubble.show()
+  }
 });
 // accessible elsewhere
 export default ContactView;
