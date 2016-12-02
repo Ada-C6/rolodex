@@ -1,16 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300');   /* Thin, Extra-Light, Light*/
+
 body {
   background-color: #16202C;
 }
 
 h1, h2, h3, h4, h5, h6, p, label {
-  font-family: 'Nunito', sans-serif;
+  /*font-family: 'Nunito', sans-serif;*/
+  font-family: 'Work Sans', sans-serif;
 }
 
 header {
   text-align: center;
   width: 30%;
   position: fixed;
-  background-image: url("/imgs/sparks.jpeg");
+  background-image: url("/imgs/phone.jpeg");
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -19,8 +22,12 @@ header {
 }
 
 .contact-form {
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.45);
+  height: 100%;
+  overflow: scroll;
 }
+
+
 
 .contact-form label {
   color: white;
@@ -30,17 +37,18 @@ header {
 #contact-details {
   z-index: 10;
   position: fixed;
-  width: 30%;
-  height: 30%;
+  /*width: 30%;
+  height: 30%;*/
   top: 30%;
   left: 30%;
-  background-color: #538ca3;
+  background-color: rgb(63, 82, 48);
   text-align: center;
   border: 1em solid white;
   margin-left: 20%;
   border-radius: 20%;
 
   width: auto;
+  height: auto;
   padding: 2%;
   display: none;
 }
@@ -62,7 +70,7 @@ header {
 
 .contact-card:hover {
     cursor: pointer;
-    background-color: #538ca3;
+    background-color: rgb(63, 82, 48);
 }
 
 .contact-card:hover h3 {

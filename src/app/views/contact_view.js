@@ -26,11 +26,12 @@ const ContactView = Backbone.View.extend({
 
   events: {
     'click .contact-card': 'displayContactInfo',   // "We're intercepting a form submit event"
+    // 'click #contact-details': 'stopTest'
   },
 
   displayContactInfo: function(event) {
     console.log('displayContact called');
-    console.log(this.contact.attributes.name);
+    // console.log(this.contact.attributes.name);
 
     var displayTemplate = _.template($('#tmpl-contact-details').html());
     // Take the (digit only) phone number and add dashes
@@ -45,6 +46,12 @@ const ContactView = Backbone.View.extend({
     $('#contact-details').fadeIn();
     $('#contact-details').html(html);
   },
+
+  // Alternate way to stop the popup from closing when you click on a contact button only (instead of the conditional I put in the application_view hidePopup method.)...
+  // This is essentially stopping event bubbling here. (at least that's what I was told... need to google it.)
+  // stopTest: function(event) {
+  //   event.stopPropagation();
+  // }
 
 });
 

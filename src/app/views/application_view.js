@@ -12,6 +12,7 @@ const ApplicationView = Backbone.View.extend({
   }, // end initialize function
 
   render: function() {
+    return this; // enable chained calls
 
   }, // end render function
 
@@ -31,15 +32,21 @@ const ApplicationView = Backbone.View.extend({
 
     // Get the input data from the form and turn it into a task
     var contact = this.getInput();
-    console.log(contact);
+    console.log(contact.name);
+    console.log(contact.name.length);
+      console.log(contact.phoneNumber.length);
 
     // This is calling a built in function ".add" on the Rolodex collection (passed in here with the name 'model')
       // the contact data from getInput is passed to rolodex.js Collection,
       // which calls contact.js model,
       // the Listening event in rolodex "senses" that this.model (i.e. the rolodex) has been added to,
       // and subsequently calls the addContact method.
-    this.model.add(contact);
-
+    if (contact.name.length > 0 && contact.email.length > 0 || contact.phoneNumber.length > 0) {
+      this.model.add(contact);
+    }
+    else {
+      alert("Please enter a name and either an email or phone number to save a new contact.")
+    }
     // Clear the input form so the user can add another task
     this.clearInput();
   },
@@ -67,10 +74,10 @@ const ApplicationView = Backbone.View.extend({
     console.log("hidePopup called");
     console.log($(e.target).closest(".contact-card"));
 
-
     // OMG... this took FOREVER to figure out. there was a weird problem with identifying if
-    // I clicked on the h4 part of a contact-card it didnt identify as clicking $('.contact-card') -- i.e. juse $('.contact-card').is(e.target) did not work
-    // but if I don't limit to clicking anywhere EXCEPT on a contact-card, it would get confused showing and hiding them at the same time.
+    // I clicked on the h4 part of a contact-card it didnt identify as clicking $('.contact-card') -- i.e. just $('.contact-card').is(e.target) did not work
+    // but if I don't do the thing below limit to clicking anywhere EXCEPT on a contact-card,
+    // it would get confused showing and hiding them at the same time.
     if ($(e.target).closest(".contact-card").length === 0) {
       $('#contact-details').fadeOut(200); // Close the popup element
     }
