@@ -1,16 +1,9 @@
 import $ from 'jquery';
-import _ from 'underscore';
 import Backbone from 'backbone';
 
 const ContactView = Backbone.View.extend({
-  initialize: function(template) {
-    if (!template) {
-      // Compile a Underscore template
-      this.template = _.template($('#tmpl-contact-card').html());
-    } else {
-      this.template = template;
-    }
-
+  initialize: function(options) {
+    this.template = options.template;
     this.listenTo(this.model, "change", this.render);
   },
 
