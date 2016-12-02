@@ -1,4 +1,4 @@
-// wave 2 is almost complete, except the new instance in the Rolodex collection isn't showing on the app correctly. The input name is being replaced with the default name--perplexing me.
+// wave 2 is almost complete, except the new instance in the Rolodex collection isn't showing on the app correctly. The input name is showing up in the console.log. And then it's being replaced with the default name in a duplication of the console.log--as well as showing the default on the app view--perplexing me.
 
 import $ from 'jquery';
 import Backbone from 'backbone';
@@ -31,6 +31,8 @@ const RolodexView = Backbone.View.extend({
         // when a model is added to the collection, create a card for that model and add it to our list of cards
         this.listenTo(this.model, 'add', this.addContact);
         this.listenTo(this.model, 'add', this.render);
+        this.render();
+// AT THIS POINT I'M PLAYING AROUND ABOVE. I'D LIKE TO BETTER UNDERSTAND WHERE MY RENDERS NEED TO OCCUR FOR EXPECTED FUNCTIONALITY.
     },
 
     render: function() {

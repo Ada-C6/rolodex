@@ -31,8 +31,6 @@ const ApplicationView = Backbone.View.extend({
         };
         var application = new RolodexView(options);
 
-        application.render();
-
         return this;
     }
 });
