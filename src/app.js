@@ -35,3 +35,16 @@ $(document).ready(function() {
   });
   appView.render();
 });
+
+$(document).click(function (event)
+{
+    var element = $('.contact-card');
+    var container = $('#contact-details')
+
+    if (!element.is(event.target) && element.has(event.target).length === 0)  // if the target of the click isn't the container... nor a descendant of the container
+    {
+      container.hide();
+    } else {
+      container.show();
+    }
+});
