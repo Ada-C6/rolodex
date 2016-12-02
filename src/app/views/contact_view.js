@@ -11,13 +11,8 @@ const ContactView = Backbone.View.extend({
     var html = this.template({contact: this.model.attributes});
     this.$el.html(html);
 
-    // var modalHtml = this.modal({contact: this.model.attributes});
-    // $('#contact-details').html(modalHtml);
-
     // // Re-attach DOM event listeners to our new HTML
     // this.delegateEvents();
-
-    // $('#contact-details').hide();
 
     // Enable chained calls
     return this;
@@ -35,9 +30,6 @@ const ContactView = Backbone.View.extend({
     console.log('showing');
     return false;
   }
-
-
-
 
 });
 

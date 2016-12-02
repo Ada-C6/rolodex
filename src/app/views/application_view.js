@@ -77,12 +77,10 @@ const ApplicationView = Backbone.View.extend({
   },
 
   hideModal: function(event){
-    console.log('hideModal called');
     $('#contact-details').hide();
   },
 
   showModal: function(event){
-    console.log('showModal');
     event.stopPropagation();
     $('#contact-details').show();
   }
