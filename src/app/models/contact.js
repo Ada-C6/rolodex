@@ -4,8 +4,9 @@ const Contact = Backbone.Model.extend({
     email: "name@example.com",
     phone: "888-802-3434"
   },
+
   initialize: function() {
-    console.log("Added a contact card");
+//    console.log("Added " + this.get('name'));
   }
 });
 

@@ -41,6 +41,10 @@ header {
   border-radius: 20%;
 }
 
+#contact-details h4 {
+  font-size: 0.83em;
+}
+
 #contact-cards {
   width: 70%;
   margin: 0 auto;
@@ -63,4 +67,8 @@ header {
 
 .contact-card:hover h3 {
   color: white;
+}
+
+.hide-item {
+  display:none;
 }

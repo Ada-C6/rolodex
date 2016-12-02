@@ -16,7 +16,7 @@ var contactList = [
     phone: "KLondike 6-5000"
   }, {
     name: "Lisa Simpson",
-    email: "saxophone.nerd@sprinfield.com",
+    email: "sax.nerd@springfield.com",
     phone: "555-0420"
   }
 ];

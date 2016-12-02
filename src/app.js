@@ -7,6 +7,7 @@ import RolodexView from 'app/views/rolodex_view';
 
 
 $(document).ready(function() {
+  $("#contact-details").addClass("hide-item");
   var application = new Application();
 
   var appView = new ApplicationView({

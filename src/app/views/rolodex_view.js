@@ -33,7 +33,21 @@ const RolodexView = Backbone.View.extend({
       model: contact,
       template: this.contactTemplate
     });
+
+    this.listenTo(card, 'display', this.displayDetails);
     this.cardList.push(card);
+  },
+
+  displayDetails: function(card) {
+    console.log("in displayDetails, clicked on: " + card.model.get('name'));
+    var detailsTemplate = _.template($('#tmpl-contact-details').html());
+    var detailsDiv = $('#contact-details');
+    var html = detailsTemplate({
+      name: card.model.get('name'),
+      email: card.model.get('email'),
+      phone: card.model.get('phone')});
+    detailsDiv.html(html);
+    detailsDiv.removeClass("hide-item");
   }
 });
 
