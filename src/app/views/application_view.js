@@ -28,7 +28,6 @@ const ApplicationView = Backbone.View.extend({
   events: {
     "click": "hideDetailsBox",
     "click #contact-details": (e) => { e.stopPropagation() }, // Thanks, Jay
-
     "click .btn-cancel": "clearInput",
     "click .btn-save": "createNewContact"
   },
@@ -44,18 +43,16 @@ const ApplicationView = Backbone.View.extend({
   },
 
   createNewContact: function(event) {
-    console.log("createNewContact")
     // No post-form-submission refresh for you!
     event.preventDefault();
-    // Get the input data from the form and turn it into a task
+    // Get the input data from the form and turn it into a JS object
     var inputFormData = this.getInput();
 
-    // Keep track of this task
+    // turn the input into a contact model and stuff it in rolodex collection
     this.model.rolodex.add(inputFormData)
 
     // Re-render the whole list, now including the new card
     this.render();
-
     this.clearInput();
   },
 
@@ -67,10 +64,7 @@ const ApplicationView = Backbone.View.extend({
       phone: this.fieldFromNewContactForm.phone.val()
     };
     return contact;
-  },
-
-
-
+  }
 });
 
 export default ApplicationView;
