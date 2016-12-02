@@ -17,9 +17,9 @@ const RolodexView = Backbone.View.extend({
         this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
         // Keep track of the <ul> element where the contact cards will live within
-        this.listElement = this.$('#contact-cards'); // this.$() is telling Backbone to search within the element this RolodexView is responsible for (#application--ID, on the HTML) and look for '#contact-cards' within it.
+        this.listElement = this.$('#contact-cards');
 
-        // We'll keep track of a list of contact models and a list of contact views.
+        // We'll use a cardList to keep track of the list of contact models and list of contact views.
         this.cardList = [];
 
         this.model.forEach(function(rawContact) {
@@ -40,7 +40,6 @@ const RolodexView = Backbone.View.extend({
 
             // Add that HTML to our contact list
             this.listElement.append(card.$el);
-            // this.listElement.append(card.$el.html()); this is jquery only appending what was INSIDE of the div that was created--it creates a copy of the originial stuff. And then the click event handler doesn't work because it's only listening to the REAL stuff, not the copies. So we reverted to what's above.
         }, this);
 
         return this; // enable chained calls

@@ -17,7 +17,7 @@ const ContactView = Backbone.View.extend({
 
     events: {
         'click': 'showHandler'
-    },
+    }, 
 
     showHandler: function(event) {
         console.log('showHandler called');
