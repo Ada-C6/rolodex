@@ -11,44 +11,21 @@ import RolodexView from 'app/views/rolodex_view';
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
 
-var peeps = [
-  {
-    name: "karin",
-    email: "k@ada.edu",
-    phone: "206-222-2121"
-  },
-  {
-    name: "dan",
-    email: "dan@ada.edu",
-    phone: "206-222-2121"
-  },
-  {
-    name: "kari",
-    email: "kari@ada.edu",
-    phone: "206-222-2121"
-  }
-];
-
-var application = new Application();
-
-var appView = new ApplicationView({
-  el: '#application',
-  model: application
-});
 
 $(document).ready(function(){
   // hide the modal by default
   $("#contact-details").hide();
 
-  var rolodexList = new Rolodex(peeps);
+  var application = new Application();
 
-  var rolodex = new RolodexView( {
-    el: $('body'),
-    model: rolodexList
+  var appView = new ApplicationView({
+    el: 'body',
+    model: application
   });
 
-  rolodex.render();
+  // make a new rolodex view
+  // render the app
+  appView.render();
 
-  // stuff to move to rolodex_view.
 
 });

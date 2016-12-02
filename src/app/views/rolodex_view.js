@@ -83,7 +83,7 @@ const RolodexView = Backbone.View.extend({
       template: this.contactCardTemplate
     });
 
-    this.listenTo(card, 'edit', this.showModal);
+    this.listenTo(card, 'showDetail', this.showModal);
     this.cardList.push(card);
   },
 
@@ -135,10 +135,12 @@ const RolodexView = Backbone.View.extend({
   },
 
   otherClick: function(event){
+    console.log("otherClick calld");
     this.hideModal();
   },
 
   hideModal: function() {
+    console.log("hideModal");
     this.contactDetails.hide();
   }
 

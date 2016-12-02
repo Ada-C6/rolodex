@@ -13,6 +13,10 @@ const ContactView = Backbone.View.extend({
     console.log(this.model.attributes);
 
     this.$el.html(html);
+
+    // reattach dom even listeners to our brand spanking new HTML
+    this.delegateEvents();
+    
     // Enable chained calls
     return this;
   },
@@ -22,11 +26,11 @@ const ContactView = Backbone.View.extend({
   },
 
   detailsHandler: function(event) {
-    // is this where I'd stop the propogation? I want the trigger to go up exactly ONE level.
+    // I only want clicks on the cards to register on the cards and not bubble up to the application.
     event.stopPropagation();
-    
+
     console.log("detailsHandler called on: " + this.model.attributes.name);
-    this.trigger('edit', this.model);
+    this.trigger('showDetail', this.model);
   }
 });
 
