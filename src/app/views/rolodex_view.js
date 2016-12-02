@@ -37,7 +37,7 @@ const RolodexView = Backbone.View.extend({
   },
 
   displayDetails: function(card) {
-    console.log("in displayDetails, clicked on: " + card.model.get('name'));
+    // console.log("in displayDetails, clicked on: " + card.model.get('name'));
     var detailsTemplate = _.template($('#tmpl-contact-details').html());
     var detailsDiv = $('#contact-details');
     var html = detailsTemplate({

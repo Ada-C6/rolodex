@@ -31,7 +31,7 @@ const ApplicationView = Backbone.View.extend({
   },
 
   clearForm: function(event) {
-    console.log("form cleared");
+    // console.log("form cleared");
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
@@ -52,11 +52,11 @@ const ApplicationView = Backbone.View.extend({
 
     this.model.rolodex.add(collectContact);
     this.clearForm();
-    console.log('createContact clicked');
+  //  console.log('createContact clicked');
   },
 
  hideDetails: function(event) {
-   console.log("hideDetails called");
+//   console.log("hideDetails called");
    $("#contact-details").addClass("hide-item");
  }
 });
