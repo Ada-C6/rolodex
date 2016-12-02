@@ -31,21 +31,33 @@ const RolodexView = Backbone.View.extend({
     }, this);
 
     // WHat is this and where does it go?
-    // this.input = {
-    //   name: this.$('.new-task input[name="title"]'),
-    //   description: this.$('.new-task input[name="description"]')
-    // };
+    this.input = {
+      name: this.$('.contact-form input[name="name"]'),
+      email: this.$('.contact-form input[name="email"]'),
+      phone: this.$('.contact-form input[name="phone"]')
+    };
   },
   render: function(){
     this.cardList.forEach(function(card){
       card.render();
-      console.log(">>>>> Debugging with Dan: DPR: about to log card stuff");
-      console.log(card);
-      console.log(card.el);
-      console.log(card.$el);
+      // console.log(">>>>> Debugging with Dan: DPR: about to log card stuff");
+      // console.log(card);
+      // console.log(card.el);
+      // console.log(card.$el);
       this.listElement.append(card.$el);
     }, this);
     return this;
+  },
+
+  events: {
+    'click .btn-cancel': 'cancelInput'
+  },
+
+  cancelInput: function(event){
+    console.log("cancelInput called");
+    this.input.name.val('');
+    this.input.email.val('');
+    this.input.phone.val('');
   }
 
 });
