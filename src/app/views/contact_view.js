@@ -16,7 +16,19 @@ const ContactView = Backbone.View.extend({
 
     // Enable chained calls
     return this;
-  }
+  },
+
+  events: {
+   'click .contact-card': 'showDetails',
+  //  'click .btn-cancel': 'clearInput'
+ },
+
+ showDetails: function() {
+   console.log("You've clicked the contact card");
+   //we want to pull up the template that has the contact details (#'templ-contact-details')
+
+   //we gotta feed it data to show up
+ },
 });
 
 export default ContactView;
