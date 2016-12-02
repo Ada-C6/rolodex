@@ -10,7 +10,11 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
+    this.detailCardTemplate = _.template($('#tmpl-contact-details').html());
+
     this.listElement = this.$('#contact-cards');
+
+    this.detailCard = this.$('#contact-details');
 
     this.cardList = [];
 
@@ -30,6 +34,7 @@ const RolodexView = Backbone.View.extend({
       template: this.contactTemplate
     });
 
+    this.listenTo(card, 'modal', this.showDetailCard);
     this.cardList.push(card);
   },
 
@@ -46,7 +51,8 @@ const RolodexView = Backbone.View.extend({
 
   events: {
     'click .btn-save' : 'createContact',
-    'click .btn-cancel' : 'clearInput'
+    'click .btn-cancel' : 'clearInput',
+    'click' : 'hideDetailCard'
   },
 
   getInput: function() {
@@ -78,6 +84,23 @@ const RolodexView = Backbone.View.extend({
     this.$('.contact-form input[name="email"]').val('');
     this.$('.contact-form input[name="phone"]').val('');
   },
+
+  showDetailCard: function(contact) {
+    console.log("showDetailCard is called");
+
+    this.detailCard.empty();
+
+    var details = this.detailCardTemplate({name: contact.attributes.name, email: contact.attributes.email, phone: contact.attributes.phone});
+
+    this.detailCard.append(details);
+
+    this.detailCard.show();
+  },
+
+  hideDetailCard: function() {
+    console.log("hideDetailCard is called");
+    this.detailCard.hide();
+  }
 });
 
 export default RolodexView;
