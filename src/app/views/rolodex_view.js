@@ -13,8 +13,8 @@ const RolodexView = Backbone.View.extend({
     //store the full list of contacts
 
     this.contactData = options.contactData;
-    console.log("this contactData", this.contactData);
-    console.log("options _>", options);
+    // console.log("this contactData", this.contactData);
+    // console.log("options _>", options);
 
     // Compile a template to be shared between the individual tasks
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
@@ -51,7 +51,7 @@ const RolodexView = Backbone.View.extend({
     // clearing contacts each time. Might need to remove.
     this.listElement.empty();
 
-    console.log("contactbox", this.contactBox);
+    // console.log("contactbox", this.contactBox);
 
     this.contactBox.forEach(function(card){
       card.render();
@@ -73,7 +73,7 @@ const RolodexView = Backbone.View.extend({
 
   // clear input function
   clearInput: function(event) {
-    console.log("clear Input called!");
+    // console.log("clear Input called!");
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
