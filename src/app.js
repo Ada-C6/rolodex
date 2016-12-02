@@ -10,17 +10,21 @@ import Contact from 'app/models/contact';
 
 var contactData = [
   {
-    name: 'Nicole',
-    email: 'nicole@ada.com',
+    name: 'Nicole <3s Condiments',
+    email: 'nicolelovecondiments@ada.com',
     phone: '555-555-5555'
   }, {
     name: 'Shari Safari',
     email: 'safarishari@ada.com',
     phone: '444-444-4444'
   }, {
-    name: 'Dianne',
-    email: 'diane@ada.com',
+    name: 'Dianne Can Can',
+    email: 'cancandiane@ada.com',
     phone: '333-333-3333'
+  }, {
+    name: 'Unicorn Yudi',
+    email: 'unicorns&rainbows@ada.com',
+    phone: '222-222-2222'
   }, {
     name: 'Margarine Mary',
     email: 'margarinemary@ada.com',
