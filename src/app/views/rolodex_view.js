@@ -70,7 +70,7 @@ const RolodexView = Backbone.View.extend({
       model: contact,
       template: this.contactTemplate
     });
-    console.log("THIS IS THE CARD BEING MADE: " + JSON.stringify(card));
+    // console.log("THIS IS THE CARD BEING MADE: " + JSON.stringify(card));
     // this.listenTo(card, 'edit', this.editContact);
     // Add the card to our card list
     this.cardList.push(card);
