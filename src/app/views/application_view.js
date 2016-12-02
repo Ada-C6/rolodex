@@ -35,8 +35,7 @@ const ApplicationView = Backbone.View.extend({
             phone: this.$('.contact-form input[name="phone"]')
         };
 
-        // this.listenTo(this.model, 'add', this.addContact);
-        // this.listenTo(this.model, 'update', this.render);
+        this.contactDetailSection = this.$('#contact-details');
     },
 
     render: function() { // render a new instance of RolodexView
@@ -49,7 +48,13 @@ const ApplicationView = Backbone.View.extend({
 
     events: {
         'click .btn-save': 'createContact',
-        'click .btn-cancel': 'clearInput'
+        'click .btn-cancel': 'clearInput',
+        'click': 'hideDetailSection'
+    },
+
+    hideDetailSection: function() {
+        console.log('hide detail section activated');
+        this.contactDetailSection.hide();
     },
 
     clearInput: function(event) {

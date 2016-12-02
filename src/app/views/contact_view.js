@@ -21,6 +21,7 @@ const ContactView = Backbone.View.extend({
 
     showHandler: function(event) {
         console.log('showHandler called');
+        event.stopPropagation();
         this.trigger('show', this.model);
     }
 });

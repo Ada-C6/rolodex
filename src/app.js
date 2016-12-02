@@ -5,7 +5,7 @@ import $ from 'jquery';
 
 $(document).ready(function() {
     var appView = new ApplicationView({
-        el: '#application', //the div inside the body where we want the contacts to render
+        el: $('body'),
     });
 
     appView.render();
