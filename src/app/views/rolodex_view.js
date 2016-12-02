@@ -10,7 +10,11 @@ var RolodexView = Backbone.View.extend({
 
     this.contactNameTemplate = _.template($('#tmpl-contact-card').html());
 
+    this.contactDetailsTemplate = _.template($('#tmpl-contact-details').html());
+
     this.contactNameElement = this.$('#contact-cards');
+
+    this.contactDetailsElement = this.$('#contact-details');
 
     console.log("Contact is: ", this.contactNameElement);
 
@@ -33,6 +37,7 @@ var RolodexView = Backbone.View.extend({
 
   render: function() {
     this.contactNameElement.empty();
+    this.contactDetailsElement.empty();
 
     this.contactList.forEach(function(contact) {
       contact.render();
@@ -43,7 +48,8 @@ var RolodexView = Backbone.View.extend({
 
   events: {
     'click .btn-cancel': 'cancelInput',
-    'click .btn-save': 'saveContact'
+    'click .btn-save': 'saveContact',
+    'click': 'hideDetails',
   },
 
   addContact: function(contact_info) {
@@ -52,6 +58,10 @@ var RolodexView = Backbone.View.extend({
       model: contact_info,
       template: this.contactNameTemplate
     });
+
+    this.listenTo(contact, 'showDetails', this.showDetails);
+
+    this.listenTo(contact, 'hideDetails', this.hideDetails);
 
     this.contactList.push(contact);
 
@@ -81,6 +91,16 @@ var RolodexView = Backbone.View.extend({
     this.model.add(rawContact);
 
     this.cancelInput();
+  },
+
+  showDetails: function(contactDetail) {
+    this.contactDetailsElement.show();
+    var html = this.contactDetailsTemplate(contactDetail.model.attributes);
+    this.contactDetailsElement.html(html);
+  },
+
+  hideDetails: function(event) {
+    this.contactDetailsElement.hide();
   }
 
 });

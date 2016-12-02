@@ -21,6 +21,7 @@ var defaultContacts = [
 ];
 
 $(document).ready(function() {
+  $('#contact-details').hide();
   var newRolodex = new Rolodex(defaultContacts);
 
   var newRolodexView = new RolodexView ({
