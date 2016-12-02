@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 
   var appView = new ApplicationView({
-    el: '#application' //the div inside the body
+    el: 'body' 
   });
 
   appView.render();

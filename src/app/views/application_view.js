@@ -28,7 +28,7 @@ var ApplicationView = Backbone.View.extend({
     var rolodexCollection = new Rolodex(contactData);
 
     //render a new instance of RolodexView
-    var rolodexTag = $('#application'); //set a HTML tag for this to end up in the rolodex section
+    var rolodexTag = $('body'); //set a HTML tag for this to end up in the rolodex section
 
     var rolodex = new RolodexView({ //give the application the rolodex view to render
       el: rolodexTag,
@@ -38,6 +38,17 @@ var ApplicationView = Backbone.View.extend({
     rolodex.render();
     return this;
   }
+
+  // events: {
+  //   'click': 'toggleContactDetails'
+  // },
+  //
+  // toggleContactDetails: function(onIndicator) {
+  //   if ($('#contact-details').is(":visible")) {
+  //     console.log("contact details visible");
+  //     $('#contact-details').toggle(onIndicator);
+  //   }
+  // }
 });
 
 export default ApplicationView;

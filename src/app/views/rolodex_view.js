@@ -10,14 +10,15 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate =  _.template($('#tmpl-contact-card').html());
 
-
     // the <ul> element that the contact cards will live within
     this.listElement = this.$('#contact-cards');
 
+    this.contactDetails = $('#contact-details');
+
+    this.contactDetailsTemplate = _.template($('#tmpl-contact-details').html());
 
     // // a list of contact views
     this.cardList = [];
-
 
     this.model.forEach(function(rawContact) {
       this.addContact(rawContact);  //triggers the listener for `add` and `update`
@@ -34,6 +35,7 @@ const RolodexView = Backbone.View.extend({
     //when the model updates, re-render the list of cards
     this.listenTo(this.model, 'update', this.render);
 
+    this.hideModal();
   },
 
   render: function() {
@@ -53,7 +55,8 @@ const RolodexView = Backbone.View.extend({
 
   events: {
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'clearInput'
+    'click .btn-cancel': 'clearInput',
+    'click': 'hideModal'
   },
 
   clearInput: function(event) {
@@ -84,7 +87,7 @@ const RolodexView = Backbone.View.extend({
     });
 
     // console.log("======the card is:" + JSON.stringify(card));
-
+    this.listenTo(card, 'modal', this.showModal);
     this.cardList.push(card);
   },
 
@@ -96,7 +99,24 @@ const RolodexView = Backbone.View.extend({
     };
     // console.log("==========Contact name is: " + JSON.stringify(contact));
     return contact;
+  },
+
+  showModal: function(contact) {
+    // replace contents of modal with this peep's info
+    this.contactDetails.empty();
+    // the data I'm passing to the template
+    var details = this.contactDetailsTemplate({name: contact.attributes.name, email: contact.attributes.email, phone: contact.attributes.phone});
+    // putting the html from this contact into the modal.
+    this.contactDetails.append(details);
+
+    // display the modal
+    this.contactDetails.show();
+  },
+
+  hideModal: function() {
+    this.contactDetails.hide();
   }
+
 });
 
 export default RolodexView;
