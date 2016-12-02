@@ -20,7 +20,6 @@ const RolodexView = Backbone.View.extend({
     // this list carries the list of cards that is displayed
     this.cardList = [];
 
-
     this.model.forEach(function(modelName) {
 
       // eventually : this.addTask(rawTask);
@@ -67,7 +66,15 @@ const RolodexView = Backbone.View.extend({
       template: this.contactTemplate
     });
 
+    this.listenTo(contactCard, "displayHandler", this.displayContactDetails);
+
     this.cardList.push(contactCard);
+  },
+
+  // No event, because it is triggered by another event.
+  displayContactDetails: function(){
+    console.log("displayHandler called");
+    var el = this.$("#contact-details");
   },
 
   cancelInput: function(event){

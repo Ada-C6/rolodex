@@ -46,6 +46,7 @@ var contactData = [
 $(document).ready(function() {
 
   var rolodex = new Rolodex(contactData);
+  
 
   var listOfContacts = new RolodexView({
     el: '#application',
