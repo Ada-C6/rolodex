@@ -22,12 +22,6 @@ const RolodexView = Backbone.View.extend({
           this.addContact(contact);
         }, this); // bind `this` so it's available inside forEach
 
-    this.input = {
-      name: this.$('.contact-form input[name="name"]'),
-      email: this.$('.contact-form input[name="email"]'),
-      phone: this.$('.contact-form input[name="phone"]')
-    };
-
     this.listenTo(this.model, "remove", this.removeContact);
     this.listenTo(this.model, "update", this.render);
     this.listenTo(this.model, "add", this.addContact)

@@ -1,9 +1,17 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
+import Contact from 'app/models/contact';
 
 const ApplicationView = Backbone.View.extend({
+
+
   initialize: function() {
     this.render();
+    this.input = {
+      name: this.$('input[name="name"]'),
+      email: this.$('input[name="email"]'),
+      phone: this.$('input[name="phone"]')
+    };
   },
 
   render: function() {
@@ -26,9 +34,19 @@ const ApplicationView = Backbone.View.extend({
   }, // end of clear
 
   saveButton: function(event) {
-    console.log("saving that")
-  } // end of save
+    event.preventDefault();
+    var contact = new Contact(this.getInput());
+    console.log("saving that contact");
+  }, // end of save
 
+  getInput: function(event) {
+    var contact = {
+        name: this.input.name.val(),
+        email: this.input.email.val(),
+        phone: this.input.phone.val()
+      };
+    return contact;
+  }
 });
 
 export default ApplicationView;
