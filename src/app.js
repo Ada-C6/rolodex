@@ -1,9 +1,17 @@
+import $ from 'jquery';
+
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
 
-var application = new Application();
+import RolodexView from 'app/views/rolodex_view';
+import Rolodex from 'app/collections/rolodex';
 
-var appView = new ApplicationView({
-  el: '#application',
-  model: application
+$(document).ready(function() {
+  var application = new Application();
+  var appView = new ApplicationView({
+    el: 'html',
+    model: application
+  });
+
+  appView.render();
 });
