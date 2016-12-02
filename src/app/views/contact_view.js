@@ -4,7 +4,7 @@ import Contact from 'app/models/contact';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
-    this.template = options.template;
+    this.template = options.template; // name only contact card
   },
 
   render: function(){
@@ -15,12 +15,12 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-    'click .contact-card': 'triggerDetails'
+    'click .contact-card': 'triggerDetails' // send trigger when specific card is clicked
   },
 
   triggerDetails: function(e){
-    e.stopPropagation();
-    this.trigger('details', this.model);
+    e.stopPropagation(); // don't let any parents hear this event
+    this.trigger('details', this.model); // send this contact model to the roloview listener
   }
 });
 
