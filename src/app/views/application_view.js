@@ -10,7 +10,7 @@ const ApplicationView = Backbone.View.extend({ // parent
     // console.log('THIS>>' + this.model);
 
     var listElement = $('#contact-cards');
-    var formElement = $('.contact-form');
+    // var formElement = $('.contact-form');
 
    // console.log('CHECKPOINT');
      this.contactGrid = new ContactListView( { //child
@@ -41,7 +41,8 @@ const ApplicationView = Backbone.View.extend({ // parent
   },
   events: {
     'click .btn-save': 'saveOnClick',
-    'click .btn-cancel': 'clearOnClick'
+    'click .btn-cancel': 'clearOnClick',
+    // 'click #tmpl-contact-card': 'setModal'
   },
   saveOnClick: function() {
     console.log('Ready to save?');
@@ -70,6 +71,10 @@ const ApplicationView = Backbone.View.extend({ // parent
     this.contactGrid.createContact(rawData);
     console.log('Contact created');
     this.clearOnClick();
+  },
+  setModal: function() {
+    console.log(this);
+    console.log(this.model);
   }
 });
 

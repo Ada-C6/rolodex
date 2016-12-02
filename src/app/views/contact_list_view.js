@@ -6,9 +6,8 @@ import _ from 'underscore';
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
 
-//
-// // const ContactView = Backbone.View.extend({
-// // });
+// el: '#contact-cards'
+
 var ContactListView = Backbone.View.extend({ // parent
   initialize: function(options) {
   this.template = _.template($('#tmpl-contact-card').html());
@@ -24,7 +23,6 @@ var ContactListView = Backbone.View.extend({ // parent
 
   this.listenTo(options.contacts, 'saving', this.render);
   this.listenTo(options.contacts, 'saving', console.log('THIS?'));
-
 
 //
     // this.listenTo(this.model, 'change', this.render);
@@ -48,6 +46,11 @@ var ContactListView = Backbone.View.extend({ // parent
 
     return this;
   },
+  events: {
+    'click .contact-card': 'setCurrentContact'
+
+  },
+
   addContact: function(rawData) {
     // Create a Task from this raw data
     var contact = new Contact(rawData); // child
@@ -70,6 +73,26 @@ var ContactListView = Backbone.View.extend({ // parent
     console.log('Time to create a new contact');
     this.addContact(rawData);
     this.render();
+  },
+
+  setCurrentContact: function() {
+    console.log('setCurrentContact');
+    var currentName = function(e) {
+      e = e || window.event; // e=e?
+      return e.target.innerHTML; // || e.srcElement;
+    };
+    console.log('currentName: ' + currentName());
+    console.log('this.modelList[i].attributes.name:' + this.modelList[1].attributes.name);
+    console.log('NAME: ' + currentName());
+    for (var i = 0; i < this.modelList.length; i++) {
+      if (currentName() == this.modelList[i].attributes.name) {
+        this.currentContact = this.modelList[i].attributes;
+        console.log('currentContact: ' + this.currentContact);
+      }
+    }
+
+    // this.currentContact = this.modelList[2].attributes;
+    console.log('CC: ' + this.currentContact.name);
   }
 
 });
