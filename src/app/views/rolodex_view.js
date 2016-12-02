@@ -14,9 +14,11 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options) {
 
     this.contactTemplate = _.template($('#tmpl-contact-details').html());
+    this.cardTemplate = _.template($('#tmpl-contact-card').html());
+
     this.listElement = this.$('#contact-cards');
     // These are used when you add a card to the list.
-    this.modelList = [];
+    // this.modelList = [];
     // this list carries the list of cards that is displayed
     this.cardList = [];
 
@@ -24,13 +26,13 @@ const RolodexView = Backbone.View.extend({
 
       // eventually : this.addTask(rawTask);
 
-      var contactOptions = new ContactView({
+      var contactCard = new ContactView({
         model: modelName,
         template: this.contactTemplate
       });
 
-      this.listenTo(contactOptions, "displayHandler", this.displayContactDetails);
-      this.cardList.push(contactOptions);
+      this.listenTo(contactCard, "displayHandler", this.displayContactDetails);
+      this.cardList.push(contactCard);
     }, this);
 
     // WHat is this and where does it go?
@@ -76,16 +78,15 @@ const RolodexView = Backbone.View.extend({
     this.cardList.push(contactCard);
   },
 
+
   // No event, because it is triggered by another event.
-  displayContactDetails: function(){
+  displayContactDetails: function(contactCard){
     console.log("displayHandler called");
     var element = this.$("#contact-details");
-    //
-    console.log(element);
-    console.log(this.model);
-    var html = this.contactTemplate({contact: this.model.attributes});
+    var name = contactCard.model.get('name');
+    var html = this.contactTemplate({contact: contactCard.model.attributes});
     console.log(html);
-    // element.append(html);
+    element.append(html);
     // console.log(html);
     // console.log(element);
   },

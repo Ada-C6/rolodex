@@ -7,6 +7,7 @@ import Contact from 'app/models/contact';
 
 var ContactView = Backbone.View.extend({
   initialize: function(options) {
+
     this.cardTemplate = _.template($('#tmpl-contact-card').html());
 
   },
@@ -29,7 +30,8 @@ var ContactView = Backbone.View.extend({
 
     console.log("triggerDisplayHandler called");
 
-    this.trigger("displayHandler");
+    this.trigger("displayHandler", this);
+
 
     // $(this.el).html(html);
     // console.log($(this.el).html(html));
