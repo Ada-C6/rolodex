@@ -8,12 +8,12 @@ import Contact from 'app/models/contact';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
-    this.template = _.template($('#tmpl-contact-card').html());
+    this.template = options.template;
   },
 
   render: function() {
     var html = this.template({name: this.model.get('name')});
-    // console.log("===========" + this.model.attributes);
+
     this.$el.html(html);
     return this;
   },

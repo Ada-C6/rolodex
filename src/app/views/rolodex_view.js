@@ -102,7 +102,7 @@ const RolodexView = Backbone.View.extend({
   },
 
   showModal: function(contact) {
-    // replace contents of modal with this peep's info
+    // replace contents of modal with this person's info
     this.contactDetails.empty();
     // the data I'm passing to the template
     var details = this.contactDetailsTemplate({name: contact.attributes.name, email: contact.attributes.email, phone: contact.attributes.phone});
