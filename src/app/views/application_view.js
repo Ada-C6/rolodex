@@ -20,12 +20,14 @@ const ApplicationView = Backbone.View.extend({
 
   render: function() {
     this.rolodexDisplay.render();
+    this.delegateEvents();
     return this;
   },
 
   events: {
     'click .btn-cancel': 'clearForm',
     'click .btn-save': 'createContact',
+    'click': 'hideDetails'
   },
 
   clearForm: function(event) {
@@ -52,6 +54,11 @@ const ApplicationView = Backbone.View.extend({
     this.clearForm();
     console.log('createContact clicked');
   },
+
+ hideDetails: function(event) {
+   console.log("hideDetails called");
+   $("#contact-details").addClass("hide-item");
+ }
 });
 
 export default ApplicationView;

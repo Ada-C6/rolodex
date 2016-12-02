@@ -14,8 +14,6 @@ const RolodexView = Backbone.View.extend({
 
     this.listenTo(this.model, 'add', this.addContact);
     this.listenTo(this.model, 'update', this.render);
-
-
     this.render();
   },
 
@@ -48,7 +46,7 @@ const RolodexView = Backbone.View.extend({
       phone: card.model.get('phone')});
     detailsDiv.html(html);
     detailsDiv.removeClass("hide-item");
-  }
+  },
 });
 
 export default RolodexView;

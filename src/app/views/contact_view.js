@@ -19,6 +19,7 @@ const ContactView = Backbone.View.extend({
 
   detailsHandler: function(event) {
 //    console.log("clicked on " + this.model.get('name'));
+    event.stopPropagation();
     this.trigger('display', this);
   }
 
