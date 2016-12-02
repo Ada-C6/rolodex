@@ -36,8 +36,7 @@ $(document).ready(function() {
   appView.render();
 });
 
-$(document).click(function (event)
-{
+$(document).click(function (event) {
     var element = $('.contact-card');
     var container = $('#contact-details')
 
