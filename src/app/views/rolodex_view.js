@@ -10,17 +10,16 @@ const RolodexView = Backbone.View.extend({
 
   initialize: function(options) {
     this.contactTemplate = _.template($("#tmpl-contact-card").html());
+    this.contactDetailTemplate = _.template($('#tmpl-contact-details').html());
 
     this.cardsSection = this.$("#contact-cards");
-
     this.cardList = [];
+    // hide the contact details section
+    this.$('#contact-details').hide();
 
-    console.log("this.model is: " + this.model);
     this.model.forEach(function(contact) {
       this.addContactCard(contact);
     }, this);
-
-    console.log("-------------->" + this.cardList);
 
     // Keep track of our form input fields
     this.input = {
@@ -36,9 +35,6 @@ const RolodexView = Backbone.View.extend({
     // when the model collection updates, re-render the list of cards
     this.listenTo(this.model, 'update', this.render);
 
-    // when the model is removed throm the collection,
-    // remove the card for that task from our list of cards
-    // this.listenTo(this.model, 'remove', this.removeTask);
   },
 
   render: function() {
@@ -57,6 +53,8 @@ const RolodexView = Backbone.View.extend({
     });
 
     this.cardList.push(card);
+
+    this.listenTo(card, 'showContactDeets', this.popUpModal);
   },
 
   events: {
@@ -77,17 +75,8 @@ const RolodexView = Backbone.View.extend({
     // Normally a form submission will refresh the page.
     // Suppress that behavior.
     event.preventDefault();
-
-    // Get the input data from the form and turn it into a task
     var rawContact = this.getInput();
-
-    // Keep track of this task
     this.model.add(rawContact); // add triggers two events automatically, the add event and finally the update event
-
-    // Re-render the whole list, now including the new card
-    // this.render();
-
-    // Clear the input form so the user can add another task
     this.clearInput();
   },
 
@@ -96,6 +85,17 @@ const RolodexView = Backbone.View.extend({
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
+  },
+
+  popUpModal: function(card) {
+    var name = card.model.get('name');
+    var email = card.model.get('email');
+    var phone = card.model.get('phone');
+
+    console.log("name: " + name + " | email: " + email + " | phone: " + phone);
+
+    this.$('#contact-details').html(this.contactDetailTemplate({name: name, email: email, phone: phone}));
+    this.$('#contact-details').show();
   }
 
 

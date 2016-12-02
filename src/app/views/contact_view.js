@@ -18,6 +18,14 @@ const ContactView = Backbone.View.extend({
 
   // Enable chained calls
     return this;
+  },
+
+  events: {
+    'click .contact-card': 'clickCard'
+  },
+
+  clickCard: function() {
+    this.trigger('showContactDeets', this);
   }
 
 });
