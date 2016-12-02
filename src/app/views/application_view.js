@@ -32,15 +32,18 @@ const ApplicationView = Backbone.View.extend({
 
     var contactList = new Rolodex(contactData);
 
-    var rolodexView = new RolodexView({
+    this.rolodexView = new RolodexView({
       el: 'main',
       model: contactList
     });
 
-    rolodexView.render();
+    // this.rolodexView.render();
   },
 
   render: function() {
+
+    this.rolodexView.render();
+
     return this;
   },
 
@@ -60,8 +63,7 @@ const ApplicationView = Backbone.View.extend({
     var contact = this.getInput();
     console.log(contact);
 
-    // this.model.add(contact);
-    console.log(this);
+    this.rolodexView.model.add(contact);
 
     this.clearContact();
   },

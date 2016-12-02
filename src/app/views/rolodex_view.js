@@ -19,7 +19,13 @@ const RolodexView = Backbone.View.extend({
 
       // Add contact to list of contacts
       this.addContact(contact);
-      }, this);
+    }, this);
+
+    // When a model is added to the collection, create a contact and add it to the list of contacts
+    this.listenTo(this.model, 'add', this.addContact);
+
+    // When the model updates, re-render the list of cards
+    this.listenTo(this.model, 'update', this.render);
   },
 
   render: function() {
