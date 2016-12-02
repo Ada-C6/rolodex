@@ -12,10 +12,16 @@ const ApplicationView = Backbone.View.extend({
 
   hideModal: function(){
   	$('#contact-details').css("display","none");
-  	console.log("hello again")
+  	console.log("hello again");
+  },
+
+  nope: function(event){
+  	
+  	event.stopPropagation();
   },
   events:{
-  	"click .Quai": "hideModal"
+  	"click body": "hideModal",
+  	"click #contact-details": "nope"
   }
 });
 

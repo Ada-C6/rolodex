@@ -66,10 +66,10 @@ $(document).ready(function() {
   var rolodexView = new RolodexView({
   	template: _.template($("#tmpl-contact-card").html()),
   	model: rolodex,
-  	el: '#application'
+  	 el: $('#application')
   });
 
- 
+
 
   rolodexView.render();
   
