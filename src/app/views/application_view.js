@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import $ from 'jquery';
 
 const ApplicationView = Backbone.View.extend({
   initialize: function() {

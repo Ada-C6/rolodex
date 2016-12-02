@@ -20,15 +20,26 @@ var hardCodedContacts = [{
   name: "ediff",
   email: "dummy@cat.com",
   phone: "dfikdsjfs;df"
+},
+{
+  name: "boo",
+  email: "sldk@cat.com",
+  phone: "dfikdsjfs;df"
 }];
 
 $(document).ready(function(){
   var rolodex = new Rolodex(hardCodedContacts);
+  // console.log("this is the rolodex",rolodex)
 
   var application = new RolodexView({
     el: $('#contact-cards'),
     model: rolodex
   });
+
+  var application2 = new ApplicationView({
+    el: $('body') // this was #application if it's not working that's why
+  });
+  application2.render();
   application.render();
 
 
