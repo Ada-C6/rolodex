@@ -23,6 +23,15 @@ const ContactView = Backbone.View.extend({
 
     // Enable chained calls
     return this;
+  },
+
+  events: {
+    'click': 'modalHandler'
+  },
+
+  modalHandler: function() {
+    this.trigger('showModal', this);
+    return false; // Won't let it be hidden later without setting this to false - without this, it will be hidden immediately
   }
 });
 

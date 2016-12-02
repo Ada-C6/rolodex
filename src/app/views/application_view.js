@@ -1,11 +1,9 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 
-import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
 import RolodexView from 'app/views/rolodex_view';
 import Rolodex from 'app/collections/rolodex';
-
 
 var contactInfo = [
   {
@@ -25,7 +23,8 @@ var contactInfo = [
 
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
-    console.log("Bueller?");
+    $('#contact-details').hide();
+    // console.log("Bueller?");
     this.rolodex = new Rolodex(contactInfo);
     this.rolodexView = new RolodexView({
       el: $('#contact-cards'),
@@ -34,7 +33,7 @@ const ApplicationView = Backbone.View.extend({
 
     this.rolodexView.render();
 
-    this.render();
+    // this.render();
 
     // Keep track of our form input fields
     this.input = {
@@ -61,15 +60,15 @@ const ApplicationView = Backbone.View.extend({
   },
 
   createContact: function(event) {
-    console.log("SAVE DAMNIT");
+    console.log("createContact called");
     event.preventDefault();
-    // Get the input data from the form and turn it into a task
+    // Get the input data from the form and turn it into a contact
     var contact = this.getInput();
 
     // Add the task to our Collection
     this.rolodex.add(contact);
 
-    // Clear the input form so the user can add another task
+    // Clear the input form so the user can add another contact
     this.clearInput();
   },
 
@@ -80,15 +79,6 @@ const ApplicationView = Backbone.View.extend({
       phone: this.input.phone.val()
     };
     return contact;
-  },
-
-  addContact: function(contact) {
-    var info = new ContactView({
-      model: contact,
-      template: this.contactTemplate
-    });
-
-    this.contactList.push(info);
   }
 });
 

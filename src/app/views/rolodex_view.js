@@ -8,6 +8,8 @@ import ContactView from 'app/views/contact_view';
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
+    this.modalTemplate = _.template($('#tmpl-contact-details').html());
+    this.modalDetails = this.$('#contact-details');
 
     // Create a ContactView for each contact
     this.contactList = [];
@@ -38,13 +40,35 @@ const RolodexView = Backbone.View.extend({
     return this; // enable chained calls
   },
 
+  events: {
+    'click': 'hideModal'
+  },
+
   addContact: function(contact) {
     var info = new ContactView({
       model: contact,
       template: this.contactTemplate
     });
 
+    this.listenTo(info, 'showModal', this.showModal);
+    this.listenTo(info, 'hideModal', this.hideModal);
+
     this.contactList.push(info);
+
+    return this;
+  },
+
+  showModal: function(contact) {
+    // console.log("contact.model.attributes", contact.model.attributes);
+    $('#contact-details').show(); // No clue why this works with jquery but not this.modalDetails
+    var html = this.modalTemplate(contact.model.attributes);
+    // console.log("html", html);
+    $('#contact-details').html(html); // No clue why this works with jquery but not this.modalDetails
+  },
+
+  hideModal: function(event) {
+    console.log("hideModal called");
+    $('#contact-details').hide();
   }
 });
 

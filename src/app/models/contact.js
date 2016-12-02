@@ -8,10 +8,8 @@ const Contact = Backbone.Model.extend({
   },
 
   initialize: function() {
-    console.log("Created new contact from hard-coded");
+    // console.log("Created new contact from hard-coded");
   }
-  // This model should have the attributes for
-  // a single contact: name, phone number, and email.
 });
 
 export default Contact;
