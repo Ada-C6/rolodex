@@ -26,7 +26,9 @@ const ContactView = Backbone.View.extend({
 
   cardClick: function(event) {
     console.log("cardClick! " + this.model.name);
+    // event.stopPropagation();
     this.trigger('contact:click', this.model);
+    return false;
   }
 });
 
