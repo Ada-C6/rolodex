@@ -23,8 +23,8 @@ const ApplicationView = Backbone.View.extend({
 
   events: {
     'click .btn-cancel': 'clearInput',
-    'click .btn-save': 'saveButton'//,
-    //'click ': 'hideModal'
+    'click .btn-save': 'saveButton'
+    // 'click ': 'hideModal'
   }, //end of events
 
   hideModal: function() {
@@ -42,9 +42,13 @@ const ApplicationView = Backbone.View.extend({
   saveButton: function(event) {
     event.preventDefault();
     var contact = this.getInput();
-    this.model.add(contact);
-    console.log("saving that contact");
-    this.clearInput();
+    if (contact.name == "" || contact.email == "" || contact.phone == "") {
+      alert("please enter all contact details to save.")
+    } else {
+      this.model.add(contact);
+      console.log("saving that contact");
+      this.clearInput();
+    }
   }, // end of save
 
   getInput: function(event) {
