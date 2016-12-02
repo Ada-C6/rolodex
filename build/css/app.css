@@ -21,7 +21,7 @@ header {
 }
 
 .contact-form {
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(140, 193, 189, 0.48);
 
 }
 
@@ -34,15 +34,16 @@ header {
   display: none;
   z-index: 10;
   position: fixed;
-  width: auto;
+  width: 30%;
   height: 30%;
   top: 30%;
   left: 30%;
-  background-color: #538ca3;
+  background-color: rgba(140, 193, 189, 0.48);
   text-align: center;
   border: 1px solid black;
   margin-left: 20%;
   border-radius: 20%;
+  padding-top: 3%;
 }
 
 #contact-cards {
