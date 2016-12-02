@@ -38,7 +38,7 @@ const ContactView = Backbone.View.extend({
 
   viewDetails: function() {
     //show the details card somehow - ask google
-    console.log("VIEWING THE DETAILS CARD");
+    console.log("VIEWING THE DETAILS CARD of: " + this); // TODO: how to we access the details of this contact
   }
 });
 
