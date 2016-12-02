@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
 import _ from 'underscore';
-import ApplicationView from 'app/views/application_view';
+// import ApplicationView from 'app/views/application_view';
 
 // import Contact from 'app/models/contact';
 
