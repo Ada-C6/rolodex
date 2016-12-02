@@ -22,8 +22,9 @@ var ContactListView = Backbone.View.extend({ // parent
     this.addContact(contact);
   }, this);
 
-  // this.listenTo(options.contacts, 'saving', this.render);
-  // this.listenTo(options.contacts, 'saving', console.log('THIS?'));
+// the function collection.add sends out events 'add' and 'update'
+  this.listenTo(this.model, 'add', this.addContact); // rolodex model
+  this.listenTo(this.model, 'update', this.render);
 
 //
     // this.listenTo(this.model, 'change', this.render);
@@ -52,11 +53,7 @@ var ContactListView = Backbone.View.extend({ // parent
   },
 
   addContact: function(contact) {
-    // // Create a Task from this raw data
-    // var contact = new Contact(rawData); // child
-    //
-    // // Add the new task model to our list
-    // this.modelList.push(contact);
+    // console.log("addContact called");
 
     // Create a card for the new task
     var card = new ContactView({
@@ -68,15 +65,13 @@ var ContactListView = Backbone.View.extend({ // parent
     this.cardList.push(card);
   },
 
-  createContact: function(rawData) {
-    // event.preventDefault();
-
-    var newContact = new Contact(rawData); //child
-    this.model.add(newContact);
-    console.log('Time to create a new contact');
-    this.addContact(newContact);
-    this.render();
-  },
+  // createContact: function(rawData) {
+  //   // event.preventDefault();
+  //
+  //   // var newContact = new Contact(); //child // we dnt need it anymore
+  //   this.model.add(rawData); // backbone add and update triggers
+  //   console.log('Time to create a new contact');
+  // },
 
   getCurrentContact: function() {
     console.log('setCurrentContact');

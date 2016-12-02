@@ -74,7 +74,7 @@ const ApplicationView = Backbone.View.extend({ // parent
     return contact;
   },
   savingContact: function(rawData) {
-    this.contactGrid.createContact(rawData);
+    this.contactCollection.add(rawData);
     console.log('Contact created');
     this.clearOnClick();
   },
