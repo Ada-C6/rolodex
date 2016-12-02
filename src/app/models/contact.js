@@ -1,8 +1,13 @@
 import Backbone from 'backbone';
 
 const Contact = Backbone.Model.extend({
-  // This model should have the attributes for
-  // a single contact: name, phone number, and email.
+
+//options refers to the "el" in contact
+  initialize: function(options) {
+    this.Template = _.template($('#tmpl-contact-card').html());
+    console.log("contact card initialized");
+  },
+
 });
 
 export default Contact;
