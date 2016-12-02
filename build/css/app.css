@@ -36,13 +36,9 @@ header {
   left: 30%;
   background-color: #538ca3;
   text-align: center;
-  border: 1em solid white;
+  border: 0.5em solid white;
   margin-left: 20%;
   border-radius: 20%;
-}
-
-#contact-details h4 {
-  font-size: 0.83em;
 }
 
 #contact-cards {

@@ -11,54 +11,74 @@ const ApplicationView = Backbone.View.extend({
       phone: this.$('.contact-form input[name="phone"]')
     };
 
-    this.rolodexDisplay = new RolodexView(
-      {
-        el: $("main"),
-        model: this.model.rolodex
+    this.rolodexDisplay = new RolodexView({
+      el: $("main"),
+      model: this.model.rolodex
+    });
+    },
+
+    render: function() {
+      this.rolodexDisplay.render();
+      console.log(this.model.rolodex);
+
+      // this.listenTo(this.model.rolodex.models, 'edit', this.editContact);
+
+      this.model.rolodex.each(function(model) {
+//        console.log(model);
+//       this.listenTo(model, 'edit', this.editContact);
       });
-  },
 
-  render: function() {
-    this.rolodexDisplay.render();
-    this.delegateEvents();
-    return this;
-  },
+      this.delegateEvents();
+      return this;
+    },
 
-  events: {
-    'click .btn-cancel': 'clearForm',
-    'click .btn-save': 'createContact',
-    'click': 'hideDetails'
-  },
+    events: {
+      'click .btn-cancel': 'clearForm',
+      'click .btn-save': 'createContact',
+      'click': 'hideDetails'
+    },
 
-  clearForm: function(event) {
-    // console.log("form cleared");
-    this.input.name.val('');
-    this.input.email.val('');
-    this.input.phone.val('');
-  },
+    clearForm: function(event) {
+      // console.log("form cleared");
+      this.input.name.val('');
+      this.input.email.val('');
+      this.input.phone.val('');
+    },
 
-  getInput: function() {
-    var contactInfo = {
-      name: this.input.name.val(),
-      email: this.input.email.val(),
-      phone: this.input.phone.val(),
-    };
-    return contactInfo;
-  },
+    getInput: function() {
+      var contactInfo = {
+        name: this.input.name.val(),
+        email: this.input.email.val(),
+        phone: this.input.phone.val(),
+      };
+      return contactInfo;
+    },
 
-  createContact: function(event) {
-    event.preventDefault();
-    var collectContact = this.getInput();
+    createContact: function(event) {
+      event.preventDefault();
+      var collectContact = this.getInput();
 
-    this.model.rolodex.add(collectContact);
-    this.clearForm();
-  //  console.log('createContact clicked');
-  },
+      this.model.rolodex.add(collectContact);
+      this.clearForm();
+      //  console.log('createContact clicked');
+    },
 
- hideDetails: function(event) {
-//   console.log("hideDetails called");
-   $("#contact-details").addClass("hide-item");
- }
-});
+    editContact: function(card) {
+      console.log("in editContact for contact: " + card.model.get('name'));
+//      this.setInput(card.model);
+//      card.model.destroy();
+    },
 
-export default ApplicationView;
+    hideDetails: function(event) {
+      //   console.log("hideDetails called");
+      $("#contact-details").addClass("hide-item");
+    },
+
+    setInput: function (contact) {
+      this.input.name.val(contact.get('name'));
+      this.input.email.val(contact.get('email'));
+      this.input.phone.val(contact.get('phone'));
+    }
+  });
+
+  export default ApplicationView;
