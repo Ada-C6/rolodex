@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import _ from 'underscore';
 import Backbone from 'backbone';
 
 import Rolodex from 'app/collections/rolodex';
@@ -35,14 +34,8 @@ var contactData = [
 
 const ApplicationView = Backbone.View.extend({
   // this.$el is '#application'
-  initialize: function() {
-    // Keep track of our form input fields
-    this.input = {
-      name: this.$('.contact-form input[name="name"]'),
-      email: this.$('.contact-form input[name="email"]'),
-      phone: this.$('.contact-form input[name="phone"]'),
-    };
 
+  initialize: function() {
     // Instantiate Rolodex & RolodexView
     this.rolodex = new Rolodex(contactData);
     this.rolodexView = new RolodexView({
@@ -50,65 +43,64 @@ const ApplicationView = Backbone.View.extend({
       model: this.rolodex
     });
 
-    // // Keep track of modal element/template & listen for clicks
-    // // NOTE: trying moving this to RolodexView
-    // this.modalSection = this.$('#contact-details');
-    // this.modalTemplate = _.template($('#tmpl-contact-details').html());
-    // // this.listenTo() -- NOTE: should this be in RolodexView?
+    // Keep track of our form input fields
+    this.input = {
+      name: this.$('.contact-form input[name="name"]'),
+      email: this.$('.contact-form input[name="email"]'),
+      phone: this.$('.contact-form input[name="phone"]'),
+    };
 
-    // Listen for clicks on modal area & non-modal area. Show/hide depending.
-    // this.listenTo(this.modalSection, 'click', );
-    // this.listenTo(this.$el, 'main:click', this.hideModal);
-
+    // I believe this prevents need for $(document).ready activation?
     this.render();
   },
 
   render: function() {
-    // this.modalSection.hide(); NOTE: moved to RolodexView
     this.rolodexView.render();
-    // this.delegateEvents();
     return this;
   },
 
   events: {
-    'click': 'hideModal',
+    'click': 'hideModal', // NOTE: this event listens on entire element
     'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearInput'
   },
 
   createContact: function(event) {
-    console.log("Yo that save button got clicked");
+    // console.log("Yo, save button got clicked"); // NOTE: log
 
+    // prevent default form submit action (new GET req?)
     event.preventDefault();
 
     var contact = this.getInput();
 
+    // add new Contact Model to Rolodex Collection
     this.rolodex.add(contact);
 
+    // clear Input on the form fields
     this.clearInput();
   },
 
   getInput: function() {
-    console.log("Getting Input");
+    // console.log("Getting Input"); // NOTE: log
+
+    // get the currently-entered values from each input element
     var contact = {
       name: this.input.name.val(),
       email: this.input.email.val(),
       phone: this.input.phone.val()
     };
+
     return contact;
   },
 
   clearInput: function() {
-    console.log("Clearing Input");
+    // console.log("Clearing Input"); // NOTE: log
+
+    // reset the each input element to an empty string
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
   },
-  //
-  // mainClick: function(event) {
-  //   console.log("main click!!!");
-  //   this.trigger('main:click');
-  // },
 
   hideModal: function(event) {
     console.log("Modal should go away now...");

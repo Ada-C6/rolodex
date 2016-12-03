@@ -1,8 +1,5 @@
 import $ from 'jquery';
-import _ from 'underscore';
 import Backbone from 'backbone';
-
-// import Contact from 'app/models/contact';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
@@ -10,15 +7,18 @@ const ContactView = Backbone.View.extend({
   },
 
   render: function() {
-    console.log("Loaded a ContactView!");
+    // console.log("Loaded a ContactView!"); // NOTE: log
+
+    // Populate the template with model values
     var html = this.template({
       name: this.model.name,
     });
-    console.log("Name: " + this.model.name);
+    // console.log("Name: " + this.model.name); // NOTE: log
     this.$el.html(html);
 
-    // Ensure that event listeners re-initialize when re-rendering contact cards
+    // Ensure that event listeners are active whenever rendering contact cards
     this.delegateEvents();
+
     return this;
   },
 
@@ -27,10 +27,13 @@ const ContactView = Backbone.View.extend({
   },
 
   cardClick: function(event) {
-    console.log("cardClick! " + this.model.name);
-    // event.stopPropagation();
+    // console.log("cardClick! " + this.model.name); // NOTE: log
+
+    // stopPropagation prevents event from bubbling up; in this case, it prevents clicks on this contactView from triggering as clicks on 'html' element (which hides the modal)
+    event.stopPropagation();
+
+    // Trigger event to pass up to RolodexView for showModal
     this.trigger('contact:click', this.model);
-    return false;
   }
 });
 
