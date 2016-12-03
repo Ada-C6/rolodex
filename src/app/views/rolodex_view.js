@@ -64,11 +64,22 @@ const RolodexView = Backbone.View.extend({
     return this;
   },
 
+  // addContact: function(contact) {
+  //
+  // }
+
   events:  {
     // right: name of function that insides page view.
     'click btn-save' : 'createContact',
     'click btn-cancel':'clearInput'
 
+  },
+
+  cancelInput: function(event) {
+    console.log("cancel inout");
+    this.input.name.val('');
+    this.input.email.val('');
+    this.input.phone.val('');
   },
 
   // clear input function
@@ -80,23 +91,27 @@ const RolodexView = Backbone.View.extend({
   },
 
   // create Contact function
-  createContact: function() {
+  createContact: function(event) {
     event.preventDefault();
+    console.log("createContact");
     //get input data from the form. and turn it into contact.
 
-    var contact = this.getInput();
+    // var contact = this.getInput();
+    var contact = new Contact(this.getInput());
+    this.model.add(contact);
+    this.clearInput();
 
     // add the dat
-    var card = new RolodexView({
-      contact: contact,
-      template: this.contactTemplate
-
-    });
-    this.cartList.push(card);
+    // var card = new RolodexView({
+    //   contact: contact,
+    //   template: this.contactTemplate
+    //
+    // // });
+    // this.cartList.push(card);
 
   },
 
-  getInput: function() {
+  getInput: function(event) {
     var contact = {
       name: this.input.name.val(),
       email: this.input.email.val(),
@@ -104,6 +119,16 @@ const RolodexView = Backbone.View.extend({
     };
     return contact;
   },// end getInputl
+
+  addContact: function(contact){
+
+    var card = new ContactView({
+      model: contact,
+      template: this.contactTemplate
+    });
+    this.contactBox.push(card);
+
+  }
 
 });
 

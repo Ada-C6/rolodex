@@ -5,24 +5,30 @@ import ApplicationView from 'app/views/application_view';
 import $ from 'jquery';
 
 import _ from 'underscore';
-
+// model
 import Contact from 'app/models/contact';
+
+//collections/ views
 import ContactView from 'app/views/contact_view';
 import RolodexView from 'app/views/rolodex_view';
 
+// do I need this one? from collections
+import Rolodex from 'app/collections/rolodex';
+
+// contacts to start with with.
 var contactList = [
   {
-  name: "Dumbldore",
-  email: "headmaster@aol.com",
-  phone: "222333444"
+  name: "Albus Dumbldore",
+  email: "headmaster@wizzard.edu",
+  phone: "1112223344"
 },
 {
   name: "Professor Snape",
   email: "Ilovedlilly@aol.com",
-  phone: "222333444"
+  phone: "2062224444"
 }];
 
-
+// starts at 1st load.
 $(document).ready(function (){
   // var application = new Application();
 
