@@ -16,17 +16,32 @@ import RolodexView from 'app/views/rolodex_view';
 import Rolodex from 'app/collections/rolodex';
 
 // contacts to start with with.
+// spacing used to disquish diff. parts of code. ok to use this arrangement?
 var contactList = [
   {
-  name: "Albus Dumbldore",
-  email: "headmaster@wizzard.edu",
-  phone: "1112223344"
-},
-{
-  name: "Professor Snape",
-  email: "Ilovedlilly@aol.com",
-  phone: "2062224444"
-}];
+    name: "Albus Dumbldore",
+    email: "headmaster@wizzard.edu",
+    phone: "1112223344"
+  },
+  {
+    name: "Professor Snape",
+    email: "Ilovedlilly@aol.com",
+    phone: "2062224444"
+  },
+
+  {
+    name: "Frida Kahlo",
+    email: "artist@mexico.org",
+    phone: "0002223333"
+  },
+
+    {
+      name: "Sonia Sotomayor",
+      email: "judge@supreme.org",
+      phone: "3334445555"
+    }
+
+];
 
 // starts at 1st load.
 $(document).ready(function (){
@@ -36,7 +51,7 @@ $(document).ready(function (){
     el: $('#application'),
     // abstraction.. introducing.
     contactData: contactList,
-    model: application
+    model: application,
   });
   appView.render();
 

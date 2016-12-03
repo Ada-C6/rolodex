@@ -6,18 +6,30 @@ import Contact from 'app/models/contact';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options){
-    console.log("options in cview_>", options);
+    // console.log("options in cview_>", options);
     this.name = options.contact.name;
     this.template = options.template;
     },
     render: function(){
-      console.log("I'm here");
+      // console.log("I'm here");
       var html = this.template({name: this.name});
-      console.log("I'm here htlm>", html);
-      console.log("$el:  ", this.$el);
+      // console.log("I'm here htlm>", html);
+      // console.log("$el:  ", this.$el);
       this.$el.html(html);
       return this;
+    },
+
+    events: {
+      'click .contact-card' : 'showDetails',
+      // 'click .btn cancel' : clearInput
+    },
+// other more semantic name?
+    showDetails: function() {
+      console.log("Clicked on contact you did.");
+      // probably should pull details from #'temp-contact-details'
+
     }
+
 
   });
     //store the full list of contacts
