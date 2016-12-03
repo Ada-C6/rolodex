@@ -9,6 +9,7 @@ const ContactView = Backbone.View.extend({
   }, //close initialize
 
   render: function() {
+    this.delegateEvents();
     var html = this.template({contact: this.model.attributes})
     this.$el.html(html);
     return this;
