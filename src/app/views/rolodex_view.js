@@ -8,7 +8,8 @@ const RolodexView = Backbone.View.extend({
   initialize: function(options){
     this.rolodexTemplate = _.template($('#tmpl-contact-card').html());
     this.element = this.$('#contact-cards');
-    this.cardTemplate = $('#contact-details');
+    this.boxThing = $('#contact-details');
+    this.cardTemplate = _.template($('#tmpl-contact-card').html());
 
 
     this.nameList = [];
@@ -79,7 +80,15 @@ const RolodexView = Backbone.View.extend({
     return contact;
   },
   showBox: function(contact){
-    this.cardTemplate.show();
+    console.log("You are getting a box for: " + contact.get("name"));
+    this.showDeets(contact);
+    this.boxThing.show();
+  },
+  showDeets: function(){
+    //Trying to figure 
+    // console.log(JSON.stringify(contact));
+    // var info = this.cardTemplate({name: contact, email: contact.attributes.email, phone: contact.attributes.phone});
+    this.boxThing.append(info);
   }
 });
 
