@@ -9,14 +9,14 @@ const ContactView = Backbone.View.extend({
   render: function() {
     // console.log("Loaded a ContactView!"); // NOTE: log
 
-    // Populate the template with model values
+    // Populate the card template with model name value
     var html = this.template({
       name: this.model.name,
     });
     // console.log("Name: " + this.model.name); // NOTE: log
     this.$el.html(html);
 
-    // Ensure that event listeners are active whenever rendering contact cards
+    // Ensure that event listeners are active whenever (re-)rendering contact cards
     this.delegateEvents();
 
     return this;
@@ -24,25 +24,17 @@ const ContactView = Backbone.View.extend({
 
   events: {
     'click .contact-card': 'cardClick'
-    // TODO: remove!
-    // 'click .btn-edit': 'editClick'
   },
 
   cardClick: function(event) {
     // console.log("cardClick! " + this.model.name); // NOTE: log
 
-    // stopPropagation prevents event from bubbling up; in this case, it prevents clicks on this contactView from triggering as clicks on 'html' element (which hides the modal)
+    // stopPropagation prevents event from bubbling up; in this case, it prevents clicks on this contactView from triggering as clicks on its ancestor 'html' element (which hides the modal)
     event.stopPropagation();
 
-    // Trigger event to pass up to RolodexView for showModal
+    // Trigger 'contact:click' event to pass up to RolodexView for showModal
     this.trigger('contact:click', this.model);
   },
-
-  // TODO: remove!
-  // editClick: function(event) {
-  //   console.log("Ready to edit! " + this.model); // NOTE: log
-  //   this.trigger('edit:click');
-  // },
 });
 
 export default ContactView;

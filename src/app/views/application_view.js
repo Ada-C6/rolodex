@@ -50,9 +50,10 @@ const ApplicationView = Backbone.View.extend({
       phone: this.$('.contact-form input[name="phone"]'),
     };
 
+    // Listen for edit clicks on Modal (coming from RolodexView)
     this.listenTo(this.rolodexView, 'edit:click', this.editContact);
 
-    // I believe this prevents need for $(document).ready activation?
+    // I believe this prevents need for $(document).ready in app.js?
     this.render();
   },
 
@@ -70,52 +71,49 @@ const ApplicationView = Backbone.View.extend({
   createContact: function(event) {
     // console.log("Yo, save button got clicked"); // NOTE: log
 
-    // prevent default form submit action (new GET req?)
+    // Prevent default form submit action (new GET req?)
     event.preventDefault();
 
+    // Collect input values from form
     var contact = this.getInput();
 
-    console.log("in createContact. this.rolodex start: " + this.rolodex);
+    // console.log("in createContact. this.rolodex start: " + this.rolodex); // NOTE: log
 
-    if (this.existingContact === true) {
-      console.log("Contact currently exists...");
+    // Check whether user is editing an existing contact; if so, destroy its Contact model & remove the currentContact variable
+    if (typeof this.currentContact != 'undefined') {
+      // console.log("Contact currently exists..."); // NOTE: log
       this.currentContact.destroy();
-      this.existingContact = false;
-      console.log("this.rolodex after destroy: " + this.rolodex);
+      // console.log("currentContact name: " + this.currentContact.name); // NOTE: log
+      delete this.currentContact;
+      // console.log("after delete: currentContact name: " + this.currentContact); // NOTE: log
+      // console.log("this.rolodex after destroy: " + this.rolodex); // NOTE: log
     }
-    // if (_.contains(this.rolodex, contact)) {
-    //   console.log();
-    // }
-    // add new Contact Model to Rolodex Collection
+
+    // Add new/updated Contact Model to Rolodex Collection
     this.rolodex.add(contact);
 
-    console.log("this.rolodex end (after add): " + this.rolodex);
+    // console.log("this.rolodex end (after add): " + this.rolodex); // NOTE: log
 
-    // clear Input on the form fields
+    // Clear Input on the form fields
     this.clearInput();
   },
 
   editContact: function(contact) {
-    console.log("editContact!!!"); // NOTE: log
-    // console.log("this.contact " + this.contact);
-    console.log("contact " + contact); // NOTE: log
-    console.log("contact.name " + contact.name); // NOTE: log
-    // console.log("editContact " + this.contact.name); // NOTE: log
+    // console.log("editContact!!!"); // NOTE: log
+    // console.log("contact.name " + contact.name); // NOTE: log
 
+    // Populate form with current Contact attributes & hide the Modal
     this.setInput(contact);
-
     this.hideModal();
 
-    this.existingContact = true;
+    // Set a variable to track the currentContact (this is used to instruct createContact method to remove old Contact before creating the updated Contact)
     this.currentContact = contact;
-    // contact.destroy();
-
   },
 
   getInput: function() {
     // console.log("Getting Input"); // NOTE: log
 
-    // get the currently-entered values from each input element
+    // Get the currently-entered values from each input element
     var contact = {
       name: this.input.name.val(),
       email: this.input.email.val(),
@@ -128,21 +126,21 @@ const ApplicationView = Backbone.View.extend({
   clearInput: function() {
     // console.log("Clearing Input"); // NOTE: log
 
-    // reset the each input element to an empty string
+    // reset each form input element to an empty string
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
 
-    if (this.existingContact === true) {
-      this.existingContact = false;
-      console.log("currentContact name: " + this.currentContact.name);
+    // If form had been editing a currentContact, delete currentContact variable to reset
+    if (typeof this.currentContact != 'undefined') {
+      // console.log("currentContact name: " + this.currentContact.name); // NOTE: log
       delete this.currentContact;
-      console.log("after delete: currentContact name: " + this.currentContact);
+      // console.log("after delete: currentContact name: " + this.currentContact); // NOTE: log
     }
   },
 
   setInput: function(contact) {
-    // console.log(""); // NOTE: log TODO: remove if empty
+    // Populate form input fields with current Contact data
     this.input.name.val(contact.get('name'));
     this.input.email.val(contact.get('email'));
     this.input.phone.val(contact.get('phone'));
