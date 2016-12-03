@@ -27,10 +27,14 @@ var ContactView = Backbone.View.extend({
   },
 
   triggerDisplayHandler: function(event){
+    if ($("#contact-details").is(':visible')) {
+      return;
+    }
 
     console.log("triggerDisplayHandler called");
 
     this.trigger("displayHandler", this);
+    // I am doing this because I don't want to bubble up to the application DOM when I click the card contact. I ONLY want to select the contact and then stop or else further in the code, the whole thing will go blank again and my work is pointless. 
     event.stopPropagation();
 
 

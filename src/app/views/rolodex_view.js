@@ -59,7 +59,13 @@ const RolodexView = Backbone.View.extend({
     'click .btn-cancel': 'cancelInput',
 
     // NOTE, there is not a typical HTML-form for this form, so I think to submit, I need to click the button in and then pass in the values some other way.
-    'click .btn-save': 'createContact'
+    'click .btn-save': 'createContact',
+    'click': 'hideContactDetail'
+  },
+
+  hideContactDetail: function(event){
+    console.log("in hideContactDetail");
+    $("#contact-details").hide();
   },
 
   addContact: function(rawContact){
@@ -89,6 +95,7 @@ const RolodexView = Backbone.View.extend({
     var html = this.contactTemplate({contact: contactCard.model.attributes});
     console.log(html);
     element.append(html);
+    // event.stopPropagation();
     // console.log(html);
     // console.log(element);
   },

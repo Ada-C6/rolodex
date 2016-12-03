@@ -46,10 +46,10 @@ var contactData = [
 $(document).ready(function() {
 
   var rolodex = new Rolodex(contactData);
-  
+
 
   var listOfContacts = new RolodexView({
-    el: '#application',
+    el: 'body',
     // Question: Is this the name of the model contact or the variable defined above?
     model: rolodex
   });
