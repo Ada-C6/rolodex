@@ -8,7 +8,7 @@ import ContactView from 'app/views/contact_view';
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
-    this.listElement = this.$('#tmpl-contact-card');
+    this.listElement = this.$('#contact-cards');
     this.cardList = [];
 
     this.model.forEach(function(rawContact) {
@@ -23,9 +23,9 @@ const RolodexView = Backbone.View.extend({
 
     this.listenTo(this.model, 'add', this.addContact);
 
-    this.listenTo(this.model, 'remove', this.removeContact);
-
     this.listenTo(this.model, 'update', this.render);
+
+    this.listenTo(this.model, 'show', this.showDetails);
   },
 
   render: function() {
@@ -38,11 +38,12 @@ const RolodexView = Backbone.View.extend({
   },
 
   events: {
-    'submit .btn-save': 'createContact',
+    'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearInput'
   },
 
   createContact: function(event) {
+    console.log("$$$$$$$");
     event.preventDefault();
 
     // Get the input data from the form and turn it into a contact
@@ -64,16 +65,15 @@ const RolodexView = Backbone.View.extend({
 
     // Add the card to our card list
     this.cardList.push(card);
+    console.log(card);
   },
 
-  removeContact: function(contact) {
-    var filteredList = [];
-    this.cardList.forEach(function(card) {
-      if (card.model != contact) {
-        filteredList.push(card);
-      }
+  showDetails: function(event) {
+    console.log("showDetails called");
+    var details = new ContactView({
+      model: contact,
+      template: this.detailsTemplate
     });
-    this.cardList = filteredList;
   },
 
   getInput: function() {
@@ -85,7 +85,7 @@ const RolodexView = Backbone.View.extend({
     return contact;
   },
 
-  clearInput: function(event) {
+  clearInput: function() {
     console.log("clearInput called!");
     this.input.name.val('');
     this.input.email.val('');

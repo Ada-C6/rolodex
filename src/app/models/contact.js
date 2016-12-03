@@ -7,17 +7,12 @@ const Contact = Backbone.Model.extend({
   defaults: {
     name: "Unknown Contact",
     email: "placeholder email",
-    phone: "placeholder phone number",
-    complete: false
+    phone: "placeholder phone number"
+    // complete: false
   },
 
   initialize: function(){
-    console.log("name is: " + this.attributes.name);
-  },
-
-  toggleComplete: function() {
-    var newStatus = !(this.get('complete'));
-    this.set('complete', newStatus);
+    console.log("created new contact: " + this.name); // this.attributes.name
   }
 
 });

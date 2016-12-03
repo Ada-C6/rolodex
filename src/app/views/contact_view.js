@@ -1,10 +1,12 @@
 import Backbone from 'backbone';
+import _ from 'underscore';
+import $ from 'jquery';
 
 const ContactView = Backbone.View.extend({
 
   initialize: function(options) {
     this.template = options.template;
-
+    this.detailsTemplate = _.template($('#tmpl-contact-details').html());
     this.listenTo(this.model, 'change', this.render);
   },
 
@@ -21,24 +23,14 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-    "click .btn-save": "saveHandler",
-    "click .btn-cancel": "cancelHandler"
+    "click": "modalHandler"
   },
 
-  saveHandler: function(event) {
-    console.log("saveHandler called!");
-    this.model.toggleComplete();
-  },
-
-  cancelHandler: function(event) {
-    console.log("cancelHandler called!");
-    if (window.confirm("Are you sure you want to cancel this contact?")) {
-      console.log("going to cancel it!");
-      this.model.destroy();
-    }
+  modalHandler: function(event) {
+    console.log("modalHandler called!");
+     $('#contact-details').show();
+    this.trigger('show', this);
   }
-
-
 });
 
 export default ContactView;
