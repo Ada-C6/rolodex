@@ -75,8 +75,21 @@ const ApplicationView = Backbone.View.extend({
 
     var contact = this.getInput();
 
+    console.log("in createContact. this.rolodex start: " + this.rolodex);
+
+    if (this.existingContact === true) {
+      console.log("Contact currently exists...");
+      this.currentContact.destroy();
+      this.existingContact = false;
+      console.log("this.rolodex after destroy: " + this.rolodex);
+    }
+    // if (_.contains(this.rolodex, contact)) {
+    //   console.log();
+    // }
     // add new Contact Model to Rolodex Collection
     this.rolodex.add(contact);
+
+    console.log("this.rolodex end (after add): " + this.rolodex);
 
     // clear Input on the form fields
     this.clearInput();
@@ -93,7 +106,9 @@ const ApplicationView = Backbone.View.extend({
 
     this.hideModal();
 
-    contact.destroy();
+    this.existingContact = true;
+    this.currentContact = contact;
+    // contact.destroy();
 
   },
 
@@ -117,6 +132,13 @@ const ApplicationView = Backbone.View.extend({
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');
+
+    if (this.existingContact === true) {
+      this.existingContact = false;
+      console.log("currentContact name: " + this.currentContact.name);
+      delete this.currentContact;
+      console.log("after delete: currentContact name: " + this.currentContact);
+    }
   },
 
   setInput: function(contact) {
