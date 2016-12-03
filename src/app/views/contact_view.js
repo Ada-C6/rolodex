@@ -1,4 +1,5 @@
 //contact_view.js
+// handles the logic for single contact view.
 import Backbone from 'backbone';
 import _ from 'underscore';
 import $ from 'jquery';
@@ -6,9 +7,14 @@ import Contact from 'app/models/contact';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options){
-    // console.log("options in cview_>", options);
+    console.log("options in cview_>", options);
     this.name = options.contact.name;
     this.template = options.template;
+    // do we need these 2 rangle these ?>
+    this.email = options.contact.email;
+    this.phone = options.contact.phone;
+
+
     },
     render: function(){
       // console.log("I'm here");

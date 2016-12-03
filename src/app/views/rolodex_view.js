@@ -41,24 +41,34 @@ const RolodexView = Backbone.View.extend({
       this.contactBox.push(card);
     }, this); // bind this
 
-// -----------------// testing
-// when model is added to collect, it will crate and add card to list
-  this.listenTo(this.contatData, "add", this.addContact);
-  //when model updates, re-render list of cards
-  this.listenTo(this.model, 'update', this.render);
-
-
+// keep track of data being put into form by user.
     this.input = {
       name: this.$('.new-contact input[name="name"]'),
       phone: this.$('.new-contact input[name="phone"]'),
       email: this.$('.new-contact input[name="email"]')
     };
 
+    // -----------------// testing
+    // when model is added to collect, it will crate and add card to list
+      // this.listenTo(this.contatData, "add", this.addContact);
+      // //when model updates, re-render list of cards
+      // this.listenTo(this.model, 'update', this.render);
+
+      //These let us know if the model has been updated or if a new model has been added
+
+
+    this.listenTo(this.model, "update", this.render);
+    this.listenTo(this.model, "add", this.addContact);
+    this.listenTo(this.model, "remove", this.removeContact);
+      console.log("model", this.model);
+
+
   }, // end of initialize
 
 
   // http://backbonejs.org/#View-render
   render: function(){
+    console.log("rendering that rolodex!");
     // clearing contacts each time. Might need to remove.
     // make sure list in the dorm is empty before start appending.
     this.listElement.empty();
@@ -68,8 +78,12 @@ const RolodexView = Backbone.View.extend({
     this.contactBox.forEach(function(card){
       card.render();
 
+/// -----------------//
+// will this work?
+    $("#contact-cards").append(card.render().$el);
+/// -----------------//
       // add card to our contact list.
-      this.listElement.append(card.$el);
+      // this.listElement.append(card.$el);
     }, this);
 // // http://backbonejs.org/#View-render
 //     this.$el.html(this.contactTemplate(this.contactModel.attributes));
@@ -79,13 +93,15 @@ const RolodexView = Backbone.View.extend({
   events:  {
     // right: name of function that insides page view.
     'click .btn-save' : 'createContact',
-    'click .btn-cancel':'clearInput'
+    'click .btn-cancel':'clearInput',
+    // added this here, should it be here or in other spot.??
+    // 'click .contact-card': 'showDetails'
 
   },
 
   // turn contact data into a contact model, add it to our list of contacts?
   addContact: function(contact){
-
+    console.log("adding contact");
     var card = new ContactView({
       model: contact,
       template: this.contactTemplate
@@ -107,31 +123,35 @@ const RolodexView = Backbone.View.extend({
     // var contact = this.getInput();
     // add contact to collection.
     var contact = new Contact(this.getInput());
+    this.render();
     this.clearInput();
   },
-// necessary for createContact to complete its action
+// necessary for createContact to complete its action?
   getInput: function(event) {
+    console.log("getting input from the form");
+
     var contact = {
       name: this.input.name.val(),
       email: this.input.email.val(),
       phone: this.input.phone.val()
     };
-    console.log("contact -->", contact); // not displaying.
+    console.log("contact -->", contact); // working now. Though returns undefined when no info used. Will I need validation?
+
     return contact;
   },// end getInput
 //
 // set the incoming input??
   setInput: function(contact) {
+    console.log("set input babe!");
     this.input.name.val(contact.get('name'));
     this.input.email.val(contact.get('email'));
     this.input.phone.val(contact.get('name'));
-
 
   },
 
   // clear input function
   clearInput: function(event) {
-    // console.log("clear Input called!");
+    console.log("clear Input called!");
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');

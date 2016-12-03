@@ -46,6 +46,8 @@ var contactList = [
 // starts at 1st load.
 $(document).ready(function (){
   // var application = new Application();
+  // practice hiding things.
+  // $("#contact-details").hide(); // no details to hide yet.
 
   var appView = new RolodexView({
     el: $('#application'),
