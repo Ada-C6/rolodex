@@ -8,14 +8,13 @@ import RolodexView from 'app/views/rolodex_view';
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
     this.render();
+
+    var body = $('body');
+    body.on('click', this.hideModalHandler);
   },
 
   render: function() {
     return this;
-  },
-
-  events: {
-    'dblclick': "hideModalHandler",
   },
 
   hideModalHandler: function(event) {

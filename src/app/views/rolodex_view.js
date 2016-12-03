@@ -58,7 +58,15 @@ const RolodexView = Backbone.View.extend({
 
   events: {
     'click .btn-save': 'createContact',
-    'click .btn-cancel': 'cancelInput'
+    'click .btn-cancel': 'cancelInput',
+    'click #contact-details': 'ModalHandler',
+  },
+
+  ModalHandler: function(event) {
+    event.stopPropagation();
+
+    console.log("Modal Handler called!");
+    // $('#contact-details').show();
   },
 
   // Turn a raw contact into a Contact model, add it to our list of contacts,

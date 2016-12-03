@@ -25,7 +25,7 @@ const ContactView = Backbone.View.extend({
   },
 
   events: {
-    'dblclick': "showModalHandler",
+    'click': "showModalHandler",
   },
 
   showModalHandler: function(event) {
