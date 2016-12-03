@@ -29,14 +29,14 @@
               <input type="text" name="phone">
             </label>
             <button class="button btn-save">Save</button>
-            <button type="button" class="button btn-cancel">Cancel</button>
+            <button class="button btn-cancel">Cancel</button>
           </div>
         </form>
       </header>
 
       <main>
         <ul id="contact-cards" class="row align-center"></ul>
-        <section id="contact-details"></section>
+          <section id="contact-details"></section>
       </main>
     </div>
 
@@ -48,10 +48,11 @@
     </script>
 
     <script type="text/template" id="tmpl-contact-details">
-      <h3><%- contact.name %></h3>
-      <h4><%- contact.email %></h4>
-      <h4><%- contact.phone %></h4>
+      <h3><%- name %>pooooop</h3>
+      <h4><%- email %></h4>
+      <h4><%- phone %></h4>
     </script>
+
 
     <!-- Entire JS project built by Webpack -->
     <script src="/app.bundle.js" charset="utf-8"></script>

@@ -33,12 +33,13 @@ $(document).ready(function() {
     el: $('#application'),
     model: rolodex//contactsData: contactsData
   });
+
+  var appView = new ApplicationView({
+    el: $('#application'),
+    model: application
+  });
+
   application.render();
 });
 
 // var application = new Application();
-//
-// var appView = new ApplicationView({
-//   el: '#application',
-//   model: application
-// });

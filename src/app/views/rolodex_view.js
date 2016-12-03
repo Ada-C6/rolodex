@@ -8,6 +8,7 @@ import Contact from 'app/models/contact';
 const RolodexView = Backbone.View.extend({
   initialize: function(options) {
     // this.contactsData = options.contactsData; //stores the full list of contacts
+    $('#contact-details').hide();
     this.contactTemplate = _.template($('#tmpl-contact-card').html()); //compiles a template to be shared between the contacts
     this.listElement = this.$('#contact-cards'); //keep track of the <li> elements
 
@@ -17,18 +18,6 @@ const RolodexView = Backbone.View.extend({
     this.model.forEach(function(contact) {
       this.addContact(contact);
     }, this);
-
-    // options.contactsData.forEach(function(contact) {
-    //   this.addContact(contact);
-    // }, this);
-
-    // this.contactsData.forEach(function(contact) {
-    //   var card = new ContactView({
-    //     contact: contact,
-    //     template: this.contactTemplate
-    //   });
-    //   this.cardList.push(card);
-    // }, this);
 
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
@@ -41,6 +30,7 @@ const RolodexView = Backbone.View.extend({
   }, //close initialize
 
   render: function() {
+    // $('#contact-details').hide();
     this.listElement.empty(); //make sure the DOM is empty before we start adding to it
     this.cardList.forEach(function(card) {
       card.render(); //cause the contact to render
@@ -66,15 +56,7 @@ const RolodexView = Backbone.View.extend({
     event.preventDefault();
     console.log('creating a contact button pressed!');
     var contact = new Contact( this.getInput() );
-    // this.addContact(contact);
     this.model.add(contact);
-    // this.contactsData.push(contact);
-    // var card = new ContactView({
-    //   contact: contact,
-    //   template: this.contactTemplate
-    // });
-    // this.cardList.push(card);
-    // this.render();
     this.clearInput(event);
   }, //close createContact
 
@@ -88,14 +70,23 @@ const RolodexView = Backbone.View.extend({
   }, //close getInput
 
   addContact: function(contact) {
-    // var contact = new Contact(rawContact);
-    // this.modelList.push(contact);
     var card = new ContactView({
       model: contact,
       template: this.contactTemplate
     });
     this.cardList.push(card);
-  } //close addContact
+    this.listenTo(card, "showMe", this.showCard);
+  }, //close addContact
+
+  showCard: function(contact) {
+    console.log('youre trying to show the card in the rolodex view');
+    var mycardsname = contact.get("name");
+    console.log( 'mycardsname ' + mycardsname);
+    // var this.contact.showing = true;
+    // console.log("contact.showing is " + contact.showing);
+    // return mycardsname
+    // this.model.remove(cardModel);
+  }
 
 });
 
