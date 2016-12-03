@@ -14,8 +14,7 @@ import ApplicationView from 'app/views/application_view';
 var RolodexView = Backbone.View.extend({
   initialize: function(options) {
 
-    this.contactTemplate = _.template($('#tmpl-contact-card').html());
-    // console.log(JSON.stringify(this));
+    this.cardTemplate = _.template($('#tmpl-contact-card').html());
     this.listElement = this.$('.contact-cards');
     // this.contactTemplate = _.template($('#tmpl-contact-details').html());
 
@@ -39,17 +38,15 @@ var RolodexView = Backbone.View.extend({
 
 
     render: function(){
-      console.log("element " + this);
-      console.log(this.contactList);
-      // var card = {name: (this.model.name)};
-      // var html = this.Template(card);
-      // var index = this.$el.html(html);
-      // this.delegateEvetns();
+      console.log("element " + this.model.name);
+    //  var card = {name: (JSON.stringify(this.model))};
+  //    var html = this.Template(card);
+  //    this.$el.html(html);
         this.listElement.empty();
         this.contactList.forEach(function(contactCard) {
           contactCard.render();
-          this.listElement.append(this.contactList);
-          // listElement = contacts.$el
+          this.listElement.append(contactCard);
+        //  listElement = contacts.$el
         }, this);
         return this; // enable chained calls
       },
@@ -63,7 +60,8 @@ var RolodexView = Backbone.View.extend({
       addContact: function(contact) {
         var contactCard = new ContactView({
           model: contact,
-          template: this.contactTemplate
+          el:this.$el,
+          template: this.cardTemplate
         });
         this.contactList.push(contactCard);
       },

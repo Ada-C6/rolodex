@@ -15,12 +15,13 @@ var ContactView = Backbone.View.extend({
     // console.log(JSON.stringify(this.model[0].name));
   },
   render: function(){
-    console.log("element " + this.model.name);
-    var card = {name: (JSON.stringify(this.model.name))};
+    console.log("element " + this.model.attributes.name);
+    var card = {name: (this.model.attributes.name)};
     var html = this.Template(card);
-    this.$el.html(html);
+    this.$el.append(html);
+    console.log(JSON.stringify(this.model));}
     // this.delegateEvetns();
-  },
+
 });
 
 export default ContactView;

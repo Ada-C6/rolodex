@@ -10,7 +10,7 @@ import ApplicationView from 'app/views/application_view';
 
 
 
-var contactList = [
+var rawContact = [
   {
     name: 'Crispin Jockers',
     email: 'crispy@me.com',
@@ -33,9 +33,10 @@ var contactList = [
 
 $(document).ready(function() {
 
+  var rolodex = new Rolodex(rawContact);//rawContact
   var rolodexView = new RolodexView({
     el: $('#contact-cards'),
-    model: contactList
+    model: rolodex
   });
   // var application = new Application(populateData);
   // var applicationView = new ApplicationView({
