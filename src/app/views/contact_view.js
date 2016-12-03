@@ -9,7 +9,7 @@ const ContactView = Backbone.View.extend({
   render: function() {
     // console.log("Loaded a ContactView!"); // NOTE: log
 
-    // Populate the card template with model name value
+    // Populate the card template with the model name
     var html = this.template({
       name: this.model.name,
     });

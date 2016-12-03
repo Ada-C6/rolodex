@@ -33,7 +33,7 @@ var contactData = [
 ];
 
 const ApplicationView = Backbone.View.extend({
-  // this.$el is '#application'
+  // this.$el is 'html'
 
   initialize: function() {
     // Instantiate Rolodex & RolodexView
@@ -63,7 +63,7 @@ const ApplicationView = Backbone.View.extend({
   },
 
   events: {
-    'click': 'hideModal', // NOTE: this event listens on entire element
+    'click': 'hideModal', // NOTE: this event listens on entire $el ()
     'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearInput'
   },

@@ -105,9 +105,8 @@ const RolodexView = Backbone.View.extend({
   },
 
   editClick: function(event) {
-    // console.log("editClick"); // NOTE: log
-    // console.log("editClick this.model" + this.model); // NOTE: log
     // console.log("editClick this.contact.name " + this.contact.name ); // NOTE: log
+    // console.log("editClick this.model" + this.model); // NOTE: log
 
     // Trigger 'edit:click' event & pass this.contact from modal up to ApplicationView (for editContact)
     this.trigger('edit:click', this.contact);
