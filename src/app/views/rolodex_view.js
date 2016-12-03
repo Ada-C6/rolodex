@@ -78,8 +78,8 @@ const RolodexView = Backbone.View.extend({
 
   events:  {
     // right: name of function that insides page view.
-    'click btn-save' : 'createContact',
-    'click btn-cancel':'clearInput'
+    'click .btn-save' : 'createContact',
+    'click .btn-cancel':'clearInput'
 
   },
 
@@ -98,14 +98,15 @@ const RolodexView = Backbone.View.extend({
 
   createContact: function(event) {
     event.preventDefault();
+    console.log("btn save has been clicked.");
     // console.log("createContact");
     //get input data from the form. and turn it into contact.
-
+    // this.model.add(contact);
     // var contact = this.getInput();
     // var contact = new Contact(this.getInput()); // working version
-    var contact = this.getInput();
+    // var contact = this.getInput();
     // add contact to collection.
-    this.model.add(contact);
+    var contact = new Contact(this.getInput());
     this.clearInput();
   },
 // necessary for createContact to complete its action
