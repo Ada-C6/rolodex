@@ -9,9 +9,12 @@ const ContactView = Backbone.View.extend({
 
 // if my contact changes, we re-render
 		this.listenTo(this.model, 'change', this.render );
+
   }, //initialize end
 
-
+events: {
+	'click': 'zoomIn'
+},
 
   render: function() {
 // this sets what we want to see
@@ -26,6 +29,14 @@ const ContactView = Backbone.View.extend({
   return this;
   }, //render end
 
+
+
+  zoomIn: function() {
+
+  	this.trigger('cardPicked', this);
+  	console.log(this.model.attributes);
+
+  },
 });
 
 export default ContactView;
