@@ -32,7 +32,7 @@ var ContactView = Backbone.View.extend({
   onClick: function(event) {
     console.log('onClick contact');
     //trigger event CLV
-    this.trigger('show-details', this.model); //this.model is just the data and that's all clv needs
+    this.trigger('show-details', this.model ); //this.model is just the data and that's all clv needs
   },
 
 });

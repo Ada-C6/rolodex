@@ -14,10 +14,7 @@ var ContactListView = Backbone.View.extend({ // parent
     // below: if we had done this.$, backbone this here will make sure we only look at THIS area for the id
     $('#contact-details').hide();
     this.template = _.template($('#tmpl-contact-card').html());
-    console.log('What is this at the moment? ' + this);
-    console.log('What is options.contacts at the moment? ' + options.contacts);
-    // console.log('What is this.model at the moment? ' + this.model);
-    // this.modelList = [];
+
     this.cardList = [];
 
     this.model.forEach(function(contact) {
@@ -63,9 +60,13 @@ var ContactListView = Backbone.View.extend({ // parent
     // Add the card to our card list
     this.cardList.push(card);
   },
-  showModal: function() {
+  showModal: function(contact) {
+    var template = _.template($('#tmpl-contact-details').html());
+    // this.$el.append(card.$el);
+
     console.log('show the modal');
-    $('#contact-details').show();    
+    console.log(contact);
+    $('#contact-details').show();
   }
 
 });
