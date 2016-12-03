@@ -31,7 +31,7 @@ header {
   z-index: 10;
   position: fixed;
   width: 30%;
-  height: 30%;
+  min-height: 30%;
   top: 30%;
   left: 30%;
   background-color: #538ca3;
@@ -39,6 +39,8 @@ header {
   border: 1em solid white;
   margin-left: 20%;
   border-radius: 20%;
+  overflow: visible;
+  word-wrap: break-word;
 }
 
 #contact-cards {
@@ -57,10 +59,14 @@ header {
 }
 
 .contact-card:hover {
-    cursor: pointer;
-    background-color: #538ca3;
+  cursor: pointer;
+  background-color: #538ca3;
 }
 
 .contact-card:hover h3 {
   color: white;
+}
+
+.hidden{
+  display: none;
 }

@@ -14,7 +14,7 @@
       <header>
         <h1>Rolodex</h1>
         <section class="row contact-form">
-          <h3>Add A New Contact</h3>
+          <h3 id="form-title">Add A New Contact</h3>
           <div class="columns">
             <label>
               Name
@@ -30,13 +30,14 @@
             </label>
             <h3 class="button btn-save">Save</h3>
             <h3 class="button btn-cancel">Cancel</h3>
+            <!-- <h3 class="button btn-test">Clickme</h3> -->
           </div>
         </section>
       </header>
 
       <main>
         <ul id="contact-cards" class="row align-center"></ul>
-        <section id="contact-details"></section>
+        <section id="contact-details" class="hidden"></section>
       </main>
     </div>
 
@@ -51,6 +52,7 @@
       <h3><%- name %></h3>
       <h4><%- email %></h4>
       <h4><%- phone %></h4>
+      <button class="button tiny edit-me">Edit</button>
     </script>
 
     <!-- Entire JS project built by Webpack -->
