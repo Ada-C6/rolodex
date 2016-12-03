@@ -1,6 +1,8 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
 import ContactView from 'app/views/contact_view';
+import Contact from 'app/models/contact';
+
 
 //currently trying to get modal thing working.
 //there is a bug when I try to show/hide the modal.
@@ -15,6 +17,8 @@ const RolodexView = Backbone.View.extend({
 	    // Compile a template to be shared between the individual tasks
 	    // console.log(options.template)
 	    this.cardList=[];
+	    // this.detailsList=[];
+
 	    this.contactTemplate = options.template;
 
 	    this.model=options.model;
@@ -22,7 +26,10 @@ const RolodexView = Backbone.View.extend({
 
 	    this.model.forEach(function(contact) {
       		this.addContact(contact);
+      		// this.addDetails(contact)
     	}, this)
+
+	    
 
 	    // console.log("$el:",this.$el)
 	    this.input = {
@@ -33,7 +40,9 @@ const RolodexView = Backbone.View.extend({
     	
     	this.listenTo(this.model, "update", this.render);
 
-    	this.listenTo(this.model, "add", this.addTask);
+    	this.listenTo(this.model, "add", this.addContact);
+
+    	// this.listenTo(this.model, "add", this.addDetails);
 
   	},
   	render: function(){
@@ -59,6 +68,7 @@ const RolodexView = Backbone.View.extend({
     	return contact;
 	},
 	clearInput: function(event) {
+    	event.stopPropagation();
     	this.input.name.val('');
     	this.input.email.val('');
     	this.input.phone.val('');
@@ -69,27 +79,41 @@ const RolodexView = Backbone.View.extend({
 	    var card = new ContactView({
 	      model: contact,
 	      template: this.contactTemplate,
-	      // el: "#application"
+	       // el: ".contact-details"
 	    });
+
+
 	    this.cardList.push(card);
+	    console.log("cardList",this.cardList)
+	    console.log("el:",card.el);
 
 	},
+
+	// addDetails: function(contact){
+	// 	 var card = new ContactView({
+	//       model: contact,
+	//       template: this.detailsTemplate,
+	//        //el: "#application"
+	//     });
+	//     this.detailsList.push(card);
+	//     console.log("detailsList",this.detailsList);
+	// },
 
 	createContact: function(event) {
 	    // Normally a form submission will refresh the page.
 	    // Suppress that behavior.
-	    
+	    event.stopPropagation();
 	    event.preventDefault();
 		console.log("This happened");
 	    // Get the input data from the form and turn it into a contact
 	    var contact = new Contact(this.getInput());
 	    this.model.add(contact);
+	    console.log("rolodex",this.model)
 
 	    console.log("contact",contact);
-	    console.log("rawContact", rawContact);
 
 	    // Create a card (view for the card)
-	    // this.addContact(contact);
+	    this.addContact(contact);
 
 	    // // Re-render the whole list, now including the new card
 	    // this.render();

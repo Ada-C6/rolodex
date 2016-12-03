@@ -13,7 +13,7 @@ import _ from 'underscore';
 var application = new Application();
 
 var appView = new ApplicationView({
-  el: '#application',
+  el: $('.everything'),
   model: application
 });
 
@@ -69,7 +69,10 @@ $(document).ready(function() {
   	 el: $('#application')
   });
 
-
+  // $(".everything").onclick=function(){
+  // 		$('#contact-details').hide();
+  // 		console.log("bye modal");
+  // 	};
 
   rolodexView.render();
   

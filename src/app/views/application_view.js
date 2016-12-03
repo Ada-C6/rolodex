@@ -11,16 +11,21 @@ const ApplicationView = Backbone.View.extend({
   },
 
   hideModal: function(){
-  	$('#contact-details').css("display","none");
-  	console.log("hello again");
+  	if ($('#contact-details').css("display") != "none"){
+  		  $('#contact-details').css("display","none");
+  		console.log("bye modal");
+  	}
+  	console.log("I clicked outside of modal")
   },
 
   nope: function(event){
-  	
+  	console.log("does this even work?")
   	event.stopPropagation();
+
   },
+
   events:{
-  	"click body": "hideModal",
+  	"click": "hideModal",
   	"click #contact-details": "nope"
   }
 });
