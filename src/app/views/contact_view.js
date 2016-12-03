@@ -24,6 +24,8 @@ const ContactView = Backbone.View.extend({
 
   events: {
     'click .contact-card': 'cardClick'
+    // TODO: remove!
+    // 'click .btn-edit': 'editClick'
   },
 
   cardClick: function(event) {
@@ -34,7 +36,13 @@ const ContactView = Backbone.View.extend({
 
     // Trigger event to pass up to RolodexView for showModal
     this.trigger('contact:click', this.model);
-  }
+  },
+
+  // TODO: remove!
+  // editClick: function(event) {
+  //   console.log("Ready to edit! " + this.model); // NOTE: log
+  //   this.trigger('edit:click');
+  // },
 });
 
 export default ContactView;

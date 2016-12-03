@@ -6,27 +6,27 @@ import RolodexView from 'app/views/rolodex_view';
 
 var contactData = [
   {
-    name: 'Daria Morgendorffer',
+    name: 'Daria',
     email: 'no@nah.com',
     phone: '5551112222',
   },
   {
-    name: 'Quinn Morgendorffer',
+    name: 'Quinn',
     email: 'imcute@popular.com',
     phone: '5551234567',
   },
   {
-    name: 'Jane Lane',
+    name: 'Jane',
     email: 'amiga@prettyrad.com',
     phone: '5552223333',
   },
   {
-    name: 'Trent Lane',
+    name: 'Trent',
     email: 'newnameideas@mystikspiral.com',
     phone: '5556667878',
   },
   {
-    name: 'Brittany Taylor',
+    name: 'Brittany',
     email: 'thebest@cheerleader.com',
     phone: '5559873456',
   },
@@ -49,6 +49,8 @@ const ApplicationView = Backbone.View.extend({
       email: this.$('.contact-form input[name="email"]'),
       phone: this.$('.contact-form input[name="phone"]'),
     };
+
+    this.listenTo(this.rolodexView, 'edit:click', this.editContact);
 
     // I believe this prevents need for $(document).ready activation?
     this.render();
@@ -80,6 +82,21 @@ const ApplicationView = Backbone.View.extend({
     this.clearInput();
   },
 
+  editContact: function(contact) {
+    console.log("editContact!!!"); // NOTE: log
+    // console.log("this.contact " + this.contact);
+    console.log("contact " + contact); // NOTE: log
+    console.log("contact.name " + contact.name); // NOTE: log
+    // console.log("editContact " + this.contact.name); // NOTE: log
+
+    this.setInput(contact);
+
+    this.hideModal();
+
+    contact.destroy();
+
+  },
+
   getInput: function() {
     // console.log("Getting Input"); // NOTE: log
 
@@ -102,8 +119,15 @@ const ApplicationView = Backbone.View.extend({
     this.input.phone.val('');
   },
 
+  setInput: function(contact) {
+    // console.log(""); // NOTE: log TODO: remove if empty
+    this.input.name.val(contact.get('name'));
+    this.input.email.val(contact.get('email'));
+    this.input.phone.val(contact.get('phone'));
+  },
+
   hideModal: function(event) {
-    console.log("Modal should go away now...");
+    // console.log("Modal should go away now..."); // NOTE: log
     this.$('#contact-details').hide();
   }
 

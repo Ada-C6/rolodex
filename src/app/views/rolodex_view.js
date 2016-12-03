@@ -23,6 +23,7 @@ const RolodexView = Backbone.View.extend({
 
     // listen for new Contacts in Rolodex. For any: generate new card, re-render view
     this.listenTo(this.model, 'add', this.addContactCard);
+    this.listenTo(this.model, 'remove', this.removeContactCard);
     this.listenTo(this.model, 'update', this.render);
 
     // Keep track of modal element/template
@@ -46,7 +47,8 @@ const RolodexView = Backbone.View.extend({
   },
 
   events: {
-    'click #contact-details': 'suppressModalHide'
+    'click #contact-details': 'suppressModalHide',
+    'click .btn-edit': 'editClick'
   },
 
   addContactCard: function(contact) {
@@ -63,9 +65,23 @@ const RolodexView = Backbone.View.extend({
     this.contactCards.push(card);
   },
 
+  removeContactCard: function(contact) {
+    console.log("in removeContactCard. this.contactCards is: " + this.contactCards); // NOTE: log
+
+    this.contactCards = _.reject(this.contactCards, function(card) {
+      return card.model == contact;
+    });
+
+    console.log("After _.reject, this.contactCards is: " + this.contactCards);
+  },
+
   showModal: function(contact) {
     // console.log('This will SHOW MODAL >--------<'); // NOTE: log
     // console.log(contact); // NOTE: log
+    console.log("showModal this.model: " + this.model);
+    console.log("showModal this.model.name: " + this.model.name);
+
+    this.contact = contact;
 
     // set the needed values for template
     var html = this.modalTemplate({
@@ -78,13 +94,40 @@ const RolodexView = Backbone.View.extend({
     this.modalElement.html(html);
     this.modalElement.show();
 
+    console.log("showModal contact.name: " + contact.name);
+    console.log("showModal contact: " + contact);
+
+    // this.listenTo(this, 'edit:click', this.editContact); // NOTE: important?!
+
     return this;
   },
 
   suppressModalHide: function(event) {
     // prevent click on Modal from bubbling up (which would trigger hideModal)
     event.stopPropagation();
+  },
+
+  editClick: function(event) {
+    // console.log("Ready to edit! " + this.model); // NOTE: log
+    console.log("editClick"); // NOTE: log
+    console.log("editClick this" + this); // NOTE: log
+    console.log("editClick this.model" + this.model); // NOTE: log
+    console.log("editClick this.model.name" + this.model.name); // NOTE: log
+    console.log("editClick this.contact " + this.contact); // NOTE: log
+    console.log("editClick this.contact.name " + this.contact.name ); // NOTE: log
+
+    this.trigger('edit:click', this.contact);
   }
+
+  // ,
+  //
+  // editContact: function(contact) {
+  //   console.log("editContact!!!"); // NOTE: log
+  //   // console.log("this.contact " + this.contact);
+  //   console.log("contact " + contact); // NOTE: log
+  //   console.log("contact.name " + contact.name); // NOTE: log
+  //   // console.log("editContact " + this.contact.name); // NOTE: log
+  // }
 
 });
 
