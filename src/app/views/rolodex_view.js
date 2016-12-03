@@ -31,13 +31,18 @@ const RolodexView = Backbone.View.extend({
     //when model updates, re-render list of cards
     this.listenTo(this.model, 'update', this.render);
 
+    this.contactDetails = $('#contact-details');
+
+    this.hideModal();
+
+    this.contactDetailsTemplate =_.template($('#tmpl-contact-details').html());
+
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
       phone: this.$('.contact-form input[name="phone"]'),
       email: this.$('.contact-form input[name="email"]'),
     };
 
-    // this.listenTo(this.model, 'remove', this.removeTask);
   }, //end initialize
 
   render: function() {
@@ -59,10 +64,11 @@ const RolodexView = Backbone.View.extend({
 
  events: {
   'click .btn-save': 'createContact',
-  'click .btn-cancel': 'clearInput'
+  'click .btn-cancel': 'clearInput',
+  'click': 'outsideClick'
+
 },
 
- // Turn a raw contact into a Contact model, add it to our list of contacts
   addContact: function(contact) {
 
     var card = new ContactView({
@@ -70,8 +76,8 @@ const RolodexView = Backbone.View.extend({
       model: contact,
       template: this.contactTemplate
     });
-    // console.log("THIS IS THE CARD BEING MADE: " + JSON.stringify(card));
-    // this.listenTo(card, 'edit', this.editContact);
+
+    this.listenTo(card, 'showDetails', this.showModal);
     // Add the card to our card list
     this.cardList.push(card);
   },
@@ -119,6 +125,37 @@ const RolodexView = Backbone.View.extend({
     this.input.email.val('');
     this.input.phone.val('');
   },
+
+  showModal: function(info) {
+   console.log("showing modal for " + info.get("name"));
+
+   // replace contents of modal with this info
+   this.fillModal(info);
+
+   // display the modal
+   this.contactDetails.show();
+ },
+
+ fillModal: function(contact){
+
+   // clear the modal out if there's something in there already.
+   this.contactDetails.empty();
+
+   // the data I'm passing to the template
+   var specificDetails = this.contactDetailsTemplate({name: contact.attributes.name, email: contact.attributes.email, phone: contact.attributes.phone});
+
+   // putting the html from this contact into the modal.
+   this.contactDetails.append(specificDetails);
+
+ },
+
+ outsideClick: function(event){
+   this.hideModal();
+ },
+
+ hideModal: function() {
+   this.contactDetails.hide();
+ }
 
 });
 

@@ -31,7 +31,8 @@ $(document).ready(function() {
 
 // we're defining options here that are application will be in charge of.
   var options = {
-    el: $('#application'),
+    // el: $('#application'),
+    el: $('body'),
     model: rolodex
   };
 

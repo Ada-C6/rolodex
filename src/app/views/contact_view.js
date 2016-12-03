@@ -7,8 +7,9 @@ import _ from 'underscore';
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
   this.template = options.template;
-  //maybe remove html
+
   this.modalTemplate = _.template($('#tmpl-contact-details').html());
+
   this.contactInfo = {
     name: this.model.get('name'),
     phone: this.model.get('phone'),
@@ -16,16 +17,14 @@ const ContactView = Backbone.View.extend({
   };
 
   _.extend(this.contactInfo, Backbone.Events);
-  //
-  // console.log("this .contact info: " + this.contactInfo);
 
   this.listenTo(this, 'showContactDetails', this.viewDetails);
 
-  this.toggleDetails();
+  // this.toggleDetails();
   },
 
   render: function() {
-    var html = this.template({contact:  this.model.attributes}); //don't forget! this gives us the name when we say contact.name
+    var html = this.template({contact:  this.model.attributes});
     this.$el.html(html);
     // this.delegateEvents();
         console.log("contact is " + this.model.attributes.name);
@@ -35,9 +34,9 @@ const ContactView = Backbone.View.extend({
     return this;
   },
 
-  toggleDetails: function(onIndicator) {
-    $("#contact-details").toggle(onIndicator);
-  },
+  // toggleDetails: function(onIndicator) {
+  //   $("#contact-details").toggle(onIndicator);
+  // },
 
   viewDetails: function() {
     //make it pop up here
@@ -50,22 +49,21 @@ const ContactView = Backbone.View.extend({
     });
 
     $("#contact-details").html(html);
-    this.toggleDetails();
+    // this.toggleDetails();
   },
 
   events: {
    'click .contact-card': 'showDetails',
-  //  'click .btn-cancel': 'clearInput'
+  //  'click #application': 'toggleDetails',
+   'click .btn-cancel': 'clearInput'
  },
 
  showDetails: function() {
    console.log("You've clicked the contact card");
-   //we want to pull up the template that has the contact details (#'templ-contact-details')
-
-   //we gotta feed it data to show up
-
-   //trigger something
+  event.stopPropagation();
    this.trigger("showContactDetails");
+  this.trigger('showDetails', this.model);
+
  },
 
 });

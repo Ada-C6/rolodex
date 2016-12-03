@@ -11,7 +11,13 @@ const ApplicationView = Backbone.View.extend({
 
   render: function() {
     return this;
-  }
+  },
+
+  events: {'click': 'toggleDetails'},
+
+  toggleDetails: function(e) {
+    $(e.currentTarget).toggle('#contact-details');
+  },
 });
 
 export default ApplicationView;
