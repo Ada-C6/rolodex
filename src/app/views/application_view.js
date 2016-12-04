@@ -12,20 +12,18 @@ import Application from 'app/models/application';
 
 const ApplicationView = Backbone.View.extend({
   initialize: function(options){
-    // Keep track of our form input fields
+    this.form = this.$('.contact-form');
+    this.input = {
+      name: this.$('.contact-form input[name="name"]'),
+      email: this.$('.contact-form input[name="email"]'),
+      phone: this.$('.contact-form input[name="phone"]')
+    };
   },
-
   render: function() {
-    this.listElement.empty();
-    this.contactList.forEach(function(options) {
-      contacts.render();
-      this.listElement.append(contacts.$el);
-    }, this);
-    return this; // enable chained calls
   },
 
   events: {
-    'submit .btn-save': 'createContact',
+    'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearInput',
   },
 
@@ -37,23 +35,6 @@ const ApplicationView = Backbone.View.extend({
     this.clearInput();
   },
 
-  removeContact: function(contact){
-    var desirables = [];
-    this.contactList.forEach(function(contactCard){
-      if (contactCard.model != contact) {
-        undesirables.push(contact);
-      }
-    });
-    this.contactList = desirables;
-  },
-
-  addContact: function(contact) {
-    var contactCard = new ContactView({
-      model: contact,
-      template: this.contactTemplate
-    });
-    this.contactList.push(contactCard);
-  },
   getInput: function() {
     var contact = {
       name: this.input.name.val(),

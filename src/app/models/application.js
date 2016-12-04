@@ -10,11 +10,10 @@ const Application = Backbone.Model.extend({
 
   initialize: function() {
     console.log("Created new contact with title " + this.name);
+  },
+    add:function (contact){
+    this.attributes.myRolodex.add(contact);
   }
-  // toggleComplete: function() {
-  //   var newStatus = !(this.get('complete'));
-  //   this.set('complete', newStatus);
-  // }
 });
 
 export default Application;

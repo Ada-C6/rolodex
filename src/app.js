@@ -32,18 +32,22 @@ var rawContact = [
 ];
 
 $(document).ready(function() {
-
   var rolodex = new Rolodex(rawContact);//rawContact
   var rolodexView = new RolodexView({
     el: $('#contact-cards'),
     model: rolodex
   });
-  // var application = new Application(populateData);
-  // var applicationView = new ApplicationView({
-  //   el: $('#application'),
-  //   model: application
-  // });
-  rolodexView.render();
-  // rolodexView.render();
-  // applicationView.render();
+   var application = new Application({myRolodex:rolodex});
+   var applicationView = new ApplicationView({
+     el: $('#application'),
+     model: application
+   });
+   var contact = new Contact({myRolodex:rolodex});
+   var contactView = new ContactView({
+     el: $('#contact-details'),
+     model: contact
+   });
+
+   rolodexView.render();
+   applicationView.render();
 });
