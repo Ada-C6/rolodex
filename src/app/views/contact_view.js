@@ -27,6 +27,7 @@ const ContactView = Backbone.View.extend({
 	    //could use .attributes but that's bad for some reason
 	    // var html = this.contactTemplate({contact: this.model.attributes})
 	    // this.delegateEvents();
+	    this.delegateEvents();
 
 	    var html = this.contactTemplate({contact: this.model.toJSON()})
 

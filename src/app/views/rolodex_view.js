@@ -47,6 +47,7 @@ const RolodexView = Backbone.View.extend({
   	},
   	render: function(){
   		this.listElement.empty();
+  		this.delegateEvents();
 
   		this.cardList.forEach(function(card) {
      		 // Cause the contact to render
@@ -75,7 +76,7 @@ const RolodexView = Backbone.View.extend({
   	},
 
   	addContact: function(contact) {
-    // Create a card for the new task
+    // Create a card for the new contact
 	    var card = new ContactView({
 	      model: contact,
 	      template: this.contactTemplate,
