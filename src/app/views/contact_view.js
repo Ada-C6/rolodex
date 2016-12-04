@@ -2,7 +2,6 @@ import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
 import Contact from 'app/models/contact';
-import ContactDetailView from 'app/views/contact_detail_view';
 
 const ContactView = Backbone.View.extend({
 
@@ -27,23 +26,8 @@ const ContactView = Backbone.View.extend({
   },
 
   getDetail: function(event){
-    $('#contact-details').empty();
-    var cardDetail = new ContactDetailView({
-      el: $('#contact-details'),
-      model: this.model
-    });
-    this.listenTo(cardDetail, "editMe", this.editCard);
-    cardDetail.render();
-  },
-
-  editCard: function(cardModel) {
-  console.log("Editing a card");
-
-  this.input.name.val(cardModel.get("name"));
-  this.input.email.val(cardModel.get("email"));
-  this.input.phone.val(cardModel.get("phone"));
-  this.collection.remove(cardModel);
-},
+    this.trigger("deetsplz", this.model);
+  }
 
 });
 

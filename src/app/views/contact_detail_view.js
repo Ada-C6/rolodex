@@ -10,7 +10,8 @@ const ContactDetailView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.show(); //default hidden modal will show
+    // this.$el.empty(); //***changed so that no el was assigned (before #contact-details was assigned)
+    // this.$el.show(); //default hidden modal will show
     var html = this.contactTemplate(this.model.attributes); //pass model attributes to template
     this.$el.html(html); //creates div tag with above html elements inside
     // Enable chained calls
@@ -23,15 +24,15 @@ const ContactDetailView = Backbone.View.extend({
   },
   //send trigger to rolodexview!
   editDetail: function(event){
-    console.log('whyyy');
+    // console.log('whyyy');
     this.trigger("editMe", this.model);
-    this.$el.hide();
+    $('#contact-details').hide();
   },
  //delete the model!!
   deleteContact: function(event){
-    console.log('hi');
+    console.log('hi'); //<----this indicator suggests there are ZOMBIES HERE. AHHHHHHHH **resolved :)
     this.model.destroy();
-    this.$el.hide();
+    $('#contact-details').hide();
   }
 
 });
