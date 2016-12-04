@@ -29,7 +29,7 @@ var contactData = [
 $(document).ready(function() {
   var rolodex = new Rolodex(contactData);
   var options = {
-    // Need to be #application so that input fields are available to rolodex and contact 
+    // Need to be #application so that input fields are available to rolodex and contact
     el: $('#application'),
     model: rolodex
   };
@@ -37,7 +37,6 @@ $(document).ready(function() {
   rolodexView.render();
 
 });
-
 
 
 var application = new Application();

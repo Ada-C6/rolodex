@@ -5,7 +5,7 @@ import $ from 'jquery';
 var ContactView = Backbone.View.extend({
   initialize: function(options) {
     this.template = options.template;
-    this.detailsTemplate = _.template($('#tmpl-contact-details').html());
+    // this.detailsTemplate = _.template($('#tmpl-contact-details').html());
 
     this.listenTo(this.model, 'change', this.render);
   },
@@ -24,13 +24,21 @@ var ContactView = Backbone.View.extend({
   },
 
   events: {
-    'click': 'modalHandler'
+    'click .contact-card': 'modalHandler'
   },
 
   modalHandler: function(event) {
     console.log("modalHandler called");
-    $('#contact-details').show();
-    this.trigger('show', this);
+    var detailsTemplate = _.template($('#tmpl-contact-details').html());
+    var detailsHTML = detailsTemplate({
+      name: this.model.attributes.name,
+      email: this.model.attributes.email,
+      phone: this.model.attributes.phone
+    });
+    $('#contact-details').fadeIn();
+    $('#contact-details').html(detailsHTML);
+
+    // this.trigger('show', this);
   }
 });
 

@@ -28,7 +28,7 @@ var RolodexView = Backbone.View.extend({
     this.listenTo(this.model, 'update', this.render);
 
     //or is it this.showDetails instead of this.render?
-    this.listenTo(this.model, 'show', this.showDetails);
+    // this.listenTo(this.model, 'show', this.showDetails);
   },
 
   render: function() {
@@ -80,13 +80,13 @@ var RolodexView = Backbone.View.extend({
     this.clearInput();
   },
 
-  showDetails: function(event) {
-    console.log("showDetails called");
-    var details = new ContactView({
-      model: contact,
-      template: this.detailsTemplate
-    });
-  },
+  // showDetails: function(event) {
+  //   console.log("showDetails called");
+  //   var details = new ContactView({
+  //     model: contact,
+  //     template: this.detailsTemplate
+  //   });
+  // },
 
   getInput: function() {
     var contact = {
