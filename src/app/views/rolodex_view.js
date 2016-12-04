@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
-import Rolodex from 'app/collections/rolodex';
 import ContactView from 'app/views/contact_view';
 import ContactDetailView from 'app/views/contact_detail_view';
 
@@ -38,14 +37,15 @@ const RolodexView = Backbone.View.extend({
   },
 
   makeDetail: function(model){
-    $('#contact-details').empty();
+    $('#contact-details').empty();//clears modal of previous details
+    //create new detail view
     var cardDetail = new ContactDetailView({
       model: model
     });
-    cardDetail.render();
+    cardDetail.render(); //render the details
     this.listenTo(cardDetail, "editMe", this.editCard);
-    $('#contact-details').append(cardDetail.$el);
-    $('#contact-details').show();
+    $('#contact-details').append(cardDetail.$el); //append card details
+    $('#contact-details').show(); //show modal
   },
 
   editCard: function(cardModel) {
@@ -54,15 +54,13 @@ const RolodexView = Backbone.View.extend({
   this.input.name.val(cardModel.get("name"));
   this.input.email.val(cardModel.get("email"));
   this.input.phone.val(cardModel.get("phone"));
-  this.model.remove(cardModel);
+  this.model.remove(cardModel); //temporarily remove contact from collection while edited
 },
 
   addContact: function(contact) {
     var card = new ContactView({
       // el: $('#contact-cards'), <---still unsure why when el was specified (and direct li objects were added to ul tag), .contact-card tags could not be clicked independently
       model: contact, //contacts created with each individual model passed through
-      input: this.input,
-      collection: this.model
     });
     this.listenTo(card, "deetsplz", this.makeDetail);
     this.cardList.push(card); //add each contact view to cardlist matrix

@@ -30,13 +30,7 @@ const ApplicationView = Backbone.View.extend({
   events: {
     'click .btn-save': 'saveInput',
     'click .btn-cancel': 'clearInput',
-    // 'click .edit': 'editDetail'
   },
-
-  // editDetail: function(event){
-  //   console.log('ugh');
-  //   this.trigger("editMe", this.model);
-  // },
 
   clearInput: function(event) {
     $('input').val('');//clear all values in any input tags

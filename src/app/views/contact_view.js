@@ -7,9 +7,6 @@ const ContactView = Backbone.View.extend({
 
   initialize: function(options) {
     this.rolodexTemplate = _.template($('#tmpl-contact-card').html());//template provided in script tag in index.html
-    this.contactTemplate = _.template($('#tmpl-contact-details').html()); //script template for contact details
-    this.input = options.input;
-    this.collection = options.collection;
   },
 
   render: function() {
