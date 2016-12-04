@@ -13,25 +13,16 @@ import ApplicationView from 'app/views/application_view';
 var RolodexView = Backbone.View.extend({
   initialize: function(options) {
     this.cardTemplate = _.template($('#tmpl-contact-card').html());
-
-    // this.contactTemplate = _.template($('#tmpl-contact-details').html());
-
     this.contactList = [];
-
     this.model.forEach(function(newContact) {
-      this.addContact(newContact);
+    this.addContact(newContact);
     }, this);
 
-
-    //options.model?
-
-
-    this.listenTo(this.model, 'update', this.render);
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(this.model, 'add', this.addContact);
-    this.listenTo(this.model, 'remove', this.removeContact);},
-
-
+    // this.listenTo(this.model, 'update', this.render);
+    // this.listenTo(this.model, 'remove', this.removeContact);
+  },
 
     render: function(){
       this.$el.empty();
@@ -43,9 +34,8 @@ var RolodexView = Backbone.View.extend({
     },
 
     events: {
-      //need to add these in
-      'click .btn-delete': 'removeContact',
-      'click .btn-edit': 'clearInput',
+      // 'click .btn-delete': 'removeContact',
+      // 'click .btn-edit': 'editInput',
     },
 
     addContact: function(contact) {
@@ -69,12 +59,10 @@ var RolodexView = Backbone.View.extend({
 
     createContact: function(event) {
       event.preventDefault();
-      // Add the contact to our Collection
       var newContact = this.getInput();
       this.model.add(newContact);
       this.clearInput();
     }
-
   });
 
   export default RolodexView;

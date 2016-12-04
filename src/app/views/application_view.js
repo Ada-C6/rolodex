@@ -12,6 +12,7 @@ import Application from 'app/models/application';
 
 const ApplicationView = Backbone.View.extend({
   initialize: function(options){
+    this.details = $('#contact-details');
     this.form = this.$('.contact-form');
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
@@ -20,6 +21,7 @@ const ApplicationView = Backbone.View.extend({
     };
   },
   render: function() {
+    this.details.hide();
   },
 
   events: {

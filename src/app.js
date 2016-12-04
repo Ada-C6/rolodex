@@ -8,8 +8,6 @@ import ContactView from 'app/views/contact_view';
 import Application from 'app/models/application';
 import ApplicationView from 'app/views/application_view';
 
-
-
 var rawContact = [
   {
     name: 'Crispin Jockers',
