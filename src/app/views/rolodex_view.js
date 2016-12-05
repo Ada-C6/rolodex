@@ -92,7 +92,7 @@ const RolodexView = Backbone.View.extend({
     // right: name of function that insides page view.
     // Submit events are triggered by forms when the
     // submit button is clicked or the enter key pressed
-    'submit .new-contact' : 'addContact',
+    // 'submit .new-contact' : 'addContact',
     // testing // Ideas
     'click .btn-save' : 'addContact',
 
