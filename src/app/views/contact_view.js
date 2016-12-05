@@ -28,9 +28,15 @@ const ContactView = Backbone.View.extend({
 
   modalHandler: function(event) {
     console.log("modalHandler called!");
+    var templateContainer = _.template($('#tmpl-contact-details').html());
+    var templateContents = templateContainer({
+      name: this.model.attributes.name,
+      email: this.model.attributes.email,
+      phone: this.model.attributes.phone
+    });
      $('#contact-details').show();
-    this.trigger('show', this);
-  }
+     $('#contact-details').html(templateContents);
+   }
 });
 
 export default ContactView;

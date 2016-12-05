@@ -25,7 +25,6 @@ const RolodexView = Backbone.View.extend({
 
     this.listenTo(this.model, 'update', this.render);
 
-    this.listenTo(this.model, 'show', this.showDetails);
   },
 
   render: function() {
@@ -66,14 +65,6 @@ const RolodexView = Backbone.View.extend({
     // Add the card to our card list
     this.cardList.push(card);
     console.log(card);
-  },
-
-  showDetails: function(event) {
-    console.log("showDetails called");
-    var details = new ContactView({
-      model: contact,
-      template: this.detailsTemplate
-    });
   },
 
   getInput: function() {
