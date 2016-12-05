@@ -17,7 +17,7 @@ import Rolodex from 'app/collections/rolodex';
 
 // contacts to start with with.
 // spacing used to disquish diff. parts of code. ok to use this arrangement?
-var contactList = [
+var contactData = [
   {
     name: "Albus Dumbldore",
     email: "headmaster@wizzard.edu",
@@ -48,12 +48,13 @@ $(document).ready(function (){
   // var application = new Application();
   // practice hiding things.
   // $("#contact-details").hide(); // no details to hide yet.
+  var rolodex = new Rolodex(contactData);
 
   var appView = new RolodexView({
     el: $('#application'),
     // abstraction.. introducing.
-    contactData: contactList,
-    model: application,
+    // contactData: contactData,
+    model: rolodex
   });
   appView.render();
 

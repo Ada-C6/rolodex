@@ -4,63 +4,64 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
 import $ from 'jquery';
-
+// import contact from app/models/contact
 import Contact from 'app/models/contact';
+// import contact from app/models/contact_view
 import ContactView from 'app/views/contact_view';
+
 
 // build a rolodex_view with options passed in app (data)
 const RolodexView = Backbone.View.extend({
 
   initialize: function(options){
-    // receipe prep. mise plase .
-    //store the full list of contacts
-    // console.log("Inside RolodexView::::::" + JSON.stringify(options));
-
+/* mise en place: putting everything in place before building recipe. */
     this.contactData = options.contactData;
     // console.log("this contactData", this.contactData);
-    // console.log("options _>", options);
+    console.log("options _>", options);
 
     // Compile a template to be shared between the individual contacts
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
-    // not sure if this is how its done.
+
+    //keep track of the <ul> element
     this.listElement = this.$('#contact-cards');
+    this.model = options.model; // neeed this? works without it.
 
-    // model/template options.model
-     this.contactModel = options.model;
-
-
-    //create a ContactView for each contact
-    // this.modelList = [];
-    this.contactBox = [];
-
-    this.contactData.forEach(function(contact){
-      var card = new ContactView({
-        contact: contact,
-        template: this.contactTemplate
-      });
-      this.contactBox.push(card);
-    }, this); // bind this
-
-// keep track of data being put into form by user.
+    // keep track of data being put into form by user.
     this.input = {
       name: this.$('.new-contact input[name="name"]'),
       phone: this.$('.new-contact input[name="phone"]'),
       email: this.$('.new-contact input[name="email"]')
-    };
 
-    // -----------------// testing
-    // when model is added to collect, it will crate and add card to list
-      // this.listenTo(this.contatData, "add", this.addContact);
-      // //when model updates, re-render list of cards
-      // this.listenTo(this.model, 'update', this.render);
+   };
 
-      //These let us know if the model has been updated or if a new model has been added
+    //
+    // console.log("this is model: ",this.model);
+    // model is div id application.
 
+    //create a ContactView for each contact
+    this.contactBox = [];
 
-    this.listenTo(this.model, "update", this.render);
-    this.listenTo(this.model, "add", this.addContact);
-    this.listenTo(this.model, "remove", this.removeContact);
-      console.log("model", this.model);
+    this.model.forEach(function(contact){
+      var contactView = new ContactView({
+        model: contact,
+        template: this.contactTemplate
+
+      });
+      this.contactBox.push(contactView);
+
+    }, this); // bind this
+
+    // Whenever the model changes, we should re-render
+    // Since our model is a collection, a change means a task
+    // was added to or removed from the list.
+    this.listenTo(this.model, 'update', this.render);
+
+    // If a model is removed from the collection, we need
+    // to remove the corresponding view from our list of views.
+    // Removing a model from the collection also triggers an
+    // 'update' event, but the 'remove' event will always happen first.
+    this.listenTo(this.model, 'remove', this.removeContact);
+    // console.log("model", this.model);
 
 
   }, // end of initialize
@@ -75,61 +76,63 @@ const RolodexView = Backbone.View.extend({
 
     // console.log("contactbox", this.contactBox);
     // loop through data held in contact box.
-    this.contactBox.forEach(function(card){
-      card.render();
-
-/// -----------------//
-// will this work?
-    $("#contact-cards").append(card.render().$el);
-/// -----------------//
-      // add card to our contact list.
-      // this.listElement.append(card.$el);
+    this.contactBox.forEach(function(contactView){
+      // causec contact to render.
+    contactView.render();
+    // add that html to our rolodex?
+    this.listElement.append(contactView.$el);
     }, this);
 // // http://backbonejs.org/#View-render
 //     this.$el.html(this.contactTemplate(this.contactModel.attributes));
-    return this; // enable chained calls.
+    // return this; // enable chained calls.
   },
 
   events:  {
     // right: name of function that insides page view.
-    'click .btn-save' : 'createContact',
-    'click .btn-cancel':'clearInput',
+    // Submit events are triggered by forms when the
+    // submit button is clicked or the enter key pressed
+    'submit .new-contact' : 'addContact',
+    // testing // Ideas
+    'click .btn-save' : 'addContact',
+
+    // 'click .btn-save' : 'createContact',
+    'click .btn-cancel':'clearInput'
     // added this here, should it be here or in other spot.??
     // 'click .contact-card': 'showDetails'
 
   },
 
   // turn contact data into a contact model, add it to our list of contacts?
-  addContact: function(contact){
-    console.log("adding contact");
-    var card = new ContactView({
+  addContact: function(event){
+    event.preventDefault();
+
+    // Create a new model from the form data
+    var contact = new Contact(this.getInput());
+
+    // Create a view around the task and add it to our list
+    var contactView = new ContactView({
       model: contact,
       template: this.contactTemplate
     });
-    this.contactBox.push(card);
+    this.contactBox.push(contactView);
+    this.model.add(contact);
+    this.clearInput();
 
-  },
+    },
 
   // do we need edit feature?
+    removeContact: function(model) {
+      this.contactBox = this.contactBox.filter(function(contactView){
+         // Return false (don't keep) if the view's model matches the removed model
+        return contactView.model != model;
+      });
 
-  createContact: function(event) {
-    event.preventDefault();
-    console.log("btn save has been clicked.");
-    // console.log("createContact");
-    //get input data from the form. and turn it into contact.
-    // this.model.add(contact);
-    // var contact = this.getInput();
-    // var contact = new Contact(this.getInput()); // working version
-    // var contact = this.getInput();
-    // add contact to collection.
-    var contact = new Contact(this.getInput());
-    this.render();
-    this.clearInput();
-  },
+    },
+
 // necessary for createContact to complete its action?
+// build a contact from data entered in the .new contact form
   getInput: function(event) {
     console.log("getting input from the form");
-
     var contact = {
       name: this.input.name.val(),
       email: this.input.email.val(),
@@ -140,15 +143,6 @@ const RolodexView = Backbone.View.extend({
     return contact;
   },// end getInput
 //
-// set the incoming input??
-  setInput: function(contact) {
-    console.log("set input babe!");
-    this.input.name.val(contact.get('name'));
-    this.input.email.val(contact.get('email'));
-    this.input.phone.val(contact.get('name'));
-
-  },
-
   // clear input function
   clearInput: function(event) {
     console.log("clear Input called!");

@@ -12,6 +12,7 @@ const Contact = Backbone.Model.extend({
     phone: "6029970009",
     email: "yolo@aol.com"
   },
+  
   initialize: function() {
     // this works now! its displaying and grabbing name properly. Needed:  this.get("name")
     console.log("Created a new contact: " + this.get("name")); // remaining undefined.

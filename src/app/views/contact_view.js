@@ -8,33 +8,53 @@ import Contact from 'app/models/contact';
 const ContactView = Backbone.View.extend({
   initialize: function(options){
     console.log("options in cview_>", options);
-    this.name = options.contact.name;
+    // this.name = options.contact.name;
+    // Because the template can be reused, it makes sense
+    // to share one between all our views.
     this.template = options.template;
     // do we need these 2 rangle these ?>
-    this.email = options.contact.email;
-    this.phone = options.contact.phone;
+    // this.email = options.contact.email;
+    // this.phone = options.contact.phone;
+    this.model.bind('change', this.render.bind(this));
 
 
     },
+
     render: function(){
-      // console.log("I'm here");
-      var html = this.template({name: this.name});
-      // console.log("I'm here htlm>", html);
-      // console.log("$el:  ", this.$el);
-      this.$el.html(html);
-      return this;
-    },
+    // Use the contact template to build some HTML, and
+    // add it to our DOM object
+    this.$el.html(this.template({contact: this.model.attributes}));
 
+    // Since the HTML elements are destroyed and re-created from
+    // scratch every time the list re-renders, we need to re-bind
+    // event handlers that listen to events on those elements.
+    this.delegateEvents();
+    // Enable chained calls
+    return this;
+
+    },
     events: {
-      'click .contact-card' : 'showDetails',
-      // 'click .btn cancel' : clearInput
-    },
-// other more semantic name?
-    showDetails: function() {
-      console.log("Clicked on contact you did.");
-      // probably should pull details from #'temp-contact-details'
+         'click .contact-card' : 'showDetails',
+         // 'click .btn cancel' : clearInput
+       },
 
-    }
+//     render: function(){
+//
+//       // console.log("I'm here");
+//       var html = this.template({name: this.name});
+//       // console.log("I'm here htlm>", html);
+//       // console.log("$el:  ", this.$el);
+//       this.$el.html(html);
+//       return this;
+//     },
+//
+//
+// // other more semantic name?
+//     showDetails: function() {
+//       console.log("Clicked on contact you did.");
+//       // probably should pull details from #'temp-contact-details'
+//
+//     }
 
 
   });
