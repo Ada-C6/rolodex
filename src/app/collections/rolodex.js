@@ -1,3 +1,5 @@
+//rolodex.js
+// similiar to task_list. Collection of things. 
 import Backbone from 'backbone';
 import Contact from 'app/models/contact';
 
