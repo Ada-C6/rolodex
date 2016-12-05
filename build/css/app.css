@@ -39,6 +39,7 @@ header {
   border: 1em solid white;
   margin-left: 20%;
   border-radius: 20%;
+  display: none;
 }
 
 #contact-cards {
