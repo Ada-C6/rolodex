@@ -12,9 +12,9 @@ import ContactView from 'app/views/contact_view';
 
 // build a rolodex_view with options passed in app (data)
 const RolodexView = Backbone.View.extend({
-
+  
   initialize: function(options){
-/* mise en place: putting everything in place before building recipe. */
+    /* mise en place: putting everything in place before building recipe. */
     this.contactData = options.contactData;
     // console.log("this contactData", this.contactData);
     console.log("options rolodex_view>", options);
@@ -32,7 +32,7 @@ const RolodexView = Backbone.View.extend({
       phone: this.$('.new-contact input[name="phone"]'),
       email: this.$('.new-contact input[name="email"]')
 
-   };
+    };
 
     //
     // console.log("this is model: ",this.model);
@@ -79,11 +79,11 @@ const RolodexView = Backbone.View.extend({
     // loop through data held in contact box.
     this.contactBox.forEach(function(contactView){
       // causec contact to render.
-    contactView.render();
-    // add that html to our rolodex?
-    this.listElement.append(contactView.$el);
+      contactView.render();
+      // add that html to our rolodex?
+      this.listElement.append(contactView.$el);
     }, this);
-// // http://backbonejs.org/#View-render
+    // // http://backbonejs.org/#View-render
     // this.$el.html(this.contactTemplate(this.contactModel.attributes));
     return this; // enable chained calls.
   },
@@ -92,9 +92,9 @@ const RolodexView = Backbone.View.extend({
     // right: name of function that insides page view.
     // Submit events are triggered by forms when the
     // submit button is clicked or the enter key pressed
-  // 'click .btn-save' : 'addContact', // works but submit> better
+    'click .btn-save' : 'addContact', // works but submit> better
     // will this work if you use class .new-contact?
-    'submit .new-contact' : 'createContact',
+    // 'submit .new-contact' : 'addContact',
 
     'click .btn-cancel':'clearInput'
     // added this here, should it be here or in other spot.??
@@ -122,19 +122,19 @@ const RolodexView = Backbone.View.extend({
     this.model.add(contact);
     this.clearInput();
 
-    },
+  },
 
   // do we need edit feature?
-    removeContact: function(model) {
-      this.contactBox = this.contactBox.filter(function(contactView){
-         // Return false (don't keep) if the view's model matches the removed model
-        return contactView.model != model;
-      });
+  removeContact: function(model) {
+    this.contactBox = this.contactBox.filter(function(contactView){
+      // Return false (don't keep) if the view's model matches the removed model
+      return contactView.model != model;
+    });
 
-    },
+  },
 
-// necessary for createContact to complete its action?
-// build a contact from data entered in the .new contact form
+  // necessary for createContact to complete its action?
+  // build a contact from data entered in the .new contact form
   getInput: function(event) {
     console.log("getting input from the form");
     var contact = {
@@ -146,7 +146,7 @@ const RolodexView = Backbone.View.extend({
 
     return contact;
   },// end getInput
-//
+  //
   // clear input function
   clearInput: function(event) {
     console.log("clear Input called!");
