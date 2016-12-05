@@ -63,7 +63,7 @@ const ApplicationView = Backbone.View.extend({
   },
 
   events: {
-    'click': 'hideModal', // NOTE: this event listens on entire $el ()
+    'click': 'hideModal', // NOTE: this event listens on entire $el (except the modal & cards, which have stopPropagations added)
     'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearInput'
   },
@@ -106,7 +106,7 @@ const ApplicationView = Backbone.View.extend({
     this.setInput(contact);
     this.hideModal();
 
-    // Set a variable to track the currentContact (this is used to instruct createContact method to remove old Contact before creating the updated Contact)
+    // Set a variable to track the currentContact. This is used to help createContact & clearInput distinguish between a new contact & a contact that is being edited. If createContact finds this property, it will remove the old Contact before creating the updated Contact. Using this strategy, the user can cancel/discard changes when editing a contact, because the old contact doesn't get destroyed until its replacement contact is being saved.
     this.currentContact = contact;
   },
 
