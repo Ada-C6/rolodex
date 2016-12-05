@@ -17,14 +17,14 @@ const RolodexView = Backbone.View.extend({
 /* mise en place: putting everything in place before building recipe. */
     this.contactData = options.contactData;
     // console.log("this contactData", this.contactData);
-    console.log("options _>", options);
+    console.log("options rolodex_view>", options);
 
     // Compile a template to be shared between the individual contacts
     this.contactTemplate = _.template($('#tmpl-contact-card').html());
 
     //keep track of the <ul> element
     this.listElement = this.$('#contact-cards');
-    this.model = options.model; // neeed this? works without it.
+    // this.model = options.model; // neeed this? works without it.
 
     // keep track of data being put into form by user.
     this.input = {
@@ -42,6 +42,7 @@ const RolodexView = Backbone.View.extend({
     this.contactBox = [];
 
     this.model.forEach(function(contact){
+
       var contactView = new ContactView({
         model: contact,
         template: this.contactTemplate
@@ -83,8 +84,8 @@ const RolodexView = Backbone.View.extend({
     this.listElement.append(contactView.$el);
     }, this);
 // // http://backbonejs.org/#View-render
-//     this.$el.html(this.contactTemplate(this.contactModel.attributes));
-    // return this; // enable chained calls.
+    // this.$el.html(this.contactTemplate(this.contactModel.attributes));
+    return this; // enable chained calls.
   },
 
   events:  {
@@ -114,7 +115,11 @@ const RolodexView = Backbone.View.extend({
       model: contact,
       template: this.contactTemplate
     });
+
     this.contactBox.push(contactView);
+    // Add the task itself to the collection. This will trigger
+    // the collection's change event, which will call render
+    // for us (remember that we set this up in initialize).
     this.model.add(contact);
     this.clearInput();
 

@@ -7,7 +7,7 @@ import Contact from 'app/models/contact';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options){
-    console.log("options in cview_>", options);
+    console.log("options in contact_iew_>", options);
     // this.name = options.contact.name;
     // Because the template can be reused, it makes sense
     // to share one between all our views.
@@ -23,7 +23,7 @@ const ContactView = Backbone.View.extend({
     render: function(){
     // Use the contact template to build some HTML, and
     // add it to our DOM object
-    this.$el.html(this.template({contact: this.model.attributes}));
+    this.$el.html(this.template(this.model.attributes));
 
     // Since the HTML elements are destroyed and re-created from
     // scratch every time the list re-renders, we need to re-bind
@@ -50,11 +50,11 @@ const ContactView = Backbone.View.extend({
 //
 //
 // // other more semantic name?
-//     showDetails: function() {
-//       console.log("Clicked on contact you did.");
-//       // probably should pull details from #'temp-contact-details'
-//
-//     }
+    showDetails: function() {
+      console.log("Clicked on contact you did.");
+      // probably should pull details from #'temp-contact-details'
+
+    }
 
 
   });
