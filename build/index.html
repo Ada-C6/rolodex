@@ -13,7 +13,7 @@
     <div id="application">
       <header>
         <h1>Rolodex</h1>
-        <section class="row contact-form">
+        <form class="row contact-form">
           <h3>Add A New Contact</h3>
           <div class="columns">
             <label>
@@ -28,22 +28,22 @@
               Phone
               <input type="text" name="phone">
             </label>
-            <h3 class="button btn-save">Save</h3>
-            <h3 class="button btn-cancel">Cancel</h3>
+            <button class="button btn-save">Save</button>
+            <button class="button btn-cancel">Cancel</button>
           </div>
-        </section>
+        </form>
       </header>
 
       <main>
         <ul id="contact-cards" class="row align-center"></ul>
-        <section id="contact-details"></section>
+          <section id="contact-details"></section>
       </main>
     </div>
 
     <!-- Underscore Templates -->
     <script type="text/template" id="tmpl-contact-card">
       <li class="contact-card small-11 medium-4 large-2 medium-offset-1 columns">
-        <h4><%- name %></h4>
+        <h4><%- contact.name %></h4>
       </li>
     </script>
 
@@ -52,6 +52,7 @@
       <h4><%- email %></h4>
       <h4><%- phone %></h4>
     </script>
+
 
     <!-- Entire JS project built by Webpack -->
     <script src="/app.bundle.js" charset="utf-8"></script>
