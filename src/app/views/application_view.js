@@ -1,18 +1,9 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Rolodex from 'app/collections/rolodex';
-import RolodexView from 'app/views/rolodex_view';
-import Contact from 'app/models/contact';
-import ContactView from 'app/views/contact_view';
-import Application from 'app/models/application';
-// import ApplicationView from 'app/views/application_view';
-//application is responsible for the form, I percieve this to need also, the logic and listening of changes made to the form.
-
 
 const ApplicationView = Backbone.View.extend({
   initialize: function(options){
-    this.details = $('#contact-details');
     this.form = this.$('.contact-form');
     this.input = {
       name: this.$('.contact-form input[name="name"]'),
@@ -20,9 +11,7 @@ const ApplicationView = Backbone.View.extend({
       phone: this.$('.contact-form input[name="phone"]')
     };
   },
-  render: function() {
-    this.details.hide();
-  },
+  render: function() { },
 
   events: {
     'click .btn-save': 'createContact',
@@ -31,7 +20,6 @@ const ApplicationView = Backbone.View.extend({
 
   createContact: function(event) {
     event.preventDefault();
-    // Add the contact to our Collection
     var rawContact = this.getInput();
     this.model.add(rawContact);
     this.clearInput();
@@ -47,7 +35,6 @@ const ApplicationView = Backbone.View.extend({
   },
 
   clearInput: function(event) {
-    console.log("clearInput called!");
     this.input.name.val('');
     this.input.email.val('');
     this.input.phone.val('');

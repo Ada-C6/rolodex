@@ -9,11 +9,7 @@ const Application = Backbone.Model.extend({
   },
 
   initialize: function() {
-    console.log("Created new contact with title " + this.name);
   },
-    add:function (contact){
-    this.attributes.myRolodex.add(contact);
-  }
 });
 
 export default Application;
