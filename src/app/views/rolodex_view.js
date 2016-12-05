@@ -4,6 +4,8 @@ import _ from 'underscore';
 import Rolodex from 'app/collections/rolodex';
 import Contact from 'app/models/contact';
 import ContactView from 'app/views/contact_view';
+import Application from 'app/models/application';
+import ApplicationView from 'app/views/application_view';
 
 
 var RolodexView = Backbone.View.extend({
@@ -35,8 +37,8 @@ var RolodexView = Backbone.View.extend({
       el:this.$el,
       template: this.cardTemplate
     });
-    this.listenTo(contactCard, 'show-details', this.showModal);
     this.contactList.push(contactCard);
+    this.render();
   },
 
 //did not get to this optional button functionality

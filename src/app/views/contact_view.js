@@ -1,6 +1,10 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
+import Rolodex from 'app/collections/rolodex';
+import RolodexView from 'app/views/rolodex_view';
+import Contact from 'app/models/contact';
+
 
 var ContactView = Backbone.View.extend({
   initialize: function(options) {

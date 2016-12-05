@@ -45,7 +45,7 @@ $(document).ready(function() {
      el: $('#contact-details'),
      model: contact
    });
-
+   contactView.render();
    rolodexView.render();
    applicationView.render();
 });

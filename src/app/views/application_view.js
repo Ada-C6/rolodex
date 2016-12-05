@@ -1,6 +1,13 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
+import Rolodex from 'app/collections/rolodex';
+import RolodexView from 'app/views/rolodex_view';
+import Contact from 'app/models/contact';
+import ContactView from 'app/views/contact_view';
+
+
+
 
 const ApplicationView = Backbone.View.extend({
   initialize: function(options){
@@ -10,6 +17,8 @@ const ApplicationView = Backbone.View.extend({
       email: this.$('.contact-form input[name="email"]'),
       phone: this.$('.contact-form input[name="phone"]')
     };
+      this.listenTo(this.model, 'add', this.addContact);
+      this.listenTo(this.model, 'change', this.render);
   },
   render: function() { },
 
@@ -21,7 +30,7 @@ const ApplicationView = Backbone.View.extend({
   createContact: function(event) {
     event.preventDefault();
     var rawContact = this.getInput();
-    this.model.add(rawContact);
+    this.model.attributes.myRolodex.add(rawContact);
     this.clearInput();
   },
 
