@@ -5,3 +5,5 @@ const Application = Backbone.Model.extend({
 });
 
 export default Application;
+
+//should include add a new contact feature
