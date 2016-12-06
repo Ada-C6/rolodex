@@ -48,15 +48,12 @@ const RolodexView = Backbone.View.extend({
     // Make sure the list in the DOM is empty
     // before we start appending items
     this.listElement.empty();
-    console.log(this.listElement.html() );
     // Loop through the data assigned to this view
     this.cardList.forEach(function(card) {
       // Cause the task to render
-      console.log("rendering: ", card);
       card.render();
       // Add that HTML to our task list
       this.listElement.append(card.$el);
-      console.log(this.listElement.html() );
 
     }, this);
     return this; // enable chained calls
@@ -74,7 +71,6 @@ const RolodexView = Backbone.View.extend({
     // Add the new task to our list of tasks
     // this.addTask(task); --old
     this.model.add(contact);
-    console.log(contact);
     // Re-render the whole list, now including the new card
     // this.render(); -- no longer needed
     // Clear the input form so the user can add another task

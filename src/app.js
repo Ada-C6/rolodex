@@ -14,17 +14,17 @@ var contactData = [
   {
     name: 'Abominable Snowman',
     email: 'fun@destruction.com',
-    phoneNumber: '206-555-YETI'
+    phone: '206-555-YETI'
   },
   {
     name: 'Rudolph',
     email: 'SantasNumber1@northpole.com',
-    phoneNumber: '206-RED-NOSE'
+    phone: '206-RED-NOSE'
   },
   {
     name: 'Grinch',
     email: 'garbage@greasyblackpeel.com',
-    phoneNumber: '206-DIE-XMAS'
+    phone: '206-DIE-XMAS'
   },
 ];
 
@@ -51,6 +51,16 @@ $(document).ready(function() {
     // taskData: taskData -- old code
   });
   application.render();
+});
+
+$(document).mouseup(function (e)
+{
+    var container = $("#contact-details");
+
+    if (!container.is(e.target)  && container.has(e.target).length === 0) // ... nor a descendant of the container
+    {
+        container.hide();
+    }
 });
 
 
