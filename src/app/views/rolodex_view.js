@@ -98,7 +98,6 @@ const RolodexView = Backbone.View.extend({
     this.$('#contact-details').show();
   }
 
-
 });
 
 export default RolodexView;
