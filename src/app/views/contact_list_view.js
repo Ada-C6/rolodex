@@ -61,11 +61,15 @@ var ContactListView = Backbone.View.extend({ // parent
     this.cardList.push(card);
   },
   showModal: function(contact) {
+    $('#contact-details').empty();
     var template = _.template($('#tmpl-contact-details').html());
-    // this.$el.append(card.$el);
+    // this.$el.append(contact.$el);
+    var contact_details = {name: contact.attributes.name, email: contact.attributes.email, phone: contact.attributes.phone};
+    var html = template(contact_details);
+
+    $('#contact-details').append(html);
 
     console.log('show the modal');
-    console.log(contact);
     $('#contact-details').show();
   }
 
