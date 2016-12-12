@@ -48,6 +48,10 @@ header {
   text-align: center;
 }
 
+#contact-details {
+  display: none;
+}
+
 .contact-card {
   display: inline-block;
   padding: 2%;
