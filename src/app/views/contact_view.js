@@ -40,10 +40,7 @@ const ContactView = Backbone.View.extend({
     // event.stopPropagation();
     $('#contact-details').show();
     $('#contact-details').html(html);
-
-
   }
-
 });
 
 
