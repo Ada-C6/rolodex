@@ -26,6 +26,12 @@ const RolodexView = Backbone.View.extend({
 
     this.listenTo(this.model, "update", this.render);
     this.listenTo(this.model, "add", this.addContactView);
+
+    $('body').on('click', this.hideModal);
+  },
+
+  hideModal: function() {
+    $('#contact-details').hide();
   },
 
   events: {

@@ -4,7 +4,7 @@
   "description": "Rolodex application using Backbone.js",
   "main": "./bin/app.bundle.js",
   "scripts": {
-    "start": "webpack-dashboard -- webpack-dev-server",
+    "start": "webpack-dashboard --display-error-details -- webpack-dev-server ",
     "test": "jasmine"
   },
   "author": "Ada Developers Academy <contact@adadevelopersacademy.org>",

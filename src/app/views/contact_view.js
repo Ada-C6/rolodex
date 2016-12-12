@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
+import ContactDetailsView from 'app/views/contact_details_view';
 
 const ContactView = Backbone.View.extend({
   initialize: function(options) {
@@ -16,6 +17,20 @@ const ContactView = Backbone.View.extend({
     this.$el.html(html);
 
     return this;
+  },
+
+  events: {
+    'click': "showThisContactDetails",
+  },
+
+  showThisContactDetails: function(event) {
+    event.stopPropagation();
+    var contactDetailsView = new ContactDetailsView({
+      model: this.model,
+    });
+
+    contactDetailsView.render();
+    contactDetailsView.show();
   },
 });
 
