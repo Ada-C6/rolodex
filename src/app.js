@@ -3,6 +3,7 @@ import _ from 'underscore';
 import backbone from 'backbone';
 import Rolodex from 'app/collections/rolodex';
 import RolodexView from 'app/views/rolodex_view';
+import Contact from 'app/models/contact';
 
 var contactData = [
   {
