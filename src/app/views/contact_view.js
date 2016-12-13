@@ -6,6 +6,7 @@ const ContactView = Backbone.View.extend({
     // this.name = options.name,
     // this.email = options.email,
     // this.phone = options.phone,
+    this.model = options.model;
     this.template = options.template;
   },
   render: function(){
