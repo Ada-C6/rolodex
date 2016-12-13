@@ -38,29 +38,23 @@ var contactList = [
   },
 ];
 
-// Start by hiding the contact details!
-console.log("00. I am hiding the modal");
-$('#contact-details').hide();
-
 
 // Once the document is ready
 $(document).ready(function(){
-  console.log("05. The document is ready");
-
-  // Create a new Rolodex from the static contactList defined above
+  // Push the contact list data through the Rolodex model collection (which creates Contact models)
   var someContacts = new Rolodex(contactList);
-  console.log("10. The new Rolodex is ready. Here are the contents:");
-  console.log(someContacts);
 
+  // Create a template for the contact card html
   var contactCardTemplate = _.template($('#tmpl-contact-card').html());
 
+  // Fire up the rolodex view initializer with the following properties:
   var roloView = new RolodexView({
-    el: $('#application'),
+    el: $('body'),
     contacts: someContacts,
     cardTemplate: contactCardTemplate
   });
 
-  console.log("20. The RolodexView is about to be rendered by the document ready function");
+  // Render that bad boy
   roloView.render();
 });
 

@@ -6,14 +6,9 @@ import _ from 'underscore';
 
 const RolodexView = Backbone.View.extend({
   initialize: function(incomingInfo) {
-    console.log("15. You're starting to create the RolodexView");
-    console.log(incomingInfo);
-
     // Store the incoming contacts and template
     this.contacts = incomingInfo.contacts;
     this.template = incomingInfo.cardTemplate;
-    console.log("You're trying to save a template");
-    console.log(this.template);
 
     // Store any input that comes in through the form
     this.input = {
@@ -21,22 +16,14 @@ const RolodexView = Backbone.View.extend({
       phone: this.$('.contact-form input[name="phone"]'),
       email: this.$('.contact-form input[name="email"]')
     };
-
-
   },
   render: function() {
-    console.log("25. You are rendering the RolodexView");
-
     // Locate the place you want to show individual contact cards
     this.cardPlacement = $("#contact-cards");
 
-    // Loop through the contact cards and generate new html for each card. Append that html to general html
+    // Loop through the contacts and generate new Contact view for each one. Store that contact view in a storage array
     var storage = [];
     this.contacts.forEach(function(individualContact){
-      console.log("You're in the RolodexView initialize one contact!");
-      console.log(individualContact.attributes.name);
-      console.log(this.template);
-
       var newContactView = new ContactView(
         {contact:
           {
@@ -44,34 +31,27 @@ const RolodexView = Backbone.View.extend({
             email: individualContact.attributes.email,
             phone: individualContact.attributes.phone
           },
-        cardTemplate: this.template,
-        el: this.cardPlacement
+        cardTemplate: this.template
       });
-
       storage.push(newContactView);
-      // newContactView.render();
     }, this);
 
-    storage.forEach(function(contact) {
-      contact.render();
-    });
 
-    return this;
+    // Loop through the contacts and render it. Appendt the render to the designated placement.
+    storage.forEach(function(contact) {
+      this.cardPlacement.append(contact.render().$el);
+    }, this);
   },
 
   events: {
     'click .btn-save' : 'createContact',
     'click .btn-cancel' : 'clearInput',
-    // SOMETHING SHOULD GO HERE TO MAKE IT DISAPPEAR CORRECTLY
-    // 'click ' : 'hideModal'
+    'click' : 'hideModal'
   },
 
   createContact: function(event) {
     // Prevent standard form submit upon creating a contact
     event.preventDefault();
-    console.log("trying to create a new contact!!");
-    console.log("******************");
-    console.log(this.input.name.val());
 
     // Push this new contact into the contact list
     this.contacts.push(this.getInput());
@@ -86,7 +66,6 @@ const RolodexView = Backbone.View.extend({
     this.clearInput();
   },
 
-
   // Transform the form input into usable data
   getInput: function() {
     var actualContactData = {
@@ -95,20 +74,23 @@ const RolodexView = Backbone.View.extend({
       phone: this.input.phone.val()
     };
 
+    // Return the usable data to the caller
     return actualContactData;
   },
 
-
   // This will clear the input form
   clearInput: function() {
-    console.log("clearInput called");
     this.input.name.val("");
     this.input.email.val("");
     this.input.phone.val("");
-    console.log('Form area should now be clear');
+  },
+
+  hideModal: function() {
+    // If the Contact Details is visible, hide it.
+    if ($("#contact-details").css("display") !== 'none') {
+      $("#contact-details").hide();
+    }
   }
-
-
 });
 
 export default RolodexView;
