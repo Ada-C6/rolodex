@@ -14,8 +14,9 @@ const RolodexView = Backbone.View.extend({
 
     this.contactDetailsTemplate = _.template($('#tmpl-contact-details').html());
 
-    // keep track of the <ul> element
+    // keep track of the elements that will be used to render the contact card and the contact details
     this.listElement = this.$('#contact-cards');
+    this.detailsElement = this.$('#contact-details');
 
     // list of card views:
     this.cardList = [];
@@ -36,10 +37,11 @@ const RolodexView = Backbone.View.extend({
     // re-render the list when the collection changes:
     this.listenTo(this.model, 'update', this.render);
 
+
   },
   render: function() {
     // need to make sure the list in the DOM is empty before appending new items
-    debugger;
+
     this.listElement.empty();
 
     // iterate through the data assigned:
@@ -50,9 +52,9 @@ const RolodexView = Backbone.View.extend({
     return this;
   },
   events: {
-    'submit .contact-form': 'createContact',
+    'click .btn-save': 'createContact',
     'click .btn-cancel': 'clearInput',
-    'click .contact-card': 'showDetails'
+
   },
 
   createContact: function(event) {
@@ -61,10 +63,11 @@ const RolodexView = Backbone.View.extend({
     // get the input and turn it into a contact:
     var rawContact = this.getInput();
 
+    // add the contact to the model??
     var contact = this.model.add(rawContact);
 
-    this.addContact(contact);
-    this.render();
+    // this.addContact(contact);
+    // this.render();
     // clear the input form:
     this.clearInput();
   }, // end create contact
@@ -79,13 +82,16 @@ const RolodexView = Backbone.View.extend({
   }, // end getInput
 
   addContact: function(contact){
-    debugger;
+    // this is to make a view for new contacts and add them to the cardList:
     var contactCard = new ContactView({
       model: contact,
       template: this.contactCardTemplate
     });
+    // have each card listen for a click event:
+    this.listenTo(contactCard, 'showCardDetails', this.showDetails);
     // add the card to the list
     this.cardList.push(contactCard);
+
   },
 
   clearInput: function(event){
@@ -93,20 +99,10 @@ const RolodexView = Backbone.View.extend({
     this.input.email.val('');
     this.input.phone.val('');
   },
-
-  showDetails: function(event){
-    debugger;
-    var details;
-    var name = event.target.innerText;
-    this.cardList.forEach(function(contactCard){
-      if (contactCard.name === name) {
-        details = contactCard;
-      }
-    });
-    var contactCard = new ContactView({
-      model: details,
-      template: this.contactDetailsTemplate
-    });
+// need to show the details when a name is clicked:
+  showDetails: function(contactModel){
+    var details = this.contactDetailsTemplate({name: contactModel.get('name'), email: contactModel.get('email'), phone: contactModel.get('phone')})
+    this.detailsElement.html(details);
   }
 
 }); // end of RolodexView
