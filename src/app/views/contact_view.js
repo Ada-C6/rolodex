@@ -20,7 +20,7 @@ var ContactView = Backbone.View.extend({
     // QUESTION: what is delegate events. It seems to be magic
     this.delegateEvents();
     // QUESTION: not sure what is being tiggered? how is this different than the tigger in triggerDisplayHandler
-    this.trigger("displayHander");
+    // this.trigger("displayHandler");
     return this;
   },
 

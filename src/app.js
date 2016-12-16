@@ -44,6 +44,7 @@ var contactData = [
 ];
 
 $(document).ready(function() {
+  // QUESTION: Why in Charles' example does he not have to use Document.ready -> It was the order that the HTML went into. Because we loaded the script tag at the bottom. 
 
   var rolodex = new Rolodex(contactData);
 

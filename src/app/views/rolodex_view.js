@@ -78,6 +78,7 @@ const RolodexView = Backbone.View.extend({
     });
 
     // Need to include the listenTo displayHandler in both the initialize and the addContact because the add contact adds it to new contacts and the initialize includes it in the creating of the built in contacts
+    // QUESTION: Why are we attaching the listenTo here? I don't see how this is connecting the listenTo on each of the cards. 
     this.listenTo(contactCard, "displayHandler", this.displayContactDetails);
     // this.listenTo(contactCard, "displayHandler", function(){console.log("EnETTERED ANAD PRINTING!!");});
 
