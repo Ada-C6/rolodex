@@ -13,7 +13,7 @@
     <div id="application">
       <header>
         <h1>Rolodex</h1>
-        <section class="row contact-form">
+        <form class="row contact-form">
           <h3>Add A New Contact</h3>
           <div class="columns">
             <label>
@@ -28,10 +28,10 @@
               Phone
               <input type="text" name="phone">
             </label>
-            <h3 class="button btn-save">Save</h3>
-            <h3 class="button btn-cancel">Cancel</h3>
+            <h3 id="save-button" class="button btn-save">Save</h3>
+            <h3 id="clear-button" class="button btn-cancel">Cancel</h3>
           </div>
-        </section>
+        </form>
       </header>
 
       <main>
@@ -48,9 +48,11 @@
     </script>
 
     <script type="text/template" id="tmpl-contact-details">
+
       <h3><%- name %></h3>
       <h4><%- email %></h4>
       <h4><%- phone %></h4>
+
     </script>
 
     <!-- Entire JS project built by Webpack -->
