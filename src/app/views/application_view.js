@@ -1,4 +1,5 @@
 import Backbone from 'backbone';
+import ContactView from 'app/views/contact_view';
 
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
@@ -6,6 +7,10 @@ const ApplicationView = Backbone.View.extend({
   },
 
   render: function() {
+    const card = new ContactView({
+      model: this.model.contact,
+    });
+    this.$('#contact-cards').append(card.render().$el);
     return this;
   }
 });
